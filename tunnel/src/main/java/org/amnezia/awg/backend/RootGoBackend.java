@@ -248,8 +248,12 @@ public final class RootGoBackend implements Backend {
                 break;
             }
 
-            // Разрешаем доступ к /dev/net/tun
-            runRootCommandStrict("chmod 666 /dev/net/tun");
+            // Разрешаем доступ к /dev/net/tun (или /dev/tun на некоторых устройствах)
+            // Создаём /dev/net/tun если его нет, но есть /dev/tun
+            runRootCommand("mkdir -p /dev/net 2>/dev/null; " +
+                    "[ ! -e /dev/net/tun ] && [ -e /dev/tun ] && ln -s /dev/tun /dev/net/tun 2>/dev/null; " +
+                    "[ -e /dev/net/tun ] && chmod 666 /dev/net/tun; " +
+                    "[ -e /dev/tun ] && chmod 666 /dev/tun");
 
             // Создаём TUN-интерфейс через JNI
             tunFd = openTun(TUN_INTERFACE);
@@ -424,8 +428,8 @@ public final class RootGoBackend implements Backend {
             // Удаляем TUN-интерфейс
             rootShell.run(null, "ip link delete " + TUN_INTERFACE + " 2>/dev/null");
 
-            // Восстанавливаем права /dev/net/tun
-            rootShell.run(null, "chmod 660 /dev/net/tun 2>/dev/null");
+            // Восстанавливаем права /dev/net/tun и /dev/tun
+            rootShell.run(null, "chmod 660 /dev/net/tun 2>/dev/null; chmod 660 /dev/tun 2>/dev/null");
 
             activeEndpointIps.clear();
 

@@ -79,6 +79,8 @@ JNIEXPORT jint JNICALL Java_org_amnezia_awg_GoBackend_openTun(JNIEnv *env, jclas
 {
 	int fd = open("/dev/net/tun", O_RDWR);
 	if (fd < 0)
+		fd = open("/dev/tun", O_RDWR);
+	if (fd < 0)
 		return -1;
 
 	struct ifreq ifr;
