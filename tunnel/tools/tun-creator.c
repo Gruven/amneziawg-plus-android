@@ -1,10 +1,10 @@
 /* SPDX-License-Identifier: Apache-2.0
  *
- * Вспомогательный бинарник, выполняемый от root.
- * Открывает /dev/tun, создаёт TUN-интерфейс через ioctl(TUNSETIFF),
- * отправляет fd через Unix domain socket (SCM_RIGHTS) приложению.
+ * Helper binary executed as root.
+ * Opens /dev/tun, creates TUN interface via ioctl(TUNSETIFF),
+ * sends fd to the app via Unix domain socket (SCM_RIGHTS).
  *
- * Использование: tun-creator <ifname> <socket_path>
+ * Usage: tun-creator <ifname> <socket_path>
  */
 
 #include <stdio.h>
@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
     addr.sun_family = AF_UNIX;
     strncpy(addr.sun_path, socket_path, sizeof(addr.sun_path) - 1);
 
-    /* Повторяем попытки подключения (сервер может быть ещё не готов) */
+    /* Retry connecting (server may not be ready yet) */
     int connected = 0;
     for (int i = 0; i < 50; i++) {
         if (connect(sock, (struct sockaddr *)&addr, sizeof(addr)) == 0) {

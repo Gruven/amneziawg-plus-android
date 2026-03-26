@@ -68,7 +68,7 @@ class Application : android.app.Application() {
     private suspend fun determineBackend(): Backend {
         var backend: Backend? = null
 
-        // Root-режим (без VPN API)
+        // Root mode (no VPN API)
         if (UserKnobs.enableRootMode.first()) {
             try {
                 rootShell.start()
@@ -79,7 +79,7 @@ class Application : android.app.Application() {
             }
         }
 
-        // Kernel module режим
+        // Kernel module mode
         if (backend == null && UserKnobs.enableKernelModule.first() && AwgQuickBackend.hasKernelSupport()) {
             try {
                 rootShell.start()
@@ -93,7 +93,7 @@ class Application : android.app.Application() {
             }
         }
 
-        // Стандартный VPN API режим
+        // Standard VPN API mode
         if (backend == null) {
             backend = GoBackend(applicationContext)
             GoBackend.setAlwaysOnCallback { get().applicationScope.launch { get().tunnelManager.restoreState(true) } }

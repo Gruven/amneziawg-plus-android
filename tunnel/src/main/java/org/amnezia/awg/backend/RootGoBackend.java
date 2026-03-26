@@ -33,8 +33,8 @@ import androidx.collection.ArraySet;
 import static org.amnezia.awg.GoBackend.*;
 
 /**
- * Реализация {@link Backend}, использующая root-доступ для создания TUN-интерфейса
- * и настройки маршрутизации через iptables/ip route, без использования Android VPN API.
+ * {@link Backend} implementation that uses root access to create a TUN interface
+ * and configure routing via iptables/ip route, bypassing Android VPN API.
  */
 @NonNullForAll
 public final class RootGoBackend implements Backend {
@@ -52,9 +52,9 @@ public final class RootGoBackend implements Backend {
     private int tunFd = -1;
     @Nullable private Thread statusThread;
     @Nullable private StatusCallback statusCallback;
-    // Сохраняем endpoint IP для точечного удаления правил при cleanup
+    // Endpoint IPs saved for targeted rule removal during cleanup
     private final List<String> activeEndpointIps = new ArrayList<>();
-    // Сохраняем DNS IP для точечного удаления правил при cleanup
+    // DNS IP saved for targeted rule removal during cleanup
     @Nullable private String activeDnsIp;
     private boolean activeDnsIsV6;
 
@@ -229,10 +229,10 @@ public final class RootGoBackend implements Backend {
                 return;
             }
 
-            // Очистка возможных остатков от предыдущего запуска
+            // Clean up leftovers from a previous run
             cleanupRootResources();
 
-            // Резолвинг DNS для endpoint-ов
+            // Resolve DNS for endpoints
             dnsRetry: for (int i = 0; i < DNS_RESOLUTION_RETRIES; ++i) {
                 for (final Peer peer : config.getPeers()) {
                     final InetEndpoint ep = peer.getEndpoint().orElse(null);
@@ -249,17 +249,17 @@ public final class RootGoBackend implements Backend {
                 break;
             }
 
-            // Путь к вспомогательному бинарнику и Unix-сокету для передачи fd
+            // Path to helper binary and Unix socket for fd passing
             final File nativeLibDir = new File(context.getApplicationInfo().nativeLibraryDir);
             final String tunCreator = new File(nativeLibDir, "libawg-tun-creator.so").getAbsolutePath();
             final String socketPath = new File(context.getCacheDir(), "tun_fd.sock").getAbsolutePath();
             new File(socketPath).delete();
 
-            // Запускаем root-команду для создания TUN (в фоне, она подключится к сокету)
-            // tun-creator: open(/dev/tun) + ioctl(TUNSETIFF) от root, затем передаёт fd через SCM_RIGHTS
+            // Run root command to create TUN (in background, it will connect to the socket)
+            // tun-creator: open(/dev/tun) + ioctl(TUNSETIFF) as root, then passes fd via SCM_RIGHTS
             rootShell.run(null, tunCreator + " " + TUN_INTERFACE + " " + socketPath + " &");
 
-            // Принимаем fd через Unix domain socket
+            // Receive fd via Unix domain socket
             tunFd = receiveTunFd(socketPath);
             new File(socketPath).delete();
             if (tunFd < 0) {
@@ -270,7 +270,7 @@ public final class RootGoBackend implements Backend {
             Log.d(TAG, "TUN fd=" + tunFd + " received for " + TUN_INTERFACE);
 
             try {
-                // Настраиваем интерфейс через root
+                // Configure interface via root
                 final int mtu = config.getInterface().getMtu().orElse(1280);
                 for (final InetNetwork addr : config.getInterface().getAddresses()) {
                     runRootCommandStrict("ip addr add " + addr.getAddress().getHostAddress() + "/" + addr.getMask() + " dev " + TUN_INTERFACE);
@@ -278,26 +278,26 @@ public final class RootGoBackend implements Backend {
                 runRootCommandStrict("ip link set " + TUN_INTERFACE + " mtu " + mtu);
                 runRootCommandStrict("ip link set " + TUN_INTERFACE + " up");
 
-                // Запускаем amneziawg-go
+                // Start amneziawg-go
                 final String goConfig = config.toAwgUserspaceString();
                 Log.d(TAG, "Go backend " + awgVersion());
                 currentTunnelHandle = awgTurnOn(tunnel.getName(), tunFd, goConfig);
 
                 if (currentTunnelHandle < 0) {
-                    // Go НЕ взял ownership — fd ещё наш, cleanup его закроет
+                    // Go did NOT take ownership — fd is still ours, cleanup will close it
                     throw new BackendException(Reason.GO_ACTIVATION_ERROR_CODE, currentTunnelHandle);
                 }
-                // Go успешно взял ownership над fd — не закрываем вручную
+                // Go successfully took ownership of fd — do not close manually
                 tunFd = -1;
 
-                // Настраиваем маршрутизацию и iptables
+                // Configure routing and iptables
                 setupRouting(config);
                 setupIptables(config);
             } catch (final Exception e) {
-                // При любой ошибке: останавливаем Go (если запущен) и чистим ресурсы
+                // On any error: stop Go (if running) and clean up resources
                 if (currentTunnelHandle >= 0) {
                     awgTurnOff(currentTunnelHandle);
-                    tunFd = -1; // Go закрыл fd при turnOff
+                    tunFd = -1; // Go closed fd on turnOff
                 }
                 currentTunnelHandle = -1;
                 cleanupRootResources();
@@ -328,7 +328,7 @@ public final class RootGoBackend implements Backend {
     }
 
     private void setupRouting(final Config config) throws Exception {
-        // Собираем endpoint IP для исключения из маршрутизации
+        // Collect endpoint IPs to exclude from tunnel routing
         activeEndpointIps.clear();
         for (final Peer peer : config.getPeers()) {
             final InetEndpoint ep = peer.getEndpoint().orElse(null);
@@ -338,13 +338,13 @@ public final class RootGoBackend implements Backend {
                 activeEndpointIps.add(resolved.getHost());
         }
 
-        // Включаем IP forwarding
+        // Enable IP forwarding
         runRootCommand("echo 1 > /proc/sys/net/ipv4/ip_forward");
         runRootCommand("echo 1 > /proc/sys/net/ipv6/conf/all/forwarding");
 
-        // Сохраняем маршруты до endpoint-ов ПЕРЕД настройкой туннельной маршрутизации
-        // На Android дефолтный маршрут не в таблице main, а в per-network таблице
-        // Поэтому добавляем явный host route для каждого endpoint
+        // Save routes to endpoints BEFORE setting up tunnel routing.
+        // On Android the default route is in per-network tables, not in main.
+        // Add explicit host routes for each endpoint so they remain reachable.
         for (final String ip : activeEndpointIps) {
             final List<String> routeOutput = new ArrayList<>();
             if (ip.contains(":"))
@@ -358,16 +358,16 @@ public final class RootGoBackend implements Backend {
             }
         }
 
-        // Правило: помеченные fwmark пакеты (от нашего приложения) используют main таблицу
-        // (обход туннеля для UDP трафика WireGuard к endpoint-у)
+        // Rule: fwmark-ed packets (from our app) use main table
+        // (bypass tunnel for WireGuard UDP traffic to endpoint)
         runRootCommand("ip rule add fwmark " + FWMARK + " table main priority 10");
 
-        // Помечаем UDP пакеты нашего приложения fwmark через iptables mangle
+        // Mark our app's UDP packets with fwmark via iptables mangle
         final int myUid = android.os.Process.myUid();
         runRootCommand("iptables -t mangle -A OUTPUT -m owner --uid-owner " + myUid + " -p udp -j MARK --set-mark " + FWMARK);
         runRootCommand("ip6tables -t mangle -A OUTPUT -m owner --uid-owner " + myUid + " -p udp -j MARK --set-mark " + FWMARK);
 
-        // Добавляем маршруты для AllowedIPs
+        // Add routes for AllowedIPs
         for (final Peer peer : config.getPeers()) {
             for (final InetNetwork addr : peer.getAllowedIps()) {
                 final String route = addr.getAddress().getHostAddress() + "/" + addr.getMask();
@@ -378,11 +378,11 @@ public final class RootGoBackend implements Backend {
             }
         }
 
-        // Правила маршрутизации: весь трафик без fwmark идёт через таблицу туннеля
+        // Routing rules: all traffic without fwmark goes through tunnel table
         runRootCommand("ip rule add not fwmark " + FWMARK + " table " + ROUTING_TABLE + " priority 100");
         runRootCommand("ip rule add not fwmark " + FWMARK + " table main suppress_prefixlength 0 priority 90");
 
-        // Исключаем endpoint-ы сервера из маршрутизации через туннель (дополнительная защита)
+        // Exclude server endpoints from tunnel routing (additional protection)
         for (final String ip : activeEndpointIps) {
             if (ip.contains(":"))
                 runRootCommand("ip -6 rule add to " + ip + " table main priority 80");
@@ -392,11 +392,11 @@ public final class RootGoBackend implements Backend {
     }
 
     private void setupIptables(final Config config) throws Exception {
-        // NAT для трафика через туннель
+        // NAT for traffic through tunnel
         runRootCommand("iptables -t nat -A POSTROUTING -o " + TUN_INTERFACE + " -j MASQUERADE");
         runRootCommand("ip6tables -t nat -A POSTROUTING -o " + TUN_INTERFACE + " -j MASQUERADE");
 
-        // DNS-редирект на первый DNS сервер из конфига
+        // DNS redirect to first DNS server from config
         activeDnsIp = null;
         for (final InetAddress dns : config.getInterface().getDnsServers()) {
             activeDnsIp = dns.getHostAddress();
@@ -416,21 +416,21 @@ public final class RootGoBackend implements Backend {
         try {
             final int myUid = android.os.Process.myUid();
 
-            // Удаляем правила маршрутизации по приоритету (в цикле для надёжности)
+            // Remove routing rules by priority (loop for reliability)
             rootShell.run(null, "while ip rule del priority 10 2>/dev/null; do :; done; " +
                     "while ip rule del priority 80 2>/dev/null; do :; done; " +
                     "while ip rule del priority 90 2>/dev/null; do :; done; " +
                     "while ip rule del priority 100 2>/dev/null; do :; done");
 
-            // Очищаем таблицу маршрутизации
+            // Flush routing table
             rootShell.run(null, "ip route flush table " + ROUTING_TABLE + " 2>/dev/null; " +
                     "ip -6 route flush table " + ROUTING_TABLE + " 2>/dev/null");
 
-            // Удаляем NAT POSTROUTING (точечное удаление)
+            // Remove NAT POSTROUTING rules
             rootShell.run(null, "iptables -t nat -D POSTROUTING -o " + TUN_INTERFACE + " -j MASQUERADE 2>/dev/null; " +
                     "ip6tables -t nat -D POSTROUTING -o " + TUN_INTERFACE + " -j MASQUERADE 2>/dev/null");
 
-            // Удаляем DNS-редирект (точечное удаление)
+            // Remove DNS redirect rules
             if (activeDnsIp != null) {
                 if (activeDnsIsV6) {
                     rootShell.run(null, "ip6tables -t nat -D OUTPUT -p udp --dport 53 -j DNAT --to-destination [" + activeDnsIp + "]:53 2>/dev/null; " +
@@ -442,14 +442,14 @@ public final class RootGoBackend implements Backend {
                 activeDnsIp = null;
             }
 
-            // Удаляем mangle правила (точечное удаление)
+            // Remove mangle rules
             rootShell.run(null, "iptables -t mangle -D OUTPUT -m owner --uid-owner " + myUid + " -p udp -j MARK --set-mark " + FWMARK + " 2>/dev/null; " +
                     "ip6tables -t mangle -D OUTPUT -m owner --uid-owner " + myUid + " -p udp -j MARK --set-mark " + FWMARK + " 2>/dev/null");
 
-            // Удаляем TUN-интерфейс
+            // Remove TUN interface
             rootShell.run(null, "ip link delete " + TUN_INTERFACE + " 2>/dev/null");
 
-            // Удаляем endpoint host routes из main table
+            // Remove endpoint host routes from main table
             for (final String ip : activeEndpointIps) {
                 if (ip.contains(":"))
                     rootShell.run(null, "ip -6 route del " + ip + " table main 2>/dev/null");
@@ -457,12 +457,12 @@ public final class RootGoBackend implements Backend {
                     rootShell.run(null, "ip route del " + ip + " table main 2>/dev/null");
             }
 
-            // Восстанавливаем права /dev/net/tun и /dev/tun
+            // Restore /dev/net/tun and /dev/tun permissions
             rootShell.run(null, "chmod 660 /dev/net/tun 2>/dev/null; chmod 660 /dev/tun 2>/dev/null");
 
             activeEndpointIps.clear();
 
-            // Закрываем fd только если Go не получил ownership (ошибка при awgTurnOn)
+            // Close fd only if Go did not take ownership (awgTurnOn error)
             if (tunFd >= 0) {
                 closeTun(tunFd);
                 tunFd = -1;

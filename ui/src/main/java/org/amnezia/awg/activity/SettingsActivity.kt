@@ -124,7 +124,7 @@ class SettingsActivity : AppCompatActivity() {
                 val enable = newValue as Boolean
                 if (enable) {
                     lifecycleScope.launch {
-                        // Шаг 1: проверяем root отдельно
+                        // Step 1: verify root access separately
                         val rootAvailable = try {
                             withContext(Dispatchers.IO) { Application.getRootShell().start() }
                             true
@@ -137,7 +137,7 @@ class SettingsActivity : AppCompatActivity() {
                             Toast.makeText(requireContext(), R.string.root_mode_error, Toast.LENGTH_SHORT).show()
                             return@launch
                         }
-                        // Шаг 2: сохраняем и перезапускаем
+                        // Step 2: save and restart
                         UserKnobs.setEnableRootMode(true)
                         restartApp()
                     }

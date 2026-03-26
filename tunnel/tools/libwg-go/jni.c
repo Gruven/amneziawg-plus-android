@@ -145,7 +145,7 @@ JNIEXPORT jint JNICALL Java_org_amnezia_awg_GoBackend_receiveTunFd(JNIEnv *env, 
 		return -2;
 	}
 
-	/* Разрешаем root-процессу подключаться */
+	/* Allow root process to connect */
 	chmod(path, 0777);
 
 	if (listen(server, 1) < 0) {
@@ -165,7 +165,7 @@ JNIEXPORT jint JNICALL Java_org_amnezia_awg_GoBackend_receiveTunFd(JNIEnv *env, 
 		return -4;
 	}
 
-	/* Получаем fd через SCM_RIGHTS */
+	/* Receive fd via SCM_RIGHTS */
 	char buf[1];
 	struct iovec iov = { .iov_base = buf, .iov_len = 1 };
 

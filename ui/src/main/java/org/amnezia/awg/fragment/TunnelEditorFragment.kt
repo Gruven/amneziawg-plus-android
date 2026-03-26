@@ -81,7 +81,7 @@ class TunnelEditorFragment : BaseFragment(), MenuProvider {
             executePendingBindings()
             privateKeyTextLayout.setEndIconOnClickListener { config?.`interface`?.generateKeyPair() }
         }
-        // Скрываем кнопку выбора приложений в root-режиме (фильтрация по UID недоступна)
+        // Hide app selection button in root mode (per-app routing unavailable)
         lifecycleScope.launch {
             if (Application.getBackend() is RootGoBackend) {
                 binding?.setExcludedApplications?.visibility = View.GONE
