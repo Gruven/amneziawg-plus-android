@@ -15,7 +15,9 @@ import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import org.amnezia.awg.Application
 import org.amnezia.awg.R
+import org.amnezia.awg.backend.RootGoBackend
 import org.amnezia.awg.backend.Tunnel
 import org.amnezia.awg.databinding.TunnelDetailFragmentBinding
 import org.amnezia.awg.databinding.TunnelDetailPeerBinding
@@ -82,6 +84,11 @@ class TunnelDetailFragment : BaseFragment(), MenuProvider {
                     binding.config = newTunnel.getConfigAsync()
                 } catch (_: Throwable) {
                     binding.config = null
+                }
+                binding.executePendingBindings()
+                if (Application.getBackend() is RootGoBackend) {
+                    binding.applicationsLabel.visibility = View.GONE
+                    binding.applicationsText.visibility = View.GONE
                 }
             }
         }
