@@ -8,9 +8,14 @@
 #include <string.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <errno.h>
 #include <sys/ioctl.h>
 #include <net/if.h>
 #include <linux/if_tun.h>
+#include <android/log.h>
+
+#define LOG_TAG "AmneziaWG/JNI"
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
 struct go_string { const char *str; long n; };
 extern int awgTurnOn(struct go_string ifname, int tun_fd, struct go_string settings);
@@ -78,10 +83,16 @@ JNIEXPORT jstring JNICALL Java_org_amnezia_awg_GoBackend_awgVersion(JNIEnv *env,
 JNIEXPORT jint JNICALL Java_org_amnezia_awg_GoBackend_openTun(JNIEnv *env, jclass c, jstring ifname)
 {
 	int fd = open("/dev/net/tun", O_RDWR);
-	if (fd < 0)
+	if (fd < 0) {
+		LOGE("open(/dev/net/tun) failed: %s (errno=%d)", strerror(errno), errno);
 		fd = open("/dev/tun", O_RDWR);
-	if (fd < 0)
+	}
+	if (fd < 0) {
+		LOGE("open(/dev/tun) failed: %s (errno=%d)", strerror(errno), errno);
 		return -1;
+	}
+
+	LOGE("TUN device opened successfully, fd=%d", fd);
 
 	struct ifreq ifr;
 	memset(&ifr, 0, sizeof(ifr));
@@ -92,10 +103,12 @@ JNIEXPORT jint JNICALL Java_org_amnezia_awg_GoBackend_openTun(JNIEnv *env, jclas
 	(*env)->ReleaseStringUTFChars(env, ifname, ifname_str);
 
 	if (ioctl(fd, TUNSETIFF, &ifr) < 0) {
+		LOGE("ioctl(TUNSETIFF, %s) failed: %s (errno=%d)", ifr.ifr_name, strerror(errno), errno);
 		close(fd);
 		return -2;
 	}
 
+	LOGE("TUN interface %s attached, fd=%d", ifr.ifr_name, fd);
 	return fd;
 }
 
