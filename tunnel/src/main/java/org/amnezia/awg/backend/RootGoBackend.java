@@ -342,6 +342,22 @@ public final class RootGoBackend implements Backend {
         runRootCommand("echo 1 > /proc/sys/net/ipv4/ip_forward");
         runRootCommand("echo 1 > /proc/sys/net/ipv6/conf/all/forwarding");
 
+        // Сохраняем маршруты до endpoint-ов ПЕРЕД настройкой туннельной маршрутизации
+        // На Android дефолтный маршрут не в таблице main, а в per-network таблице
+        // Поэтому добавляем явный host route для каждого endpoint
+        for (final String ip : activeEndpointIps) {
+            final List<String> routeOutput = new ArrayList<>();
+            if (ip.contains(":"))
+                rootShell.run(routeOutput, "ip -6 route get " + ip + " | sed 's/ uid .*//'");
+            else
+                rootShell.run(routeOutput, "ip route get " + ip + " | sed 's/ uid .*//'");
+            if (!routeOutput.isEmpty()) {
+                final String route = routeOutput.get(0).trim();
+                Log.d(TAG, "Saving endpoint route: " + route);
+                runRootCommand("ip route add " + route + " table main 2>/dev/null");
+            }
+        }
+
         // Правило: помеченные fwmark пакеты (от нашего приложения) используют main таблицу
         // (обход туннеля для UDP трафика WireGuard к endpoint-у)
         runRootCommand("ip rule add fwmark " + FWMARK + " table main priority 10");
@@ -432,6 +448,14 @@ public final class RootGoBackend implements Backend {
 
             // Удаляем TUN-интерфейс
             rootShell.run(null, "ip link delete " + TUN_INTERFACE + " 2>/dev/null");
+
+            // Удаляем endpoint host routes из main table
+            for (final String ip : activeEndpointIps) {
+                if (ip.contains(":"))
+                    rootShell.run(null, "ip -6 route del " + ip + " table main 2>/dev/null");
+                else
+                    rootShell.run(null, "ip route del " + ip + " table main 2>/dev/null");
+            }
 
             // Восстанавливаем права /dev/net/tun и /dev/tun
             rootShell.run(null, "chmod 660 /dev/net/tun 2>/dev/null; chmod 660 /dev/tun 2>/dev/null");
