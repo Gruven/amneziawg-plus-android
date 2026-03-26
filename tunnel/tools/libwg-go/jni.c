@@ -10,6 +10,9 @@
 #include <unistd.h>
 #include <errno.h>
 #include <sys/ioctl.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/un.h>
 #include <net/if.h>
 #include <linux/if_tun.h>
 #include <android/log.h>
@@ -116,4 +119,83 @@ JNIEXPORT void JNICALL Java_org_amnezia_awg_GoBackend_closeTun(JNIEnv *env, jcla
 {
 	if (fd >= 0)
 		close(fd);
+}
+
+JNIEXPORT jint JNICALL Java_org_amnezia_awg_GoBackend_receiveTunFd(JNIEnv *env, jclass c, jstring socketPath)
+{
+	const char *path = (*env)->GetStringUTFChars(env, socketPath, 0);
+
+	int server = socket(AF_UNIX, SOCK_STREAM, 0);
+	if (server < 0) {
+		LOGE("receiveTunFd: socket() failed: %s", strerror(errno));
+		(*env)->ReleaseStringUTFChars(env, socketPath, path);
+		return -1;
+	}
+
+	struct sockaddr_un addr;
+	memset(&addr, 0, sizeof(addr));
+	addr.sun_family = AF_UNIX;
+	strncpy(addr.sun_path, path, sizeof(addr.sun_path) - 1);
+	unlink(path);
+
+	if (bind(server, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
+		LOGE("receiveTunFd: bind(%s) failed: %s", path, strerror(errno));
+		close(server);
+		(*env)->ReleaseStringUTFChars(env, socketPath, path);
+		return -2;
+	}
+
+	/* Разрешаем root-процессу подключаться */
+	chmod(path, 0777);
+
+	if (listen(server, 1) < 0) {
+		LOGE("receiveTunFd: listen() failed: %s", strerror(errno));
+		close(server);
+		unlink(path);
+		(*env)->ReleaseStringUTFChars(env, socketPath, path);
+		return -3;
+	}
+
+	(*env)->ReleaseStringUTFChars(env, socketPath, path);
+
+	int client = accept(server, NULL, NULL);
+	close(server);
+	if (client < 0) {
+		LOGE("receiveTunFd: accept() failed: %s", strerror(errno));
+		return -4;
+	}
+
+	/* Получаем fd через SCM_RIGHTS */
+	char buf[1];
+	struct iovec iov = { .iov_base = buf, .iov_len = 1 };
+
+	union {
+		char buf[CMSG_SPACE(sizeof(int))];
+		struct cmsghdr align;
+	} cmsg_buf;
+
+	struct msghdr msg;
+	memset(&msg, 0, sizeof(msg));
+	msg.msg_iov = &iov;
+	msg.msg_iovlen = 1;
+	msg.msg_control = cmsg_buf.buf;
+	msg.msg_controllen = sizeof(cmsg_buf.buf);
+
+	if (recvmsg(client, &msg, 0) < 0) {
+		LOGE("receiveTunFd: recvmsg() failed: %s", strerror(errno));
+		close(client);
+		return -5;
+	}
+	close(client);
+
+	struct cmsghdr *cmsg = CMSG_FIRSTHDR(&msg);
+	if (!cmsg || cmsg->cmsg_level != SOL_SOCKET || cmsg->cmsg_type != SCM_RIGHTS) {
+		LOGE("receiveTunFd: no SCM_RIGHTS in message");
+		return -6;
+	}
+
+	int tun_fd;
+	memcpy(&tun_fd, CMSG_DATA(cmsg), sizeof(int));
+	LOGE("receiveTunFd: received tun fd=%d", tun_fd);
+	return tun_fd;
 }

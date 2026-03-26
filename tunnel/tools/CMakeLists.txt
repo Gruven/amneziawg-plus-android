@@ -17,6 +17,9 @@ add_executable(libwg.so ${WG_SOURCES})
 target_include_directories(libwg.so PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/amneziawg-tools/src/uapi/linux/" "${CMAKE_CURRENT_SOURCE_DIR}/amneziawg-tools/src/")
 target_compile_options(libwg.so PUBLIC -std=gnu11 -include ${CMAKE_CURRENT_SOURCE_DIR}/ndk-compat/compat.h -DRUNSTATEDIR=\"/data/data/${ANDROID_PACKAGE_NAME}/cache\")
 
+add_executable(libawg-tun-creator.so tun-creator.c ndk-compat/compat.c)
+target_compile_options(libawg-tun-creator.so PUBLIC -std=gnu11 -include ${CMAKE_CURRENT_SOURCE_DIR}/ndk-compat/compat.h)
+
 add_custom_target(libwg-go.so WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/libwg-go" COMMENT "Building amneziawg-go" VERBATIM COMMAND "${ANDROID_HOST_PREBUILTS}/bin/make"
     ANDROID_ARCH_NAME=${ANDROID_ARCH_NAME}
     ANDROID_PACKAGE_NAME=${ANDROID_PACKAGE_NAME}
@@ -42,3 +45,6 @@ add_dependencies(libwg.so elf-cleaner)
 add_custom_command(TARGET libwg-quick.so POST_BUILD VERBATIM COMMAND "${CMAKE_CURRENT_BINARY_DIR}/elf-cleaner"
         --api-level "${ANDROID_NATIVE_API_LEVEL}" "$<TARGET_FILE:libwg-quick.so>")
 add_dependencies(libwg-quick.so elf-cleaner)
+add_custom_command(TARGET libawg-tun-creator.so POST_BUILD VERBATIM COMMAND "${CMAKE_CURRENT_BINARY_DIR}/elf-cleaner"
+        --api-level "${ANDROID_NATIVE_API_LEVEL}" "$<TARGET_FILE:libawg-tun-creator.so>")
+add_dependencies(libawg-tun-creator.so elf-cleaner)

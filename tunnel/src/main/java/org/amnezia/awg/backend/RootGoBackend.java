@@ -20,6 +20,7 @@ import org.amnezia.awg.util.NonNullForAll;
 import org.amnezia.awg.util.RootShell;
 import org.amnezia.awg.util.SharedLibraryLoader;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -248,30 +249,25 @@ public final class RootGoBackend implements Backend {
                 break;
             }
 
-            // Подготовка /dev/net/tun (или /dev/tun)
-            runRootCommand("mkdir -p /dev/net 2>/dev/null; " +
-                    "[ ! -e /dev/net/tun ] && [ -e /dev/tun ] && ln -s /dev/tun /dev/net/tun 2>/dev/null; " +
-                    "[ -e /dev/net/tun ] && chmod 666 /dev/net/tun; " +
-                    "[ -e /dev/tun ] && chmod 666 /dev/tun");
+            // Путь к вспомогательному бинарнику и Unix-сокету для передачи fd
+            final File nativeLibDir = new File(context.getApplicationInfo().nativeLibraryDir);
+            final String tunCreator = new File(nativeLibDir, "libawg-tun-creator.so").getAbsolutePath();
+            final String socketPath = new File(context.getCacheDir(), "tun_fd.sock").getAbsolutePath();
+            new File(socketPath).delete();
 
-            // SELinux: разрешаем приложению открывать TUN-устройство
-            runRootCommand("magiskpolicy --live 'allow untrusted_app tun_device chr_file { read write open ioctl }' 2>/dev/null || " +
-                    "supolicy --live 'allow untrusted_app tun_device chr_file { read write open ioctl }' 2>/dev/null || " +
-                    "setenforce 0 2>/dev/null");
+            // Запускаем root-команду для создания TUN (в фоне, она подключится к сокету)
+            // tun-creator: open(/dev/tun) + ioctl(TUNSETIFF) от root, затем передаёт fd через SCM_RIGHTS
+            rootShell.run(null, tunCreator + " " + TUN_INTERFACE + " " + socketPath + " &");
 
-            // Создаём TUN-интерфейс через root (нужен CAP_NET_ADMIN)
-            // user <uid> позволяет приложению прикрепиться без CAP_NET_ADMIN
-            final int myUid = android.os.Process.myUid();
-            runRootCommand("ip tuntap add dev " + TUN_INTERFACE + " mode tun user " + myUid);
-
-            // Прикрепляемся к созданному интерфейсу через JNI
-            tunFd = openTun(TUN_INTERFACE);
+            // Принимаем fd через Unix domain socket
+            tunFd = receiveTunFd(socketPath);
+            new File(socketPath).delete();
             if (tunFd < 0) {
                 tunFd = -1;
                 throw new BackendException(Reason.TUN_CREATION_ERROR);
             }
 
-            Log.d(TAG, "TUN fd=" + tunFd + " attached to " + TUN_INTERFACE);
+            Log.d(TAG, "TUN fd=" + tunFd + " received for " + TUN_INTERFACE);
 
             try {
                 // Настраиваем интерфейс через root

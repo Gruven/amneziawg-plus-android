@@ -19,4 +19,6 @@ public class GoBackend {
     public static native int openTun(String ifName);
 
     public static native void closeTun(int fd);
+
+    public static native int receiveTunFd(String socketPath);
 }
