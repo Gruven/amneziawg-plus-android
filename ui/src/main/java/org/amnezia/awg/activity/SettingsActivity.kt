@@ -21,6 +21,7 @@ import org.amnezia.awg.backend.RootGoBackend
 import org.amnezia.awg.preference.PreferencesPreferenceDataStore
 import org.amnezia.awg.util.AdminKnobs
 import org.amnezia.awg.util.UserKnobs
+import android.util.Log
 import android.widget.Toast
 import androidx.preference.CheckBoxPreference
 import kotlinx.coroutines.Dispatchers
@@ -50,6 +51,19 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
+        private fun restartApp() {
+            try {
+                Toast.makeText(requireContext(), R.string.success_application_will_restart, Toast.LENGTH_LONG).show()
+                val intent = requireContext().packageManager.getLaunchIntentForPackage(requireContext().packageName)
+                intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                requireActivity().finishAffinity()
+                if (intent != null) startActivity(intent)
+            } catch (e: Throwable) {
+                Log.w("AmneziaWG/Settings", "Restart failed", e)
+            }
+            Runtime.getRuntime().exit(0)
+        }
+
         override fun onCreatePreferences(savedInstanceState: Bundle?, key: String?) {
             preferenceManager.preferenceDataStore = PreferencesPreferenceDataStore(lifecycleScope, Application.getPreferencesDataStore())
             addPreferencesFromResource(R.xml.preferences)
@@ -110,26 +124,28 @@ class SettingsActivity : AppCompatActivity() {
                 val enable = newValue as Boolean
                 if (enable) {
                     lifecycleScope.launch {
-                        try {
+                        // Шаг 1: проверяем root отдельно
+                        val rootAvailable = try {
                             withContext(Dispatchers.IO) { Application.getRootShell().start() }
-                            UserKnobs.setEnableRootMode(true)
-                            Toast.makeText(requireContext(), R.string.success_application_will_restart, Toast.LENGTH_LONG).show()
-                            requireActivity().finishAffinity()
-                            requireContext().packageManager.getLaunchIntentForPackage(requireContext().packageName)?.let { startActivity(it) }
-                            Runtime.getRuntime().exit(0)
-                        } catch (_: Throwable) {
+                            true
+                        } catch (e: Throwable) {
+                            Log.e("AmneziaWG/Settings", "Root check failed", e)
+                            false
+                        }
+                        if (!rootAvailable) {
                             rootModePref.isChecked = false
                             Toast.makeText(requireContext(), R.string.root_mode_error, Toast.LENGTH_SHORT).show()
+                            return@launch
                         }
+                        // Шаг 2: сохраняем и перезапускаем
+                        UserKnobs.setEnableRootMode(true)
+                        restartApp()
                     }
                     false
                 } else {
                     lifecycleScope.launch {
                         UserKnobs.setEnableRootMode(false)
-                        Toast.makeText(requireContext(), R.string.success_application_will_restart, Toast.LENGTH_LONG).show()
-                        requireActivity().finishAffinity()
-                        requireContext().packageManager.getLaunchIntentForPackage(requireContext().packageName)?.let { startActivity(it) }
-                        Runtime.getRuntime().exit(0)
+                        restartApp()
                     }
                     false
                 }
