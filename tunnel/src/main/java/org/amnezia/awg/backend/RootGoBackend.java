@@ -255,6 +255,11 @@ public final class RootGoBackend implements Backend {
                     "[ -e /dev/net/tun ] && chmod 666 /dev/net/tun; " +
                     "[ -e /dev/tun ] && chmod 666 /dev/tun");
 
+            // SELinux: разрешаем приложению открывать TUN-устройство
+            runRootCommand("magiskpolicy --live 'allow untrusted_app tun_device chr_file { read write open ioctl }' 2>/dev/null || " +
+                    "supolicy --live 'allow untrusted_app tun_device chr_file { read write open ioctl }' 2>/dev/null || " +
+                    "setenforce 0 2>/dev/null");
+
             // Создаём TUN-интерфейс через JNI
             tunFd = openTun(TUN_INTERFACE);
             if (tunFd < 0) {
