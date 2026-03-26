@@ -248,8 +248,7 @@ public final class RootGoBackend implements Backend {
                 break;
             }
 
-            // Разрешаем доступ к /dev/net/tun (или /dev/tun на некоторых устройствах)
-            // Создаём /dev/net/tun если его нет, но есть /dev/tun
+            // Подготовка /dev/net/tun (или /dev/tun)
             runRootCommand("mkdir -p /dev/net 2>/dev/null; " +
                     "[ ! -e /dev/net/tun ] && [ -e /dev/tun ] && ln -s /dev/tun /dev/net/tun 2>/dev/null; " +
                     "[ -e /dev/net/tun ] && chmod 666 /dev/net/tun; " +
@@ -260,14 +259,19 @@ public final class RootGoBackend implements Backend {
                     "supolicy --live 'allow untrusted_app tun_device chr_file { read write open ioctl }' 2>/dev/null || " +
                     "setenforce 0 2>/dev/null");
 
-            // Создаём TUN-интерфейс через JNI
+            // Создаём TUN-интерфейс через root (нужен CAP_NET_ADMIN)
+            // user <uid> позволяет приложению прикрепиться без CAP_NET_ADMIN
+            final int myUid = android.os.Process.myUid();
+            runRootCommand("ip tuntap add dev " + TUN_INTERFACE + " mode tun user " + myUid);
+
+            // Прикрепляемся к созданному интерфейсу через JNI
             tunFd = openTun(TUN_INTERFACE);
             if (tunFd < 0) {
                 tunFd = -1;
                 throw new BackendException(Reason.TUN_CREATION_ERROR);
             }
 
-            Log.d(TAG, "TUN fd=" + tunFd + " created for " + TUN_INTERFACE);
+            Log.d(TAG, "TUN fd=" + tunFd + " attached to " + TUN_INTERFACE);
 
             try {
                 // Настраиваем интерфейс через root
