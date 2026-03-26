@@ -27,6 +27,8 @@ GO_HASH_darwin-amd64 := 238d9c065d09ff6af229d2e3b8b5e85e688318d69f4006fb85a96e41
 GO_HASH_darwin-arm64 := b70f8b3c5b4ccb0ad4ffa5ee91cd38075df20fdbd953a1daedd47f50fbcff47a
 GO_HASH_linux-amd64 := 68097bd680839cbc9d464a0edce4f7c333975e27a90246890e9f1078c7e702ad
 
+SHA256SUM := $(if $(filter darwin,$(shell uname -s | tr '[:upper:]' '[:lower:]')),shasum -a 256 -c,sha256sum -c)
+
 default: $(DESTDIR)/libwg-go.so
 
 $(GRADLE_USER_HOME)/caches/golang/$(GO_TARBALL):
@@ -34,7 +36,7 @@ $(GRADLE_USER_HOME)/caches/golang/$(GO_TARBALL):
 	flock "$@.lock" -c ' \
 	[ -f "$@" ] && exit 0; \
 	curl -o "$@.tmp" "https://dl.google.com/go/$(GO_TARBALL)" && \
-	echo "$(GO_HASH_$(GO_PLATFORM))  $@.tmp" | sha256sum -c && \
+	echo "$(GO_HASH_$(GO_PLATFORM))  $@.tmp" | $(SHA256SUM) && \
 	mv "$@.tmp" "$@"'
 
 $(BUILDDIR)/go-$(GO_VERSION)/.prepared: $(GRADLE_USER_HOME)/caches/golang/$(GO_TARBALL)
