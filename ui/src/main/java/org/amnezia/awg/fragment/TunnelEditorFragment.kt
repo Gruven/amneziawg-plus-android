@@ -25,6 +25,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import org.amnezia.awg.Application
 import org.amnezia.awg.R
+import org.amnezia.awg.backend.RootGoBackend
 import org.amnezia.awg.backend.Tunnel
 import org.amnezia.awg.databinding.TunnelEditorFragmentBinding
 import org.amnezia.awg.model.ObservableTunnel
@@ -79,6 +80,12 @@ class TunnelEditorFragment : BaseFragment(), MenuProvider {
         binding?.apply {
             executePendingBindings()
             privateKeyTextLayout.setEndIconOnClickListener { config?.`interface`?.generateKeyPair() }
+        }
+        // Скрываем кнопку выбора приложений в root-режиме (фильтрация по UID недоступна)
+        lifecycleScope.launch {
+            if (Application.getBackend() is RootGoBackend) {
+                binding?.setExcludedApplications?.visibility = View.GONE
+            }
         }
         return binding?.root
     }
