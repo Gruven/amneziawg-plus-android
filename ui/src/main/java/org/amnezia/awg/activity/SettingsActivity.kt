@@ -35,9 +35,10 @@ import kotlinx.coroutines.withContext
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (supportFragmentManager.findFragmentById(android.R.id.content) == null) {
+        setContentView(R.layout.settings_activity)
+        if (supportFragmentManager.findFragmentById(R.id.settings_container) == null) {
             supportFragmentManager.commit {
-                add(android.R.id.content, SettingsFragment())
+                add(R.id.settings_container, SettingsFragment())
             }
         }
     }
@@ -67,17 +68,14 @@ class SettingsActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, key: String?) {
             preferenceManager.preferenceDataStore = PreferencesPreferenceDataStore(lifecycleScope, Application.getPreferencesDataStore())
             addPreferencesFromResource(R.xml.preferences)
-            preferenceScreen.initialExpandedChildrenCount = 5
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU || QuickTileService.isAdded) {
                 val quickTile = preferenceManager.findPreference<Preference>("quick_tile")
                 quickTile?.parent?.removePreference(quickTile)
-                --preferenceScreen.initialExpandedChildrenCount
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 val darkTheme = preferenceManager.findPreference<Preference>("dark_theme")
                 darkTheme?.parent?.removePreference(darkTheme)
-                --preferenceScreen.initialExpandedChildrenCount
             }
             if (AdminKnobs.disableConfigExport) {
                 val zipExporter = preferenceManager.findPreference<Preference>("zip_exporter")
@@ -91,7 +89,6 @@ class SettingsActivity : AppCompatActivity() {
             awgQuickOnlyPrefs.forEach { it.isVisible = false }
             lifecycleScope.launch {
                 if (Application.getBackend() is AwgQuickBackend) {
-                    ++preferenceScreen.initialExpandedChildrenCount
                     awgQuickOnlyPrefs.forEach { it.isVisible = true }
                 } else {
                     awgQuickOnlyPrefs.forEach { it.parent?.removePreference(it) }
