@@ -11,6 +11,7 @@ on:
         default: release_aab
         options:
         - release_aab
+        - release_apk
         - debug_apk
       ref:
         description: "Git ref (branch/tag/sha), leave empty to use selected branch"
@@ -24,7 +25,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         ref: ${{ inputs.ref || github.ref_name }}
         token: ${{ secrets.CHECKOUT_TOKEN || github.token }}
@@ -32,16 +33,16 @@ jobs:
         fetch-depth: 0
 
     - name: Set up JDK
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v5
       with:
         distribution: temurin
         java-version: "17"
 
     - name: Set up Gradle
-      uses: gradle/actions/setup-gradle@v4
+      uses: gradle/actions/setup-gradle@v5
 
     - name: Set up Android SDK
-      uses: android-actions/setup-android@v3
+      uses: android-actions/setup-android@v4
 
     - name: Configure build
       id: cfg
@@ -53,6 +54,12 @@ jobs:
             echo "gradle_task=bundleRelease" >> "$GITHUB_OUTPUT"
             echo "kind=aab" >> "$GITHUB_OUTPUT"
             echo "artifact_name=release-aab" >> "$GITHUB_OUTPUT"
+            echo "needs_signing=true" >> "$GITHUB_OUTPUT"
+            ;;
+          release_apk)
+            echo "gradle_task=assembleRelease" >> "$GITHUB_OUTPUT"
+            echo "kind=apk" >> "$GITHUB_OUTPUT"
+            echo "artifact_name=release-apk" >> "$GITHUB_OUTPUT"
             echo "needs_signing=true" >> "$GITHUB_OUTPUT"
             ;;
           debug_apk)
@@ -93,21 +100,39 @@ jobs:
       shell: bash
       run: |
         set -euo pipefail
-        
-        if [[ "${{ steps.cfg.outputs.kind }}" == "aab" ]]; then
-          FILE="./ui/build/outputs/bundle/release/ui-release.aab"
-        else
-          FILE="./ui/build/outputs/apk/debug/ui-debug.apk"
-        fi
-        
+
+        FILE=""
+        case "${{ inputs.target }}" in
+          release_aab)
+            FILE="./ui/build/outputs/bundle/release/ui-release.aab"
+            ;;
+          debug_apk)
+            FILE="./ui/build/outputs/apk/debug/ui-debug.apk"
+            ;;
+          release_apk)
+            for CANDIDATE in \
+              "./ui/build/outputs/apk/release/ui-release-unsigned.apk" \
+              "./ui/build/outputs/apk/release/ui-release.apk"; do
+              if [[ -f "${CANDIDATE}" ]]; then
+                FILE="${CANDIDATE}"
+                break
+              fi
+            done
+            ;;
+          *)
+            echo "Unknown target in locate step: ${{ inputs.target }}" >&2
+            exit 1
+            ;;
+        esac
+
         if [[ ! -f "${FILE}" ]]; then
           echo "Built file not found: ${FILE}" >&2
           exit 1
         fi
-        
+
         echo "built_file=${FILE}" >> "$GITHUB_OUTPUT"
 
-    - name: Sign AAB
+    - name: Sign release artifact
       if: ${{ steps.cfg.outputs.needs_signing == 'true' }}
       id: sign
       shell: bash
@@ -117,32 +142,62 @@ jobs:
         KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
       run: |
         set -euo pipefail
-        
-        AAB="${{ steps.locate.outputs.built_file }}"
-        SIGNED_AAB="${AAB%.aab}-signed.aab"
-        
+
         if [[ -z "${KEYSTORE_PASSWORD}" || -z "${KEY_ALIAS}" ]]; then
           echo "Missing one of secrets: ANDROID_KEYSTORE_PASSWORD / ANDROID_KEY_ALIAS" >&2
           exit 1
         fi
 
-        KEYPASS_ARGS=()
-        if [[ -n "${KEY_PASSWORD}" ]]; then
-          KEYPASS_ARGS=(-keypass "${KEY_PASSWORD}")
+        INPUT_FILE="${{ steps.locate.outputs.built_file }}"
+        KEY_PASSWORD_EFFECTIVE="${KEY_PASSWORD:-$KEYSTORE_PASSWORD}"
+
+        if [[ "${{ steps.cfg.outputs.kind }}" == "aab" ]]; then
+          SIGNED_AAB="${INPUT_FILE%.aab}-signed.aab"
+
+          KEYPASS_ARGS=()
+          if [[ -n "${KEY_PASSWORD}" ]]; then
+            KEYPASS_ARGS=(-keypass "${KEY_PASSWORD}")
+          fi
+
+          jarsigner \
+            -keystore "${KEYSTORE_PATH}" \
+            -storepass "${KEYSTORE_PASSWORD}" \
+            "${KEYPASS_ARGS[@]}" \
+            -signedjar "${SIGNED_AAB}" \
+            "${INPUT_FILE}" \
+            "${KEY_ALIAS}"
+
+          echo "final_file=${SIGNED_AAB}" >> "$GITHUB_OUTPUT"
+        else
+          ZIPALIGN="$(find "${ANDROID_HOME}/build-tools" -type f -name zipalign | sort -V | tail -n 1)"
+          APKSIGNER="$(find "${ANDROID_HOME}/build-tools" -type f -name apksigner | sort -V | tail -n 1)"
+
+          if [[ -z "${ZIPALIGN}" || -z "${APKSIGNER}" ]]; then
+            echo "zipalign/apksigner not found in ANDROID_HOME build-tools" >&2
+            exit 1
+          fi
+
+          ALIGNED_APK="${INPUT_FILE%.apk}-aligned.apk"
+          SIGNED_APK="${INPUT_FILE%-unsigned.apk}-signed.apk"
+          if [[ "${SIGNED_APK}" == "${INPUT_FILE}" ]]; then
+            SIGNED_APK="${INPUT_FILE%.apk}-signed.apk"
+          fi
+
+          "${ZIPALIGN}" -f -p 4 "${INPUT_FILE}" "${ALIGNED_APK}"
+
+          "${APKSIGNER}" sign \
+            --ks "${KEYSTORE_PATH}" \
+            --ks-key-alias "${KEY_ALIAS}" \
+            --ks-pass "pass:${KEYSTORE_PASSWORD}" \
+            --key-pass "pass:${KEY_PASSWORD_EFFECTIVE}" \
+            --out "${SIGNED_APK}" \
+            "${ALIGNED_APK}"
+
+          echo "final_file=${SIGNED_APK}" >> "$GITHUB_OUTPUT"
         fi
-        
-        jarsigner \
-          -keystore "${KEYSTORE_PATH}" \
-          -storepass "${KEYSTORE_PASSWORD}" \
-          "${KEYPASS_ARGS[@]}" \
-          -signedjar "${SIGNED_AAB}" \
-          "${AAB}" \
-          "${KEY_ALIAS}"
-        
-        echo "final_file=${SIGNED_AAB}" >> "$GITHUB_OUTPUT"
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: ${{ steps.cfg.outputs.artifact_name }}
         path: ${{ steps.sign.outputs.final_file || steps.locate.outputs.built_file }}
