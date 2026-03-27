@@ -287,4 +287,12 @@
     <string name="import_disclaimer">Убедитесь, что вы получили файл конфигурации в надёжном источнике.\n\nОфициальные сервисы Amnezia доступны только на сайте <a href="https://storage.googleapis.com/amnezia/amnezia.org">amnezia.org</a>\n</string>
     <string name="tunnel_status_connected">Подключено</string>
     <string name="tunnel_status_connecting">Подключение…</string>
+    <string name="tasker_plugin_title">Управление туннелем AmneziaWG</string>
+    <string name="tasker_select_tunnel">Туннель</string>
+    <string name="tasker_select_action">Действие</string>
+    <string name="tasker_action_up">Включить</string>
+    <string name="tasker_action_down">Выключить</string>
+    <string name="tasker_action_toggle">Переключить</string>
+    <string name="tasker_last_used_tunnel">Последний использованный туннель</string>
+    <string name="tasker_no_tunnels">Нет настроенных туннелей</string>
 </resources>

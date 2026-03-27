@@ -46,8 +46,11 @@ class TaskerFireReceiver : BroadcastReceiver() {
                     Log.w(TAG, "Tasker: plugin not allowed")
                     return@launch
                 }
-                val tunnels = Application.getTunnelManager().getTunnels()
-                val tunnel = tunnels[tunnelName]
+                val manager = Application.getTunnelManager()
+                val tunnel = if (tunnelName == TaskerEditActivity.LAST_USED)
+                    manager.lastUsedTunnel
+                else
+                    manager.getTunnels()[tunnelName]
                 if (tunnel != null) {
                     tunnel.setStateAsync(state)
                     Log.i(TAG, "Tasker: tunnel $tunnelName set to $state")

@@ -239,4 +239,12 @@
     <string name="biometric_prompt_private_key_title">Authenticeer om de persoonlijke sleutel te bekijken</string>
     <string name="biometric_auth_error">Authenticatiefout</string>
     <string name="biometric_auth_error_reason">Authenticatiefout: %s</string>
+    <string name="tasker_plugin_title">AmneziaWG tunnelbeheer</string>
+    <string name="tasker_select_tunnel">Tunnel</string>
+    <string name="tasker_select_action">Actie</string>
+    <string name="tasker_action_up">Inschakelen</string>
+    <string name="tasker_action_down">Uitschakelen</string>
+    <string name="tasker_action_toggle">Schakelen</string>
+    <string name="tasker_last_used_tunnel">Laatst gebruikte tunnel</string>
+    <string name="tasker_no_tunnels">Geen tunnels geconfigureerd</string>
 </resources>

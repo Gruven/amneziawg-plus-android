@@ -216,4 +216,12 @@
     <string name="biometric_prompt_private_key_title">පුද්ගලික යතුර බැලීමට සත්‍යාපනය කරන්න</string>
     <string name="biometric_auth_error">සත්‍යාපනය අසාර්ථක වීම</string>
     <string name="biometric_auth_error_reason">සත්‍යාපන අසාර්ථකත්වය: %s</string>
+    <string name="tasker_plugin_title">AmneziaWG උමං පාලනය</string>
+    <string name="tasker_select_tunnel">උමඟ</string>
+    <string name="tasker_select_action">ක්‍රියාව</string>
+    <string name="tasker_action_up">සක්‍රිය කරන්න</string>
+    <string name="tasker_action_down">අක්‍රිය කරන්න</string>
+    <string name="tasker_action_toggle">මාරු කරන්න</string>
+    <string name="tasker_last_used_tunnel">අවසන් වරට භාවිත උමඟ</string>
+    <string name="tasker_no_tunnels">උමං සකසා නැත</string>
 </resources>

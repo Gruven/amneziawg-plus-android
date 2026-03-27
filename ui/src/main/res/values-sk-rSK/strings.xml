@@ -170,4 +170,12 @@
     <string name="biometric_prompt_private_key_title">Authenticate to view private key</string>
     <string name="biometric_auth_error">Overovanie zlyhalo</string>
     <string name="biometric_auth_error_reason">Overovanie zlyhalo: %s</string>
+    <string name="tasker_plugin_title">Ovládanie tunela AmneziaWG</string>
+    <string name="tasker_select_tunnel">Tunel</string>
+    <string name="tasker_select_action">Akcia</string>
+    <string name="tasker_action_up">Zapnúť</string>
+    <string name="tasker_action_down">Vypnúť</string>
+    <string name="tasker_action_toggle">Prepnúť</string>
+    <string name="tasker_last_used_tunnel">Naposledy použitý tunel</string>
+    <string name="tasker_no_tunnels">Žiadne tunely nie sú nakonfigurované</string>
 </resources>

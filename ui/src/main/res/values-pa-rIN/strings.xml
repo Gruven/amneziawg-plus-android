@@ -245,4 +245,12 @@
     <string name="biometric_prompt_private_key_title">ਪ੍ਰਾਈਵੇਟ ਕੁੰਜੀ ਵੇਖਣ ਲਈ ਪਰਮਾਣਕਿਤਾ</string>
     <string name="biometric_auth_error">ਪਰਮਾਣਿਤ ਕਰਨ ਲਈ ਅਸਫ਼ਲ</string>
     <string name="biometric_auth_error_reason">ਪਰਮਾਣਿਤ ਕਰਨ ਲਈ ਅਸਫ਼ਲ: %s</string>
+    <string name="tasker_plugin_title">AmneziaWG ਟਨਲ ਕੰਟਰੋਲ</string>
+    <string name="tasker_select_tunnel">ਟਨਲ</string>
+    <string name="tasker_select_action">ਕਾਰਵਾਈ</string>
+    <string name="tasker_action_up">ਚਾਲੂ ਕਰੋ</string>
+    <string name="tasker_action_down">ਬੰਦ ਕਰੋ</string>
+    <string name="tasker_action_toggle">ਟੌਗਲ ਕਰੋ</string>
+    <string name="tasker_last_used_tunnel">ਆਖਰੀ ਵਰਤੀ ਗਈ ਟਨਲ</string>
+    <string name="tasker_no_tunnels">ਕੋਈ ਟਨਲ ਕੌਂਫਿਗਰ ਨਹੀਂ ਹੈ</string>
 </resources>

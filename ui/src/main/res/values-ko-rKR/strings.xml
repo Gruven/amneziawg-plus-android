@@ -235,4 +235,12 @@
     <string name="biometric_prompt_private_key_title">개인 키를 보기 위한 인증과정</string>
     <string name="biometric_auth_error">인증 실패</string>
     <string name="biometric_auth_error_reason">인증 실패: %s</string>
+    <string name="tasker_plugin_title">AmneziaWG 터널 제어</string>
+    <string name="tasker_select_tunnel">터널</string>
+    <string name="tasker_select_action">작업</string>
+    <string name="tasker_action_up">켜기</string>
+    <string name="tasker_action_down">끄기</string>
+    <string name="tasker_action_toggle">전환</string>
+    <string name="tasker_last_used_tunnel">마지막으로 사용한 터널</string>
+    <string name="tasker_no_tunnels">구성된 터널 없음</string>
 </resources>

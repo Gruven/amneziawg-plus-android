@@ -284,5 +284,6 @@
     <string name="tasker_action_up">Turn on</string>
     <string name="tasker_action_down">Turn off</string>
     <string name="tasker_action_toggle">Toggle</string>
+    <string name="tasker_last_used_tunnel">Last used tunnel</string>
     <string name="tasker_no_tunnels">No tunnels configured</string>
 </resources>

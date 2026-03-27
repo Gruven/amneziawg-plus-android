@@ -237,4 +237,12 @@
     <string name="biometric_prompt_private_key_title">驗證私鑰</string>
     <string name="biometric_auth_error">驗證失敗</string>
     <string name="biometric_auth_error_reason">驗證失敗: %s</string>
+    <string name="tasker_plugin_title">AmneziaWG 隧道控制</string>
+    <string name="tasker_select_tunnel">隧道</string>
+    <string name="tasker_select_action">操作</string>
+    <string name="tasker_action_up">開啟</string>
+    <string name="tasker_action_down">關閉</string>
+    <string name="tasker_action_toggle">切換</string>
+    <string name="tasker_last_used_tunnel">上次使用的隧道</string>
+    <string name="tasker_no_tunnels">未設定隧道</string>
 </resources>
