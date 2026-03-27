@@ -198,4 +198,12 @@
     <string name="zip_export_title">Eksportér tunneler til zip-fil</string>
     <string name="biometric_auth_error">Fejl ved godkendelse</string>
     <string name="biometric_auth_error_reason">Fejl ved godkendelse: %s</string>
+    <string name="tasker_plugin_title">AmneziaWG tunnelstyring</string>
+    <string name="tasker_select_tunnel">Tunnel</string>
+    <string name="tasker_select_action">Handling</string>
+    <string name="tasker_action_up">Tænd</string>
+    <string name="tasker_action_down">Sluk</string>
+    <string name="tasker_action_toggle">Skift</string>
+    <string name="tasker_last_used_tunnel">Sidst brugte tunnel</string>
+    <string name="tasker_no_tunnels">Ingen tunneller konfigureret</string>
 </resources>

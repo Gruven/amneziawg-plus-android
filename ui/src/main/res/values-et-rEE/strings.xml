@@ -255,4 +255,12 @@
     <string name="biometric_prompt_private_key_title">Autendi privaatvõtme vaatamiseks</string>
     <string name="biometric_auth_error">Autentimine ebaõnnestus</string>
     <string name="biometric_auth_error_reason">Autentimine ebaõnnestus: %s</string>
+    <string name="tasker_plugin_title">AmneziaWG tunneli juhtimine</string>
+    <string name="tasker_select_tunnel">Tunnel</string>
+    <string name="tasker_select_action">Tegevus</string>
+    <string name="tasker_action_up">Lülita sisse</string>
+    <string name="tasker_action_down">Lülita välja</string>
+    <string name="tasker_action_toggle">Lülita ümber</string>
+    <string name="tasker_last_used_tunnel">Viimati kasutatud tunnel</string>
+    <string name="tasker_no_tunnels">Tunneleid pole seadistatud</string>
 </resources>

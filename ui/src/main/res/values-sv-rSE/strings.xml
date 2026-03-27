@@ -258,4 +258,12 @@
     <string name="biometric_prompt_private_key_title">Godkänn för att visa tunnelns privata nycklar</string>
     <string name="biometric_auth_error">Fel vid godkännande</string>
     <string name="biometric_auth_error_reason">Fel vid godkännande: %s</string>
+    <string name="tasker_plugin_title">AmneziaWG tunnelkontroll</string>
+    <string name="tasker_select_tunnel">Tunnel</string>
+    <string name="tasker_select_action">Åtgärd</string>
+    <string name="tasker_action_up">Slå på</string>
+    <string name="tasker_action_down">Stäng av</string>
+    <string name="tasker_action_toggle">Växla</string>
+    <string name="tasker_last_used_tunnel">Senast använda tunnel</string>
+    <string name="tasker_no_tunnels">Inga tunnlar konfigurerade</string>
 </resources>

@@ -23,7 +23,10 @@ import kotlinx.coroutines.launch
 class TaskerEditActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTaskerBinding
-    private var tunnelNames: List<String> = emptyList()
+    private var displayNames: List<String> = emptyList()
+    private var tunnelValues: List<String> = emptyList()
+    private var selectedTunnelIndex = 0
+    private var selectedActionIndex = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,46 +38,63 @@ class TaskerEditActivity : AppCompatActivity() {
             getString(R.string.tasker_action_down),
             getString(R.string.tasker_action_toggle)
         )
-        binding.actionSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, actions)
+        val actionDropdown = binding.actionDropdown
+        actionDropdown.setAdapter(ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, actions))
+        actionDropdown.setText(actions[0], false)
+        actionDropdown.setOnItemClickListener { _, _, position, _ -> selectedActionIndex = position }
 
         lifecycleScope.launch {
             val tunnels = Application.getTunnelManager().getTunnels()
-            tunnelNames = tunnels.map { it.name }
-            if (tunnelNames.isEmpty()) {
+            val realNames = tunnels.map { it.name }
+            if (realNames.isEmpty()) {
                 Toast.makeText(this@TaskerEditActivity, R.string.tasker_no_tunnels, Toast.LENGTH_SHORT).show()
                 setResult(Activity.RESULT_CANCELED)
                 finish()
                 return@launch
             }
-            binding.tunnelSpinner.adapter = ArrayAdapter(this@TaskerEditActivity, android.R.layout.simple_spinner_dropdown_item, tunnelNames)
+
+            val lastUsedLabel = getString(R.string.tasker_last_used_tunnel)
+            displayNames = listOf(lastUsedLabel) + realNames
+            tunnelValues = listOf(LAST_USED) + realNames
+
+            val tunnelDropdown = binding.tunnelDropdown
+            tunnelDropdown.setAdapter(ArrayAdapter(this@TaskerEditActivity, android.R.layout.simple_dropdown_item_1line, displayNames))
+            tunnelDropdown.setText(displayNames[0], false)
+            tunnelDropdown.setOnItemClickListener { _, _, position, _ -> selectedTunnelIndex = position }
 
             // Restore previous selection if editing
             val prevBundle = intent.getBundleExtra(EXTRA_BUNDLE)
             if (prevBundle != null) {
                 val prevTunnel = prevBundle.getString(KEY_TUNNEL)
                 val prevAction = prevBundle.getString(KEY_ACTION)
-                val tunnelIndex = tunnelNames.indexOf(prevTunnel)
-                if (tunnelIndex >= 0) binding.tunnelSpinner.setSelection(tunnelIndex)
+                val tunnelIndex = tunnelValues.indexOf(prevTunnel)
+                if (tunnelIndex >= 0) {
+                    selectedTunnelIndex = tunnelIndex
+                    tunnelDropdown.setText(displayNames[tunnelIndex], false)
+                }
                 val actionIndex = ACTIONS.indexOf(prevAction)
-                if (actionIndex >= 0) binding.actionSpinner.setSelection(actionIndex)
+                if (actionIndex >= 0) {
+                    selectedActionIndex = actionIndex
+                    actionDropdown.setText(actions[actionIndex], false)
+                }
             }
         }
 
         binding.saveButton.setOnClickListener {
-            if (tunnelNames.isEmpty()) {
+            if (tunnelValues.isEmpty()) {
                 setResult(Activity.RESULT_CANCELED)
                 finish()
                 return@setOnClickListener
             }
-            val tunnelName = tunnelNames[binding.tunnelSpinner.selectedItemPosition]
-            val action = ACTIONS[binding.actionSpinner.selectedItemPosition]
+            val tunnelValue = tunnelValues[selectedTunnelIndex]
+            val action = ACTIONS[selectedActionIndex]
 
             val bundle = Bundle().apply {
-                putString(KEY_TUNNEL, tunnelName)
+                putString(KEY_TUNNEL, tunnelValue)
                 putString(KEY_ACTION, action)
             }
 
-            val blurb = "$tunnelName: ${actions[binding.actionSpinner.selectedItemPosition]}"
+            val blurb = "${displayNames[selectedTunnelIndex]}: ${actions[selectedActionIndex]}"
 
             val resultIntent = Intent().apply {
                 putExtra(EXTRA_BUNDLE, bundle)
@@ -90,6 +110,7 @@ class TaskerEditActivity : AppCompatActivity() {
         const val EXTRA_STRING_BLURB = "com.twofortyfouram.locale.intent.extra.BLURB"
         const val KEY_TUNNEL = "tunnel"
         const val KEY_ACTION = "action"
+        const val LAST_USED = "__last_used__"
         val ACTIONS = arrayOf("up", "down", "toggle")
     }
 }

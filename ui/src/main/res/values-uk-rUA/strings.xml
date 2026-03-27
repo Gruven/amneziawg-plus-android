@@ -280,4 +280,12 @@
     <string name="biometric_prompt_private_key_title">Авторизуйтеся для перегляду закритого ключа</string>
     <string name="biometric_auth_error">Помилка автентифікації</string>
     <string name="biometric_auth_error_reason">Помилка автентифікації: %s</string>
+    <string name="tasker_plugin_title">Керування тунелем AmneziaWG</string>
+    <string name="tasker_select_tunnel">Тунель</string>
+    <string name="tasker_select_action">Дія</string>
+    <string name="tasker_action_up">Увімкнути</string>
+    <string name="tasker_action_down">Вимкнути</string>
+    <string name="tasker_action_toggle">Перемкнути</string>
+    <string name="tasker_last_used_tunnel">Останній використаний тунель</string>
+    <string name="tasker_no_tunnels">Немає налаштованих тунелів</string>
 </resources>

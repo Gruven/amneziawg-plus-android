@@ -310,4 +310,12 @@
     <string name="biometric_prompt_private_key_title">تحتاج للاستيثاق لعرض المفتاح الخاص</string>
     <string name="biometric_auth_error">فشل في المصادقة</string>
     <string name="biometric_auth_error_reason">فشل في المصادقة: %s</string>
+    <string name="tasker_plugin_title">التحكم في نفق AmneziaWG</string>
+    <string name="tasker_select_tunnel">النفق</string>
+    <string name="tasker_select_action">الإجراء</string>
+    <string name="tasker_action_up">تشغيل</string>
+    <string name="tasker_action_down">إيقاف</string>
+    <string name="tasker_action_toggle">تبديل</string>
+    <string name="tasker_last_used_tunnel">آخر نفق مستخدم</string>
+    <string name="tasker_no_tunnels">لا توجد أنفاق مُعدّة</string>
 </resources>

@@ -138,4 +138,12 @@
     <string name="root_mode_error">Η πρόσβαση root δεν είναι διαθέσιμη</string>
     <string name="root_shell_error">Η εντολή root shell απέτυχε: %d</string>
     <string name="type_name_root_go_userspace">Root Go userspace</string>
+    <string name="tasker_plugin_title">Έλεγχος τούνελ AmneziaWG</string>
+    <string name="tasker_select_tunnel">Τούνελ</string>
+    <string name="tasker_select_action">Ενέργεια</string>
+    <string name="tasker_action_up">Ενεργοποίηση</string>
+    <string name="tasker_action_down">Απενεργοποίηση</string>
+    <string name="tasker_action_toggle">Εναλλαγή</string>
+    <string name="tasker_last_used_tunnel">Τελευταίο χρησιμοποιημένο τούνελ</string>
+    <string name="tasker_no_tunnels">Δεν έχουν ρυθμιστεί τούνελ</string>
 </resources>

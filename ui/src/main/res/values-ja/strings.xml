@@ -245,4 +245,12 @@
     <string name="biometric_prompt_private_key_title">秘密鍵を表示するために認証を行います</string>
     <string name="biometric_auth_error">認証に失敗</string>
     <string name="biometric_auth_error_reason">認証に失敗: %s</string>
+    <string name="tasker_plugin_title">AmneziaWGトンネル制御</string>
+    <string name="tasker_select_tunnel">トンネル</string>
+    <string name="tasker_select_action">アクション</string>
+    <string name="tasker_action_up">オンにする</string>
+    <string name="tasker_action_down">オフにする</string>
+    <string name="tasker_action_toggle">切り替え</string>
+    <string name="tasker_last_used_tunnel">最後に使用したトンネル</string>
+    <string name="tasker_no_tunnels">トンネルが設定されていません</string>
 </resources>

@@ -231,4 +231,12 @@
     <string name="biometric_prompt_private_key_title">प्राइवेट की देखने के लिए प्रमाणित करें</string>
     <string name="biometric_auth_error">प्रमाणीकरण विफलता</string>
     <string name="biometric_auth_error_reason">प्रमाणीकरण विफल: %s</string>
+    <string name="tasker_plugin_title">AmneziaWG सुरंग नियंत्रण</string>
+    <string name="tasker_select_tunnel">सुरंग</string>
+    <string name="tasker_select_action">क्रिया</string>
+    <string name="tasker_action_up">चालू करें</string>
+    <string name="tasker_action_down">बंद करें</string>
+    <string name="tasker_action_toggle">टॉगल करें</string>
+    <string name="tasker_last_used_tunnel">अंतिम उपयोग की गई सुरंग</string>
+    <string name="tasker_no_tunnels">कोई सुरंग कॉन्फ़िगर नहीं है</string>
 </resources>

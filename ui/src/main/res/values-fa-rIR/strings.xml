@@ -252,4 +252,12 @@
     <string name="biometric_prompt_private_key_title">برای دیدن کلید خصوصی، هویت خود را تایید کنید</string>
     <string name="biometric_auth_error">شکست در تایید هویت</string>
     <string name="biometric_auth_error_reason">شکست در تایید هویت: %s</string>
+    <string name="tasker_plugin_title">کنترل تونل AmneziaWG</string>
+    <string name="tasker_select_tunnel">تونل</string>
+    <string name="tasker_select_action">عملیات</string>
+    <string name="tasker_action_up">روشن کردن</string>
+    <string name="tasker_action_down">خاموش کردن</string>
+    <string name="tasker_action_toggle">تغییر وضعیت</string>
+    <string name="tasker_last_used_tunnel">آخرین تونل استفاده‌شده</string>
+    <string name="tasker_no_tunnels">هیچ تونلی پیکربندی نشده است</string>
 </resources>

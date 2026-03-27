@@ -254,4 +254,12 @@
     <string name="biometric_prompt_private_key_title">Autenticar para ver la clave privada</string>
     <string name="biometric_auth_error">Error de autenticación</string>
     <string name="biometric_auth_error_reason">Error de autenticación: %s</string>
+    <string name="tasker_plugin_title">Control de túnel AmneziaWG</string>
+    <string name="tasker_select_tunnel">Túnel</string>
+    <string name="tasker_select_action">Acción</string>
+    <string name="tasker_action_up">Activar</string>
+    <string name="tasker_action_down">Desactivar</string>
+    <string name="tasker_action_toggle">Alternar</string>
+    <string name="tasker_last_used_tunnel">Último túnel utilizado</string>
+    <string name="tasker_no_tunnels">No hay túneles configurados</string>
 </resources>
