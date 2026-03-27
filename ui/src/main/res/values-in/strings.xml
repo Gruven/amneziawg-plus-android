@@ -49,6 +49,12 @@
     <string name="allow_remote_control_intents_summary_off">Aplikasi eksternal tidak dapat mengalihkan tunnel (disarankan)</string>
     <string name="allow_remote_control_intents_summary_on">Apl eksternal dapat mengalihkan tunnel (lanjutan)</string>
     <string name="allow_remote_control_intents_title">Izinkan intent jarak jauh</string>
+    <string name="remote_control_token_title">Token kendali jarak jauh</string>
+    <string name="remote_control_token_copied">Token disalin ke papan klip</string>
+    <string name="remote_control_token_regenerated">Token dibuat ulang</string>
+    <string name="remote_control_token_copy">Salin</string>
+    <string name="remote_control_token_regenerate">Buat ulang</string>
+    <string name="remote_control_token_empty">Token tidak boleh kosong</string>
     <string name="allow_tasker_plugin_summary_off">Aplikasi otomatisasi tidak dapat mengontrol terowongan</string>
     <string name="allow_tasker_plugin_summary_on">Aplikasi otomatisasi dapat mengontrol terowongan</string>
     <string name="allow_tasker_plugin_title">Izinkan plugin Tasker</string>

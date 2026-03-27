@@ -62,6 +62,12 @@
     <string name="allow_remote_control_intents_summary_off">Aplicações externas não podem controlar túneis (recomendado)</string>
     <string name="allow_remote_control_intents_summary_on">Aplicações externas podem controlar túneis (avançado)</string>
     <string name="allow_remote_control_intents_title">Permitir intents remotos</string>
+    <string name="remote_control_token_title">Token de controlo remoto</string>
+    <string name="remote_control_token_copied">Token copiado para a área de transferência</string>
+    <string name="remote_control_token_regenerated">Token regenerado</string>
+    <string name="remote_control_token_copy">Copiar</string>
+    <string name="remote_control_token_regenerate">Regenerar</string>
+    <string name="remote_control_token_empty">O token não pode estar vazio</string>
     <string name="allow_tasker_plugin_summary_off">As aplicações de automatização não podem controlar os túneis</string>
     <string name="allow_tasker_plugin_summary_on">As aplicações de automatização podem controlar os túneis</string>
     <string name="allow_tasker_plugin_title">Permitir plugin do Tasker</string>

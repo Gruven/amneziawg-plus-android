@@ -49,6 +49,12 @@
     <string name="allow_remote_control_intents_summary_off">外部程式無法控制通道 (推薦)</string>
     <string name="allow_remote_control_intents_summary_on">外部程式可以控制通道 (進階)</string>
     <string name="allow_remote_control_intents_title">允許遠端意圖</string>
+    <string name="remote_control_token_title">遠端控制權杖</string>
+    <string name="remote_control_token_copied">權杖已複製到剪貼簿</string>
+    <string name="remote_control_token_regenerated">權杖已重新產生</string>
+    <string name="remote_control_token_copy">複製</string>
+    <string name="remote_control_token_regenerate">重新產生</string>
+    <string name="remote_control_token_empty">權杖不能為空</string>
     <string name="allow_tasker_plugin_summary_off">自動化應用程式無法控制隧道</string>
     <string name="allow_tasker_plugin_summary_on">自動化應用程式可以控制隧道</string>
     <string name="allow_tasker_plugin_title">允許 Tasker 外掛</string>

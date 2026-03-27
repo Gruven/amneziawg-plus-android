@@ -62,6 +62,12 @@
     <string name="allow_remote_control_intents_summary_off">Les applications externes ne peuvent pas activer les tunnels (recommandé)</string>
     <string name="allow_remote_control_intents_summary_on">Les applications externes peuvent activer les tunnels (avancés)</string>
     <string name="allow_remote_control_intents_title">Autoriser les intents distants</string>
+    <string name="remote_control_token_title">Jeton de contrôle à distance</string>
+    <string name="remote_control_token_copied">Jeton copié dans le presse-papiers</string>
+    <string name="remote_control_token_regenerated">Jeton régénéré</string>
+    <string name="remote_control_token_copy">Copier</string>
+    <string name="remote_control_token_regenerate">Régénérer</string>
+    <string name="remote_control_token_empty">Le jeton ne peut pas être vide</string>
     <string name="allow_tasker_plugin_summary_off">Les applications d\'automatisation ne peuvent pas contrôler les tunnels</string>
     <string name="allow_tasker_plugin_summary_on">Les applications d\'automatisation peuvent contrôler les tunnels</string>
     <string name="allow_tasker_plugin_title">Autoriser le plugin Tasker</string>

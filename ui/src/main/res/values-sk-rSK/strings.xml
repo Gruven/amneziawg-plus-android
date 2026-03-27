@@ -10,6 +10,12 @@
     <string name="allow_remote_control_intents_summary_off">Externé aplikácie nemôžu spustiť tunely (odporúčané)</string>
     <string name="allow_remote_control_intents_summary_on">Externé aplikácie môžu spustiť tunely (pokročilé)</string>
     <string name="allow_remote_control_intents_title">Povoliť vzdialené intenty</string>
+    <string name="remote_control_token_title">Token vzdialeného ovládania</string>
+    <string name="remote_control_token_copied">Token skopírovaný do schránky</string>
+    <string name="remote_control_token_regenerated">Token vygenerovaný znova</string>
+    <string name="remote_control_token_copy">Kopírovať</string>
+    <string name="remote_control_token_regenerate">Vygenerovať znova</string>
+    <string name="remote_control_token_empty">Token nemôže byť prázdny</string>
     <string name="allow_tasker_plugin_summary_off">Automatizačné aplikácie nemôžu ovládať tunely</string>
     <string name="allow_tasker_plugin_summary_on">Automatizačné aplikácie môžu ovládať tunely</string>
     <string name="allow_tasker_plugin_title">Povoliť Tasker plugin</string>

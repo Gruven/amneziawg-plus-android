@@ -62,6 +62,12 @@
     <string name="allow_remote_control_intents_summary_off">Le app esterne non possono attivare tunnel (consigliato)</string>
     <string name="allow_remote_control_intents_summary_on">Le app esterne possono attivare tunnel (avanzato)</string>
     <string name="allow_remote_control_intents_title">Consenti intent remoti</string>
+    <string name="remote_control_token_title">Token di controllo remoto</string>
+    <string name="remote_control_token_copied">Token copiato negli appunti</string>
+    <string name="remote_control_token_regenerated">Token rigenerato</string>
+    <string name="remote_control_token_copy">Copia</string>
+    <string name="remote_control_token_regenerate">Rigenera</string>
+    <string name="remote_control_token_empty">Il token non può essere vuoto</string>
     <string name="allow_tasker_plugin_summary_off">Le app di automazione non possono controllare i tunnel</string>
     <string name="allow_tasker_plugin_summary_on">Le app di automazione possono controllare i tunnel</string>
     <string name="allow_tasker_plugin_title">Consenti plugin Tasker</string>

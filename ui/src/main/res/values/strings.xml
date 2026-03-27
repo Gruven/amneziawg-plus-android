@@ -269,6 +269,12 @@
     <string name="import_disclaimer">Ensure that you obtained the configuration file from a trusted source.\n\nOfficial Amnezia services are available only at <a href="https://amnezia.org">amnezia.org</a>\n</string>
     <string name="tunnel_status_connected">Connected</string>
     <string name="tunnel_status_connecting">Connecting…</string>
+    <string name="remote_control_token_title">Remote control token</string>
+    <string name="remote_control_token_copied">Token copied to clipboard</string>
+    <string name="remote_control_token_regenerated">Token regenerated</string>
+    <string name="remote_control_token_copy">Copy</string>
+    <string name="remote_control_token_regenerate">Regenerate</string>
+    <string name="remote_control_token_empty">Token cannot be empty</string>
     <string name="allow_tasker_plugin_summary_off">Tasker and similar automation apps cannot control tunnels</string>
     <string name="allow_tasker_plugin_summary_on">Tasker and similar automation apps can control tunnels</string>
     <string name="allow_tasker_plugin_title">Allow Tasker plugin</string>

@@ -63,6 +63,12 @@
 (توصیه می‌شود)</string>
     <string name="allow_remote_control_intents_summary_on">برنامه‌های بیرونی تونل‌ها را عوض کنند (پیشرفته)</string>
     <string name="allow_remote_control_intents_title">اجازه اینتنت‌های راه‌دور</string>
+    <string name="remote_control_token_title">توکن کنترل از راه‌دور</string>
+    <string name="remote_control_token_copied">توکن در کلیپ‌بورد کپی شد</string>
+    <string name="remote_control_token_regenerated">توکن بازسازی شد</string>
+    <string name="remote_control_token_copy">کپی</string>
+    <string name="remote_control_token_regenerate">بازسازی</string>
+    <string name="remote_control_token_empty">توکن نمی‌تواند خالی باشد</string>
     <string name="allow_tasker_plugin_summary_off">برنامه‌های خودکار نمی‌توانند تونل‌ها را کنترل کنند</string>
     <string name="allow_tasker_plugin_summary_on">برنامه‌های خودکار می‌توانند تونل‌ها را کنترل کنند</string>
     <string name="allow_tasker_plugin_title">اجازه افزونه Tasker</string>

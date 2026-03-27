@@ -62,6 +62,12 @@
     <string name="allow_remote_control_intents_summary_off">Οι εξωτερικές εφαρμογές δεν θα μπορούν να αλλάζουν την κατάσταση των tunnel (συνιστάται)</string>
     <string name="allow_remote_control_intents_summary_on">Οι εξωτερικές εφαρμογές θα μπορούν να αλλάζουν την κατάσταση των tunnel (για προχωρημένους)</string>
     <string name="allow_remote_control_intents_title">Επιτρέψτε απομακρυσμένα intents</string>
+    <string name="remote_control_token_title">Token απομακρυσμένου ελέγχου</string>
+    <string name="remote_control_token_copied">Το token αντιγράφηκε στο πρόχειρο</string>
+    <string name="remote_control_token_regenerated">Το token δημιουργήθηκε ξανά</string>
+    <string name="remote_control_token_copy">Αντιγραφή</string>
+    <string name="remote_control_token_regenerate">Αναδημιουργία</string>
+    <string name="remote_control_token_empty">Το token δεν μπορεί να είναι κενό</string>
     <string name="allow_tasker_plugin_summary_off">Οι εφαρμογές αυτοματισμού δεν μπορούν να ελέγξουν τα τούνελ</string>
     <string name="allow_tasker_plugin_summary_on">Οι εφαρμογές αυτοματισμού μπορούν να ελέγξουν τα τούνελ</string>
     <string name="allow_tasker_plugin_title">Επιτρέψτε το πρόσθετο Tasker</string>

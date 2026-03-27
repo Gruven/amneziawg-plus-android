@@ -62,6 +62,12 @@
     <string name="allow_remote_control_intents_summary_off">Välised rakendused ei saa tunneleid lülitada (soovituslik)</string>
     <string name="allow_remote_control_intents_summary_on">Välised rakendused saavad tunneleid lülitada (edasijõudnud)</string>
     <string name="allow_remote_control_intents_title">Luba kaugkäsklused</string>
+    <string name="remote_control_token_title">Kaugjuhtimise token</string>
+    <string name="remote_control_token_copied">Token kopeeritud lõikelauale</string>
+    <string name="remote_control_token_regenerated">Token uuesti loodud</string>
+    <string name="remote_control_token_copy">Kopeeri</string>
+    <string name="remote_control_token_regenerate">Loo uuesti</string>
+    <string name="remote_control_token_empty">Token ei saa olla tühi</string>
     <string name="allow_tasker_plugin_summary_off">Automaatikarakendused ei saa tunneleid juhtida</string>
     <string name="allow_tasker_plugin_summary_on">Automaatikarakendused saavad tunneleid juhtida</string>
     <string name="allow_tasker_plugin_title">Luba Taskeri pistikprogramm</string>

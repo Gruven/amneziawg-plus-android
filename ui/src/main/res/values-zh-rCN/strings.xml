@@ -49,6 +49,12 @@
     <string name="allow_remote_control_intents_summary_off">不允许外部应用控制隧道（推荐）</string>
     <string name="allow_remote_control_intents_summary_on">允许外部应用控制隧道（面向高级用户）</string>
     <string name="allow_remote_control_intents_title">允许远程意图</string>
+    <string name="remote_control_token_title">远程控制令牌</string>
+    <string name="remote_control_token_copied">令牌已复制到剪贴板</string>
+    <string name="remote_control_token_regenerated">令牌已重新生成</string>
+    <string name="remote_control_token_copy">复制</string>
+    <string name="remote_control_token_regenerate">重新生成</string>
+    <string name="remote_control_token_empty">令牌不能为空</string>
     <string name="allow_tasker_plugin_summary_off">自动化应用无法控制隧道</string>
     <string name="allow_tasker_plugin_summary_on">自动化应用可以控制隧道</string>
     <string name="allow_tasker_plugin_title">允许 Tasker 插件</string>

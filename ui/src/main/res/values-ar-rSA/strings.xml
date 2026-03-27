@@ -114,6 +114,12 @@
     <string name="allow_remote_control_intents_summary_off">لا يمكن للتطبيقات الخارجية تبدل الأنفاق (مستحسن)</string>
     <string name="allow_remote_control_intents_summary_on">يمكن للتطبيقات الخارجية تبدل الأنفاق (مستحسن)</string>
     <string name="allow_remote_control_intents_title">السماح بالأوامر عن بعد</string>
+    <string name="remote_control_token_title">رمز التحكم عن بعد</string>
+    <string name="remote_control_token_copied">تم نسخ الرمز إلى الحافظة</string>
+    <string name="remote_control_token_regenerated">تم إعادة إنشاء الرمز</string>
+    <string name="remote_control_token_copy">نسخ</string>
+    <string name="remote_control_token_regenerate">إعادة إنشاء</string>
+    <string name="remote_control_token_empty">لا يمكن أن يكون الرمز فارغاً</string>
     <string name="allow_tasker_plugin_summary_off">لا يمكن لتطبيقات الأتمتة التحكم في الأنفاق</string>
     <string name="allow_tasker_plugin_summary_on">يمكن لتطبيقات الأتمتة التحكم في الأنفاق</string>
     <string name="allow_tasker_plugin_title">السماح بمكوّن Tasker</string>

@@ -65,6 +65,26 @@ object UserKnobs {
             it[ALLOW_REMOTE_CONTROL_INTENTS] ?: false
         }
 
+    private val REMOTE_CONTROL_TOKEN = stringPreferencesKey("remote_control_token")
+    val remoteControlToken: Flow<String?>
+        get() = Application.getPreferencesDataStore().data.map {
+            it[REMOTE_CONTROL_TOKEN]
+        }
+
+    fun generateToken(): String {
+        val chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return (1..10).map { chars.random() }.joinToString("")
+    }
+
+    suspend fun setRemoteControlToken(token: String?) {
+        Application.getPreferencesDataStore().edit {
+            if (token == null)
+                it.remove(REMOTE_CONTROL_TOKEN)
+            else
+                it[REMOTE_CONTROL_TOKEN] = token
+        }
+    }
+
     private val ALLOW_TASKER_PLUGIN = booleanPreferencesKey("allow_tasker_plugin")
     val allowTaskerPlugin: Flow<Boolean>
         get() = Application.getPreferencesDataStore().data.map {

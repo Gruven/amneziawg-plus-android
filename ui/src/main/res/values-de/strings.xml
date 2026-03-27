@@ -62,6 +62,12 @@
     <string name="allow_remote_control_intents_summary_off">Externe Apps dürfen keine Tunnel umschalten (empfohlen)</string>
     <string name="allow_remote_control_intents_summary_on">Externe Apps dürfen Tunnel umschalten (erweitert)</string>
     <string name="allow_remote_control_intents_title">Externe Intents erlauben</string>
+    <string name="remote_control_token_title">Fernsteuerungs-Token</string>
+    <string name="remote_control_token_copied">Token in Zwischenablage kopiert</string>
+    <string name="remote_control_token_regenerated">Token neu generiert</string>
+    <string name="remote_control_token_copy">Kopieren</string>
+    <string name="remote_control_token_regenerate">Neu generieren</string>
+    <string name="remote_control_token_empty">Token darf nicht leer sein</string>
     <string name="allow_tasker_plugin_summary_off">Automatisierungs-Apps können Tunnel nicht steuern</string>
     <string name="allow_tasker_plugin_summary_on">Automatisierungs-Apps können Tunnel steuern</string>
     <string name="allow_tasker_plugin_title">Tasker-Plugin erlauben</string>

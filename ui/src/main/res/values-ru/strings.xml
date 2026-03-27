@@ -88,6 +88,12 @@
     <string name="allow_remote_control_intents_summary_off">Внешние приложения не могут переключать туннели (рекомендуется)</string>
     <string name="allow_remote_control_intents_summary_on">Внешние приложения могут переключать туннели (продвинутые)</string>
     <string name="allow_remote_control_intents_title">Разрешить удалённые интенты</string>
+    <string name="remote_control_token_title">Токен удалённого управления</string>
+    <string name="remote_control_token_copied">Токен скопирован в буфер обмена</string>
+    <string name="remote_control_token_regenerated">Токен перегенерирован</string>
+    <string name="remote_control_token_copy">Копировать</string>
+    <string name="remote_control_token_regenerate">Перегенерировать</string>
+    <string name="remote_control_token_empty">Токен не может быть пустым</string>
     <string name="allow_tasker_plugin_summary_off">Приложения автоматизации не могут управлять туннелями</string>
     <string name="allow_tasker_plugin_summary_on">Приложения автоматизации могут управлять туннелями</string>
     <string name="allow_tasker_plugin_title">Разрешить плагин Tasker</string>

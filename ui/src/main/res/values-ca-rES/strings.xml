@@ -62,6 +62,12 @@
     <string name="allow_remote_control_intents_summary_off">Aplicacions externes no poden cambiar túnels (recomanat)</string>
     <string name="allow_remote_control_intents_summary_on">Aplicacions externes poden cambiar túnels (avançat)</string>
     <string name="allow_remote_control_intents_title">Permet intents remots</string>
+    <string name="remote_control_token_title">Token de control remot</string>
+    <string name="remote_control_token_copied">Token copiat al porta-retalls</string>
+    <string name="remote_control_token_regenerated">Token regenerat</string>
+    <string name="remote_control_token_copy">Copia</string>
+    <string name="remote_control_token_regenerate">Regenera</string>
+    <string name="remote_control_token_empty">El token no pot estar buit</string>
     <string name="allow_tasker_plugin_summary_off">Les aplicacions d\'automatització no poden controlar els túnels</string>
     <string name="allow_tasker_plugin_summary_on">Les aplicacions d\'automatització poden controlar els túnels</string>
     <string name="allow_tasker_plugin_title">Permet el connector Tasker</string>

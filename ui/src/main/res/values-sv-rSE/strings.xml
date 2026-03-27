@@ -62,6 +62,12 @@
     <string name="allow_remote_control_intents_summary_off">Externa appar kan inte växla tunnlar (rekommenderas)</string>
     <string name="allow_remote_control_intents_summary_on">Externa appar kan växla tunnlar (avancerat)</string>
     <string name="allow_remote_control_intents_title">Tillåt fjärrintents</string>
+    <string name="remote_control_token_title">Fjärrstyrningstoken</string>
+    <string name="remote_control_token_copied">Token kopierad till urklipp</string>
+    <string name="remote_control_token_regenerated">Token regenererad</string>
+    <string name="remote_control_token_copy">Kopiera</string>
+    <string name="remote_control_token_regenerate">Regenerera</string>
+    <string name="remote_control_token_empty">Token kan inte vara tom</string>
     <string name="allow_tasker_plugin_summary_off">Automatiseringsappar kan inte styra tunnlar</string>
     <string name="allow_tasker_plugin_summary_on">Automatiseringsappar kan styra tunnlar</string>
     <string name="allow_tasker_plugin_title">Tillåt Tasker-plugin</string>

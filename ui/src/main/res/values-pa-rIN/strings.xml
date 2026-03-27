@@ -62,6 +62,12 @@
     <string name="allow_remote_control_intents_summary_off">ਬਾਹਰੀ ਐਪਾਂ ਟਨਲਾਂ ਨੂੰ ਬਦਲ ਨਹੀਂ ਸਕਦੀਆਂ (ਸਿਫਾਰਸ਼ੀ)</string>
     <string name="allow_remote_control_intents_summary_on">ਬਾਹਰੀ ਐਪਾਂ ਟਨਲਾਂ ਨੂੰ ਬਦਲ ਸਕਦੀਆਂ ਹਨ (ਤਕਨੀਕੀ)</string>
     <string name="allow_remote_control_intents_title">ਰਿਮੋਟ ਇੰਟੈਂਟਸ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ</string>
+    <string name="remote_control_token_title">ਰਿਮੋਟ ਕੰਟਰੋਲ ਟੋਕਨ</string>
+    <string name="remote_control_token_copied">ਟੋਕਨ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕੀਤਾ ਗਿਆ</string>
+    <string name="remote_control_token_regenerated">ਟੋਕਨ ਦੁਬਾਰਾ ਬਣਾਇਆ ਗਿਆ</string>
+    <string name="remote_control_token_copy">ਕਾਪੀ ਕਰੋ</string>
+    <string name="remote_control_token_regenerate">ਦੁਬਾਰਾ ਬਣਾਓ</string>
+    <string name="remote_control_token_empty">ਟੋਕਨ ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦਾ</string>
     <string name="allow_tasker_plugin_summary_off">ਆਟੋਮੇਸ਼ਨ ਐਪਾਂ ਟਨਲਾਂ ਨੂੰ ਕੰਟਰੋਲ ਨਹੀਂ ਕਰ ਸਕਦੀਆਂ</string>
     <string name="allow_tasker_plugin_summary_on">ਆਟੋਮੇਸ਼ਨ ਐਪਾਂ ਟਨਲਾਂ ਨੂੰ ਕੰਟਰੋਲ ਕਰ ਸਕਦੀਆਂ ਹਨ</string>
     <string name="allow_tasker_plugin_title">Tasker ਪਲੱਗਇਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ</string>

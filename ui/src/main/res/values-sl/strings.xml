@@ -88,6 +88,12 @@
     <string name="allow_remote_control_intents_summary_off">Zunanjim aplikacijam ni dovoljeno preklapljati tunelov (priporočeno)</string>
     <string name="allow_remote_control_intents_summary_on">Zunanje aplikacije lahko preklapljajo tunele (napredno)</string>
     <string name="allow_remote_control_intents_title">Dovoli oddaljene namere</string>
+    <string name="remote_control_token_title">Žeton za oddaljeno upravljanje</string>
+    <string name="remote_control_token_copied">Žeton kopiran v odložišče</string>
+    <string name="remote_control_token_regenerated">Žeton ponovno ustvarjen</string>
+    <string name="remote_control_token_copy">Kopiraj</string>
+    <string name="remote_control_token_regenerate">Ponovno ustvari</string>
+    <string name="remote_control_token_empty">Žeton ne sme biti prazen</string>
     <string name="allow_tasker_plugin_summary_off">Aplikacije za avtomatizacijo ne morejo upravljati tunelov</string>
     <string name="allow_tasker_plugin_summary_on">Aplikacije za avtomatizacijo lahko upravljajo tunele</string>
     <string name="allow_tasker_plugin_title">Dovoli vtičnik Tasker</string>

@@ -88,6 +88,12 @@
     <string name="allow_remote_control_intents_summary_off">Зовнішні додатки не можуть перемикати тунелі (рекомендовано)</string>
     <string name="allow_remote_control_intents_summary_on">Зовнішні додатки можуть перемикати тунелі (для досвідчених)</string>
     <string name="allow_remote_control_intents_title">Дозволити віддалені інтенти</string>
+    <string name="remote_control_token_title">Токен віддаленого керування</string>
+    <string name="remote_control_token_copied">Токен скопійовано до буфера обміну</string>
+    <string name="remote_control_token_regenerated">Токен перегенеровано</string>
+    <string name="remote_control_token_copy">Копіювати</string>
+    <string name="remote_control_token_regenerate">Перегенерувати</string>
+    <string name="remote_control_token_empty">Токен не може бути порожнім</string>
     <string name="allow_tasker_plugin_summary_off">Програми автоматизації не можуть керувати тунелями</string>
     <string name="allow_tasker_plugin_summary_on">Програми автоматизації можуть керувати тунелями</string>
     <string name="allow_tasker_plugin_title">Дозволити плагін Tasker</string>

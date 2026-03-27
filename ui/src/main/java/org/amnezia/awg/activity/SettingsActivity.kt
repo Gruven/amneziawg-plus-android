@@ -21,8 +21,12 @@ import org.amnezia.awg.backend.RootGoBackend
 import org.amnezia.awg.preference.PreferencesPreferenceDataStore
 import org.amnezia.awg.util.AdminKnobs
 import org.amnezia.awg.util.UserKnobs
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.getSystemService
 import androidx.preference.CheckBoxPreference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -146,6 +150,100 @@ class SettingsActivity : AppCompatActivity() {
                     }
                     false
                 }
+            }
+
+            val remoteIntentsPref = preferenceManager.findPreference<CheckBoxPreference>("allow_remote_control_intents")
+            val tokenPref = preferenceManager.findPreference<Preference>("remote_control_token")
+
+            fun updateTokenVisibility(enabled: Boolean) {
+                tokenPref?.isVisible = enabled
+            }
+
+            lifecycleScope.launch {
+                val enabled = UserKnobs.allowRemoteControlIntents.first()
+                updateTokenVisibility(enabled)
+                if (enabled) {
+                    val token = UserKnobs.remoteControlToken.first()
+                    tokenPref?.summary = token ?: "—"
+                }
+            }
+
+            remoteIntentsPref?.setOnPreferenceChangeListener { _, newValue ->
+                val enable = newValue as Boolean
+                lifecycleScope.launch {
+                    if (enable) {
+                        val existing = UserKnobs.remoteControlToken.first()
+                        if (existing == null) {
+                            val token = UserKnobs.generateToken()
+                            UserKnobs.setRemoteControlToken(token)
+                            tokenPref?.summary = token
+                        }
+                    }
+                    updateTokenVisibility(enable)
+                }
+                true
+            }
+
+            tokenPref?.setOnPreferenceClickListener {
+                lifecycleScope.launch {
+                    val token = UserKnobs.remoteControlToken.first() ?: ""
+                    val pad = (24 * resources.displayMetrics.density).toInt()
+
+                    val editText = com.google.android.material.textfield.TextInputEditText(requireContext()).apply {
+                        setText(token)
+                        setSingleLine()
+                    }
+                    val inputLayout = com.google.android.material.textfield.TextInputLayout(requireContext()).apply {
+                        layoutParams = android.widget.LinearLayout.LayoutParams(0, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+                        addView(editText)
+                    }
+                    val regenButton = com.google.android.material.button.MaterialButton(requireContext(), null, com.google.android.material.R.attr.materialButtonOutlinedStyle).apply {
+                        text = "\uD83C\uDFB2"
+                        minWidth = 0
+                        minimumWidth = 0
+                        setPadding(pad / 2, 0, pad / 2, 0)
+                        contentDescription = getString(R.string.remote_control_token_regenerate)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                            tooltipText = getString(R.string.remote_control_token_regenerate)
+                        setOnClickListener {
+                            editText.setText(UserKnobs.generateToken())
+                        }
+                    }
+                    val row = android.widget.LinearLayout(requireContext()).apply {
+                        orientation = android.widget.LinearLayout.HORIZONTAL
+                        gravity = android.view.Gravity.CENTER_VERTICAL
+                        setPadding(pad, pad / 2, pad, 0)
+                        addView(inputLayout)
+                        addView(regenButton)
+                    }
+
+                    val dialog = com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
+                        .setTitle(R.string.remote_control_token_title)
+                        .setView(row)
+                        .setPositiveButton(R.string.save, null)
+                        .setNeutralButton(R.string.remote_control_token_copy, null)
+                        .create()
+                    dialog.show()
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                        val newToken = editText.text.toString().trim()
+                        if (newToken.isEmpty()) {
+                            inputLayout.error = getString(R.string.remote_control_token_empty)
+                            return@setOnClickListener
+                        }
+                        inputLayout.error = null
+                        lifecycleScope.launch {
+                            UserKnobs.setRemoteControlToken(newToken)
+                            tokenPref.summary = newToken
+                        }
+                        dialog.dismiss()
+                    }
+                    dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener {
+                        val clipboard = requireContext().getSystemService<ClipboardManager>()
+                        clipboard?.setPrimaryClip(ClipData.newPlainText("token", editText.text.toString()))
+                        Toast.makeText(requireContext(), R.string.remote_control_token_copied, Toast.LENGTH_SHORT).show()
+                    }
+                }
+                true
             }
         }
     }

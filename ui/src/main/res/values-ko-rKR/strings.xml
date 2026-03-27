@@ -49,6 +49,12 @@
     <string name="allow_remote_control_intents_summary_off">다른 앱이 터널을 조작할 수 없음 (권장)</string>
     <string name="allow_remote_control_intents_summary_on">다른 앱이 터널을 조작할 수 있음 (상급자용)</string>
     <string name="allow_remote_control_intents_title">원격 인텐트 허용</string>
+    <string name="remote_control_token_title">원격 제어 토큰</string>
+    <string name="remote_control_token_copied">토큰이 클립보드에 복사됨</string>
+    <string name="remote_control_token_regenerated">토큰이 재생성됨</string>
+    <string name="remote_control_token_copy">복사</string>
+    <string name="remote_control_token_regenerate">재생성</string>
+    <string name="remote_control_token_empty">토큰은 비어 있을 수 없습니다</string>
     <string name="allow_tasker_plugin_summary_off">자동화 앱이 터널을 제어할 수 없음</string>
     <string name="allow_tasker_plugin_summary_on">자동화 앱이 터널을 제어할 수 있음</string>
     <string name="allow_tasker_plugin_title">Tasker 플러그인 허용</string>

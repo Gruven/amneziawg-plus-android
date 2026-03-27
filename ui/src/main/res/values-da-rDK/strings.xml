@@ -62,6 +62,12 @@
     <string name="allow_remote_control_intents_summary_off">Eksterne apps kan ikke slå tunneler til/fra (Anbefales)</string>
     <string name="allow_remote_control_intents_summary_on">Eksterne apps må slå tunneler til/fra (Avanceret)</string>
     <string name="allow_remote_control_intents_title">Tillad fjern-intents</string>
+    <string name="remote_control_token_title">Fjernstyringstoken</string>
+    <string name="remote_control_token_copied">Token kopieret til udklipsholder</string>
+    <string name="remote_control_token_regenerated">Token gendannet</string>
+    <string name="remote_control_token_copy">Kopiér</string>
+    <string name="remote_control_token_regenerate">Gendannelse</string>
+    <string name="remote_control_token_empty">Token kan ikke være tom</string>
     <string name="allow_tasker_plugin_summary_off">Automatiseringsapps kan ikke styre tunneller</string>
     <string name="allow_tasker_plugin_summary_on">Automatiseringsapps kan styre tunneller</string>
     <string name="allow_tasker_plugin_title">Tillad Tasker-plugin</string>

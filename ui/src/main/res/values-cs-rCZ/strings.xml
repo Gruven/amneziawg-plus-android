@@ -88,6 +88,12 @@
     <string name="allow_remote_control_intents_summary_off">Externí aplikace nemohou přepínat tunely (doporučeno)</string>
     <string name="allow_remote_control_intents_summary_on">Externí aplikace mohou přepínat tunely (pokročilé)</string>
     <string name="allow_remote_control_intents_title">Povolit vzdálené intenty</string>
+    <string name="remote_control_token_title">Token vzdáleného ovládání</string>
+    <string name="remote_control_token_copied">Token zkopírován do schránky</string>
+    <string name="remote_control_token_regenerated">Token vygenerován znovu</string>
+    <string name="remote_control_token_copy">Kopírovat</string>
+    <string name="remote_control_token_regenerate">Vygenerovat znovu</string>
+    <string name="remote_control_token_empty">Token nemůže být prázdný</string>
     <string name="allow_tasker_plugin_summary_off">Automatizační aplikace nemohou ovládat tunely</string>
     <string name="allow_tasker_plugin_summary_on">Automatizační aplikace mohou ovládat tunely</string>
     <string name="allow_tasker_plugin_title">Povolit Tasker plugin</string>

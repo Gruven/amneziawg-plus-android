@@ -62,6 +62,12 @@
     <string name="allow_remote_control_intents_summary_off">Externe apps kunnen mogelijk geen tunnels in-/uitschakelen (aanbevolen)</string>
     <string name="allow_remote_control_intents_summary_on">Externe apps kunnen tunnels in-/uitschakelen (geavanceerd)</string>
     <string name="allow_remote_control_intents_title">Externe intents toestaan</string>
+    <string name="remote_control_token_title">Afstandsbedieningstoken</string>
+    <string name="remote_control_token_copied">Token gekopieerd naar klembord</string>
+    <string name="remote_control_token_regenerated">Token opnieuw gegenereerd</string>
+    <string name="remote_control_token_copy">Kopiëren</string>
+    <string name="remote_control_token_regenerate">Opnieuw genereren</string>
+    <string name="remote_control_token_empty">Token mag niet leeg zijn</string>
     <string name="allow_tasker_plugin_summary_off">Automatiseringsapps kunnen geen tunnels bedienen</string>
     <string name="allow_tasker_plugin_summary_on">Automatiseringsapps kunnen tunnels bedienen</string>
     <string name="allow_tasker_plugin_title">Tasker-plugin toestaan</string>

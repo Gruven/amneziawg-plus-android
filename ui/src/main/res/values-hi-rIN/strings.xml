@@ -62,6 +62,12 @@
     <string name="allow_remote_control_intents_summary_off">बाहरी ऐप्स टनल्स को चालू नहीं कर सकते (अनुशंसित)</string>
     <string name="allow_remote_control_intents_summary_on">बाहरी ऐप्स टनल्स को चालू कर सकते है (एडवांस्ड)</string>
     <string name="allow_remote_control_intents_title">रिमोट इंटेंट्स की अनुमति दें</string>
+    <string name="remote_control_token_title">रिमोट कंट्रोल टोकन</string>
+    <string name="remote_control_token_copied">टोकन क्लिपबोर्ड पर कॉपी किया गया</string>
+    <string name="remote_control_token_regenerated">टोकन पुनः उत्पन्न किया गया</string>
+    <string name="remote_control_token_copy">कॉपी करें</string>
+    <string name="remote_control_token_regenerate">पुनः उत्पन्न करें</string>
+    <string name="remote_control_token_empty">टोकन खाली नहीं हो सकता</string>
     <string name="allow_tasker_plugin_summary_off">ऑटोमेशन ऐप्स सुरंगों को नियंत्रित नहीं कर सकते</string>
     <string name="allow_tasker_plugin_summary_on">ऑटोमेशन ऐप्स सुरंगों को नियंत्रित कर सकते हैं</string>
     <string name="allow_tasker_plugin_title">Tasker प्लगइन की अनुमति दें</string>

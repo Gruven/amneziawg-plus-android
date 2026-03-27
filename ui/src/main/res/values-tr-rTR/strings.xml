@@ -62,6 +62,12 @@
     <string name="allow_remote_control_intents_summary_off">Harici uygulamalar tünelleri değiştiremez (önerilir)</string>
     <string name="allow_remote_control_intents_summary_on">Harici uygulamalar tünelleri değiştirebilir (gelişmiş)</string>
     <string name="allow_remote_control_intents_title">Uzak intent\'lere izin ver</string>
+    <string name="remote_control_token_title">Uzaktan kontrol jetonu</string>
+    <string name="remote_control_token_copied">Jeton panoya kopyalandı</string>
+    <string name="remote_control_token_regenerated">Jeton yeniden oluşturuldu</string>
+    <string name="remote_control_token_copy">Kopyala</string>
+    <string name="remote_control_token_regenerate">Yeniden oluştur</string>
+    <string name="remote_control_token_empty">Jeton boş olamaz</string>
     <string name="allow_tasker_plugin_summary_off">Otomasyon uygulamaları tünelleri kontrol edemez</string>
     <string name="allow_tasker_plugin_summary_on">Otomasyon uygulamaları tünelleri kontrol edebilir</string>
     <string name="allow_tasker_plugin_title">Tasker eklentisine izin ver</string>

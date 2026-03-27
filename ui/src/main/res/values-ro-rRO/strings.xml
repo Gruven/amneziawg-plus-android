@@ -75,6 +75,12 @@
     <string name="allow_remote_control_intents_summary_off">Aplicațiile externe nu pot comuta tunelurile (recomandat)</string>
     <string name="allow_remote_control_intents_summary_on">Aplicațiile externe pot comuta tunelurile (avansat)</string>
     <string name="allow_remote_control_intents_title">Permite intent-uri la distanță</string>
+    <string name="remote_control_token_title">Token de control la distanță</string>
+    <string name="remote_control_token_copied">Token copiat în clipboard</string>
+    <string name="remote_control_token_regenerated">Token regenerat</string>
+    <string name="remote_control_token_copy">Copiază</string>
+    <string name="remote_control_token_regenerate">Regenerează</string>
+    <string name="remote_control_token_empty">Tokenul nu poate fi gol</string>
     <string name="allow_tasker_plugin_summary_off">Aplicațiile de automatizare nu pot controla tunelurile</string>
     <string name="allow_tasker_plugin_summary_on">Aplicațiile de automatizare pot controla tunelurile</string>
     <string name="allow_tasker_plugin_title">Permite pluginul Tasker</string>

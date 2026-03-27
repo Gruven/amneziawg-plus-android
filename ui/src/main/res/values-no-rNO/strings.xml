@@ -62,6 +62,12 @@
     <string name="allow_remote_control_intents_summary_off">Fjernstyrte apper kan ikke toggle tunneler (anbefalt)</string>
     <string name="allow_remote_control_intents_summary_on">Fjernstyrte apper toggle tunneler (avansert)</string>
     <string name="allow_remote_control_intents_title">Tillat fjern-intents</string>
+    <string name="remote_control_token_title">Fjernstyringstoken</string>
+    <string name="remote_control_token_copied">Token kopiert til utklippstavle</string>
+    <string name="remote_control_token_regenerated">Token regenerert</string>
+    <string name="remote_control_token_copy">Kopier</string>
+    <string name="remote_control_token_regenerate">Regenerer</string>
+    <string name="remote_control_token_empty">Token kan ikke være tomt</string>
     <string name="allow_tasker_plugin_summary_off">Automatiseringsapper kan ikke styre tunneler</string>
     <string name="allow_tasker_plugin_summary_on">Automatiseringsapper kan styre tunneler</string>
     <string name="allow_tasker_plugin_title">Tillat Tasker-tillegg</string>

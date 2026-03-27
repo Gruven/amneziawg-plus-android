@@ -253,6 +253,10 @@ class TunnelManager(private val configStore: ConfigStore) : BaseObservable() {
                 }
                 if (!UserKnobs.allowRemoteControlIntents.first())
                     return@launch
+                val savedToken = UserKnobs.remoteControlToken.first()
+                val intentToken = intent.getStringExtra("token")
+                if (savedToken == null || intentToken != savedToken)
+                    return@launch
                 val state: Tunnel.State
                 state = when (action) {
                     "org.amnezia.awg.action.SET_TUNNEL_UP" -> Tunnel.State.UP

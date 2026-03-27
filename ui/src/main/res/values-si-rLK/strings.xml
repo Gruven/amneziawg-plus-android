@@ -39,6 +39,12 @@
     <string name="addresses">ලිපින</string>
     <string name="applications">යෙදුම්</string>
     <string name="allow_remote_control_intents_title">දුරස්ථ intents වලට ඉඩදෙන්න</string>
+    <string name="remote_control_token_title">දුරස්ථ පාලන ටෝකනය</string>
+    <string name="remote_control_token_copied">ටෝකනය පසුරුපුවරුවට පිටපත් කරන ලදී</string>
+    <string name="remote_control_token_regenerated">ටෝකනය නැවත උත්පාදනය කරන ලදී</string>
+    <string name="remote_control_token_copy">පිටපත් කරන්න</string>
+    <string name="remote_control_token_regenerate">නැවත උත්පාදනය</string>
+    <string name="remote_control_token_empty">ටෝකනය හිස් විය නොහැක</string>
     <string name="allow_tasker_plugin_summary_off">ස්වයංක්‍රීය යෙදුම්වලට උමං පාලනය කළ නොහැක</string>
     <string name="allow_tasker_plugin_summary_on">ස්වයංක්‍රීය යෙදුම්වලට උමං පාලනය කළ හැක</string>
     <string name="allow_tasker_plugin_title">Tasker ප්ලගිනයට ඉඩදෙන්න</string>
