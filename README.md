@@ -1,4 +1,6 @@
-# Android GUI for [AmneziaWG](https://docs.amnezia.org/documentation/amnezia-wg/)
+# AmneziaWG+
+
+Android GUI for [AmneziaWG](https://docs.amnezia.org/documentation/amnezia-wg/)
 
 > [!NOTE]
 > This is a fork of the original [amneziawg-android](https://github.com/amnezia-vpn/amneziawg-android) with additional features listed below. For the upstream version, please visit the [original repository](https://github.com/amnezia-vpn/amneziawg-android).

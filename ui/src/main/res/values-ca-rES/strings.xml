@@ -227,7 +227,7 @@
     <string name="type_name_kernel_module">Mòdul del kernel</string>
     <string name="unknown_error">Error desconegut</string>
     <string name="version_summary_unknown">Versió de %s desconeguda</string>
-    <string name="version_title">AmneziaWG per a Android v%s</string>
+    <string name="version_title">AmneziaWG+ per a Android v%s</string>
     <string name="vpn_not_authorized_error">Servei de VPN no autoritzat per l\'usuari</string>
     <string name="vpn_start_error">No s\'ha pogut iniciar el servei de VPN de Android</string>
     <string name="zip_export_error">No s\'han pogut exportar els túnels: %s</string>

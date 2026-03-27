@@ -232,7 +232,7 @@
     <string name="type_name_root_go_userspace">Root Go userspace</string>
     <string name="type_name_kernel_module">Kernel module</string>
     <string name="unknown_error">Onbekende fout</string>
-    <string name="version_title">AmneziaWG voor Android v%s</string>
+    <string name="version_title">AmneziaWG+ voor Android v%s</string>
     <string name="zip_export_summary">Zip-bestand wordt opgeslagen in de downloadmap</string>
     <string name="zip_export_title">Exporteer tunnels naar zip-bestand</string>
     <string name="biometric_prompt_zip_exporter_title">Authenticeer om de tunnel configuratie te exporteren</string>

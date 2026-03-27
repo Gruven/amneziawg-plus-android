@@ -63,7 +63,7 @@
     <string name="allow_remote_control_intents_summary_on">External apps may toggle tunnels via intents (advanced)</string>
     <string name="allow_remote_control_intents_title">Allow remote intents</string>
     <string name="allowed_ips">Allowed IPs</string>
-    <string name="app_name" translatable="false">AmneziaWG</string>
+    <string name="app_name" translatable="false">AmneziaWG+</string>
     <string name="bad_config_context">%1$s\'s %2$s</string>
     <string name="bad_config_context_top_level">%s</string>
     <string name="bad_config_error">%1$s in %2$s</string>
@@ -255,7 +255,7 @@
     <string name="version_summary">%1$s backend %2$s</string>
     <string name="version_summary_checking">Checking %s backend version</string>
     <string name="version_summary_unknown">Unknown %s version</string>
-    <string name="version_title">AmneziaWG for Android v%s</string>
+    <string name="version_title">AmneziaWG+ for Android v%s</string>
     <string name="vpn_not_authorized_error">VPN service not authorized by user</string>
     <string name="vpn_start_error">Unable to start Android VPN service</string>
     <string name="zip_export_error">Unable to export tunnels: %s</string>

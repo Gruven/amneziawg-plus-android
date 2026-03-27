@@ -192,7 +192,7 @@
     <string name="type_name_root_go_userspace">Root Go userspace</string>
     <string name="unknown_error">Ukendt fejl</string>
     <string name="version_summary_unknown">Ukendt %s version</string>
-    <string name="version_title">AmneziaWG for Android v%s</string>
+    <string name="version_title">AmneziaWG+ for Android v%s</string>
     <string name="zip_export_error">Ikke i stand til at eksportere tunneler: %s</string>
     <string name="zip_export_success">Gemt til \"%s\"</string>
     <string name="zip_export_title">Eksportér tunneler til zip-fil</string>

@@ -247,7 +247,7 @@
     <string name="version_summary">%1$s arka uç %2$s</string>
     <string name="version_summary_checking">%s arka uç sürümü kontrol ediliyor</string>
     <string name="version_summary_unknown">Bilinmeyen %s sürümü</string>
-    <string name="version_title">Android için AmneziaWG v%s</string>
+    <string name="version_title">Android için AmneziaWG+ v%s</string>
     <string name="vpn_not_authorized_error">VPN hizmeti kullanıcı tarafından yetkilendirilmemiş</string>
     <string name="vpn_start_error">Android VPN hizmeti başlatılamıyor</string>
     <string name="zip_export_error">Tüneller dışa aktarılamıyor: %s</string>
