@@ -9,7 +9,10 @@
     <string name="applications">Aplikácie</string>
     <string name="allow_remote_control_intents_summary_off">Externé aplikácie nemôžu spustiť tunely (odporúčané)</string>
     <string name="allow_remote_control_intents_summary_on">Externé aplikácie môžu spustiť tunely (pokročilé)</string>
-    <string name="allow_remote_control_intents_title">Povoliť aplikáciám vzdialenú správu</string>
+    <string name="allow_remote_control_intents_title">Povoliť vzdialené intenty</string>
+    <string name="allow_tasker_plugin_summary_off">Automatizačné aplikácie nemôžu ovládať tunely</string>
+    <string name="allow_tasker_plugin_summary_on">Automatizačné aplikácie môžu ovládať tunely</string>
+    <string name="allow_tasker_plugin_title">Povoliť Tasker plugin</string>
     <string name="allowed_ips">Povolené IP adresy</string>
     <string name="bad_config_context_top_level">%s</string>
     <string name="bad_config_error">%1$s v %2$s</string>

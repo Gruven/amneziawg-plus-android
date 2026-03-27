@@ -61,7 +61,10 @@
     <string name="applications">Rakendused</string>
     <string name="allow_remote_control_intents_summary_off">Välised rakendused ei saa tunneleid lülitada (soovituslik)</string>
     <string name="allow_remote_control_intents_summary_on">Välised rakendused saavad tunneleid lülitada (edasijõudnud)</string>
-    <string name="allow_remote_control_intents_title">Luba kaugjuhtimise rakendused</string>
+    <string name="allow_remote_control_intents_title">Luba kaugkäsklused</string>
+    <string name="allow_tasker_plugin_summary_off">Automaatikarakendused ei saa tunneleid juhtida</string>
+    <string name="allow_tasker_plugin_summary_on">Automaatikarakendused saavad tunneleid juhtida</string>
+    <string name="allow_tasker_plugin_title">Luba Taskeri pistikprogramm</string>
     <string name="allowed_ips">Lubatud IP\'d</string>
     <string name="bad_config_context">sektsiooni %1$s asukohas %2$s</string>
     <string name="bad_config_context_top_level">%s</string>

@@ -61,7 +61,10 @@
     <string name="applications">Εφαρμογές</string>
     <string name="allow_remote_control_intents_summary_off">Οι εξωτερικές εφαρμογές δεν θα μπορούν να αλλάζουν την κατάσταση των tunnel (συνιστάται)</string>
     <string name="allow_remote_control_intents_summary_on">Οι εξωτερικές εφαρμογές θα μπορούν να αλλάζουν την κατάσταση των tunnel (για προχωρημένους)</string>
-    <string name="allow_remote_control_intents_title">Επιτρέψτε τον έλεγχο από άλλες εφαρμογές</string>
+    <string name="allow_remote_control_intents_title">Επιτρέψτε απομακρυσμένα intents</string>
+    <string name="allow_tasker_plugin_summary_off">Οι εφαρμογές αυτοματισμού δεν μπορούν να ελέγξουν τα τούνελ</string>
+    <string name="allow_tasker_plugin_summary_on">Οι εφαρμογές αυτοματισμού μπορούν να ελέγξουν τα τούνελ</string>
+    <string name="allow_tasker_plugin_title">Επιτρέψτε το πρόσθετο Tasker</string>
     <string name="allowed_ips">Επιτρεπόμενες IP</string>
     <string name="bad_config_context">%1$s του %2$s</string>
     <string name="bad_config_context_top_level">%s</string>

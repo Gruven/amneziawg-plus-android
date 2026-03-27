@@ -62,7 +62,10 @@
     <string name="allow_remote_control_intents_summary_off">برنامه‌های بیرونی تونل ها را عوض نکنند
 (توصیه می‌شود)</string>
     <string name="allow_remote_control_intents_summary_on">برنامه‌های بیرونی تونل‌ها را عوض کنند (پیشرفته)</string>
-    <string name="allow_remote_control_intents_title">اجازه به برنامه‌های کنترل از راه‌دور</string>
+    <string name="allow_remote_control_intents_title">اجازه اینتنت‌های راه‌دور</string>
+    <string name="allow_tasker_plugin_summary_off">برنامه‌های خودکار نمی‌توانند تونل‌ها را کنترل کنند</string>
+    <string name="allow_tasker_plugin_summary_on">برنامه‌های خودکار می‌توانند تونل‌ها را کنترل کنند</string>
+    <string name="allow_tasker_plugin_title">اجازه افزونه Tasker</string>
     <string name="allowed_ips">IPهای مجاز</string>
     <string name="bad_config_context">%1$s\'s %2$s</string>
     <string name="bad_config_context_top_level">%s</string>

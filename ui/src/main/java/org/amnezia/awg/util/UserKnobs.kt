@@ -65,6 +65,12 @@ object UserKnobs {
             it[ALLOW_REMOTE_CONTROL_INTENTS] ?: false
         }
 
+    private val ALLOW_TASKER_PLUGIN = booleanPreferencesKey("allow_tasker_plugin")
+    val allowTaskerPlugin: Flow<Boolean>
+        get() = Application.getPreferencesDataStore().data.map {
+            it[ALLOW_TASKER_PLUGIN] ?: false
+        }
+
     private val RESTORE_ON_BOOT = booleanPreferencesKey("restore_on_boot")
     val restoreOnBoot: Flow<Boolean>
         get() = Application.getPreferencesDataStore().data.map {

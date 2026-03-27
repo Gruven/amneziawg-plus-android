@@ -91,6 +91,25 @@
             tools:replace="screenOrientation" />
 
         <activity
+            android:name=".activity.TaskerEditActivity"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/tasker_plugin_title"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".TaskerFireReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
+            </intent-filter>
+        </receiver>
+
+        <activity
             android:name=".activity.LogViewerActivity"
             android:exported="false"
             android:label="@string/log_viewer_title">
@@ -129,7 +148,8 @@
             android:name=".QuickTileService"
             android:exported="true"
             android:icon="@drawable/ic_tile"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            tools:targetApi="24">
 
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />

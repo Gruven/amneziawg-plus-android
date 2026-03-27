@@ -87,7 +87,10 @@
     <string name="applications">Додатки</string>
     <string name="allow_remote_control_intents_summary_off">Зовнішні додатки не можуть перемикати тунелі (рекомендовано)</string>
     <string name="allow_remote_control_intents_summary_on">Зовнішні додатки можуть перемикати тунелі (для досвідчених)</string>
-    <string name="allow_remote_control_intents_title">Дозволити керування через інші додатки</string>
+    <string name="allow_remote_control_intents_title">Дозволити віддалені інтенти</string>
+    <string name="allow_tasker_plugin_summary_off">Програми автоматизації не можуть керувати тунелями</string>
+    <string name="allow_tasker_plugin_summary_on">Програми автоматизації можуть керувати тунелями</string>
+    <string name="allow_tasker_plugin_title">Дозволити плагін Tasker</string>
     <string name="allowed_ips">Дозволені IP адреси</string>
     <string name="bad_config_context">%1$s з %2$s</string>
     <string name="bad_config_context_top_level">%s</string>

@@ -59,9 +59,9 @@
     <string name="add_peer">Add peer</string>
     <string name="addresses">Addresses</string>
     <string name="applications">Applications</string>
-    <string name="allow_remote_control_intents_summary_off">External apps may not toggle tunnels (recommended)</string>
-    <string name="allow_remote_control_intents_summary_on">External apps may toggle tunnels (advanced)</string>
-    <string name="allow_remote_control_intents_title">Allow remote control apps</string>
+    <string name="allow_remote_control_intents_summary_off">External apps may not toggle tunnels via intents (recommended)</string>
+    <string name="allow_remote_control_intents_summary_on">External apps may toggle tunnels via intents (advanced)</string>
+    <string name="allow_remote_control_intents_title">Allow remote intents</string>
     <string name="allowed_ips">Allowed IPs</string>
     <string name="app_name" translatable="false">AmneziaWG</string>
     <string name="bad_config_context">%1$s\'s %2$s</string>
@@ -269,4 +269,14 @@
     <string name="import_disclaimer">Ensure that you obtained the configuration file from a trusted source.\n\nOfficial Amnezia services are available only at <a href="https://amnezia.org">amnezia.org</a>\n</string>
     <string name="tunnel_status_connected">Connected</string>
     <string name="tunnel_status_connecting">Connecting…</string>
+    <string name="allow_tasker_plugin_summary_off">Tasker and similar automation apps cannot control tunnels</string>
+    <string name="allow_tasker_plugin_summary_on">Tasker and similar automation apps can control tunnels</string>
+    <string name="allow_tasker_plugin_title">Allow Tasker plugin</string>
+    <string name="tasker_plugin_title">AmneziaWG Tunnel Control</string>
+    <string name="tasker_select_tunnel">Tunnel</string>
+    <string name="tasker_select_action">Action</string>
+    <string name="tasker_action_up">Turn on</string>
+    <string name="tasker_action_down">Turn off</string>
+    <string name="tasker_action_toggle">Toggle</string>
+    <string name="tasker_no_tunnels">No tunnels configured</string>
 </resources>

@@ -37,7 +37,10 @@
     <string name="applications">Aplicativo</string>
     <string name="allow_remote_control_intents_summary_off">Aplicativos externos podem não alternar túneis (recomendado)</string>
     <string name="allow_remote_control_intents_summary_on">Aplicativos externos podem alternar túneis (avançado)</string>
-    <string name="allow_remote_control_intents_title">Permitir controle remoto de apps</string>
+    <string name="allow_remote_control_intents_title">Permitir intents remotos</string>
+    <string name="allow_tasker_plugin_summary_off">Apps de automação não podem controlar túneis</string>
+    <string name="allow_tasker_plugin_summary_on">Apps de automação podem controlar túneis</string>
+    <string name="allow_tasker_plugin_title">Permitir plugin do Tasker</string>
     <string name="allowed_ips">IPs Permitidos</string>
     <string name="bad_config_context">%2$s da %1$s</string>
     <string name="bad_config_context_top_level">%s</string>

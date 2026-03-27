@@ -48,7 +48,10 @@
     <string name="applications">アプリ</string>
     <string name="allow_remote_control_intents_summary_off">外部アプリはトンネルを制御できない(推奨)</string>
     <string name="allow_remote_control_intents_summary_on">外部アプリにトンネルの制御を許可(上級者向け)</string>
-    <string name="allow_remote_control_intents_title">外部アプリからの制御</string>
+    <string name="allow_remote_control_intents_title">リモートインテントを許可</string>
+    <string name="allow_tasker_plugin_summary_off">自動化アプリはトンネルを制御できません</string>
+    <string name="allow_tasker_plugin_summary_on">自動化アプリがトンネルを制御できます</string>
+    <string name="allow_tasker_plugin_title">Taskerプラグインを許可</string>
     <string name="allowed_ips">Allowed IPs</string>
     <string name="bad_config_context">%1$s の %2$s</string>
     <string name="bad_config_context_top_level">%s</string>

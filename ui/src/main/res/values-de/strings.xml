@@ -61,7 +61,10 @@
     <string name="applications">Anwendungen</string>
     <string name="allow_remote_control_intents_summary_off">Externe Apps dürfen keine Tunnel umschalten (empfohlen)</string>
     <string name="allow_remote_control_intents_summary_on">Externe Apps dürfen Tunnel umschalten (erweitert)</string>
-    <string name="allow_remote_control_intents_title">Erlaube Steuerung über externe Apps</string>
+    <string name="allow_remote_control_intents_title">Externe Intents erlauben</string>
+    <string name="allow_tasker_plugin_summary_off">Automatisierungs-Apps können Tunnel nicht steuern</string>
+    <string name="allow_tasker_plugin_summary_on">Automatisierungs-Apps können Tunnel steuern</string>
+    <string name="allow_tasker_plugin_title">Tasker-Plugin erlauben</string>
     <string name="allowed_ips">Erlaubte IPs</string>
     <string name="bad_config_context">%2$s des %1$s</string>
     <string name="bad_config_context_top_level">%s</string>

@@ -61,7 +61,10 @@
     <string name="applications">Applikasjoner</string>
     <string name="allow_remote_control_intents_summary_off">Fjernstyrte apper kan ikke toggle tunneler (anbefalt)</string>
     <string name="allow_remote_control_intents_summary_on">Fjernstyrte apper toggle tunneler (avansert)</string>
-    <string name="allow_remote_control_intents_title">Tillat fjernstyrte apper</string>
+    <string name="allow_remote_control_intents_title">Tillat fjern-intents</string>
+    <string name="allow_tasker_plugin_summary_off">Automatiseringsapper kan ikke styre tunneler</string>
+    <string name="allow_tasker_plugin_summary_on">Automatiseringsapper kan styre tunneler</string>
+    <string name="allow_tasker_plugin_title">Tillat Tasker-tillegg</string>
     <string name="allowed_ips">Tillatte IP-adresser</string>
     <string name="bad_config_context">%1$s sin %2$s</string>
     <string name="bad_config_context_top_level">%s</string>

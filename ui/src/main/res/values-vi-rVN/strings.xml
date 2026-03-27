@@ -48,7 +48,10 @@
     <string name="applications">Ứng dụng</string>
     <string name="allow_remote_control_intents_summary_off">Các ứng dụng bên ngoài không thể bật/tắt tunnels (khuyến nghị)</string>
     <string name="allow_remote_control_intents_summary_on">Các ứng dụng bên ngoài có thể bật/tắt tunnels (nâng cao)</string>
-    <string name="allow_remote_control_intents_title">Cho phép điều khiển ứng dụng từ xa</string>
+    <string name="allow_remote_control_intents_title">Cho phép intent từ xa</string>
+    <string name="allow_tasker_plugin_summary_off">Ứng dụng tự động không thể điều khiển đường hầm</string>
+    <string name="allow_tasker_plugin_summary_on">Ứng dụng tự động có thể điều khiển đường hầm</string>
+    <string name="allow_tasker_plugin_title">Cho phép plugin Tasker</string>
     <string name="allowed_ips">IP Cho phép </string>
     <string name="bad_config_context">%1$s / %2$s</string>
     <string name="bad_config_context_top_level">%s</string>

@@ -48,4 +48,11 @@
         android:summaryOff="@string/allow_remote_control_intents_summary_off"
         android:summaryOn="@string/allow_remote_control_intents_summary_on"
         android:title="@string/allow_remote_control_intents_title" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="allow_tasker_plugin"
+        android:singleLineTitle="false"
+        android:summaryOff="@string/allow_tasker_plugin_summary_off"
+        android:summaryOn="@string/allow_tasker_plugin_summary_on"
+        android:title="@string/allow_tasker_plugin_title" />
 </androidx.preference.PreferenceScreen>

@@ -251,7 +251,7 @@ class TunnelManager(private val configStore: ConfigStore) : BaseObservable() {
                     manager.refreshTunnelStates()
                     return@launch
                 }
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || !UserKnobs.allowRemoteControlIntents.first())
+                if (!UserKnobs.allowRemoteControlIntents.first())
                     return@launch
                 val state: Tunnel.State
                 state = when (action) {

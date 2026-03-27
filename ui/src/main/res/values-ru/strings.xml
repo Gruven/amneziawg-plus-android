@@ -87,7 +87,10 @@
     <string name="applications">Приложения</string>
     <string name="allow_remote_control_intents_summary_off">Внешние приложения не могут переключать туннели (рекомендуется)</string>
     <string name="allow_remote_control_intents_summary_on">Внешние приложения могут переключать туннели (продвинутые)</string>
-    <string name="allow_remote_control_intents_title">Разрешить управление через внешние приложения</string>
+    <string name="allow_remote_control_intents_title">Разрешить удалённые интенты</string>
+    <string name="allow_tasker_plugin_summary_off">Приложения автоматизации не могут управлять туннелями</string>
+    <string name="allow_tasker_plugin_summary_on">Приложения автоматизации могут управлять туннелями</string>
+    <string name="allow_tasker_plugin_title">Разрешить плагин Tasker</string>
     <string name="allowed_ips">Разрешенные IP</string>
     <string name="bad_config_context">%1$s из %2$s</string>
     <string name="bad_config_context_top_level">%s</string>

@@ -87,7 +87,10 @@
     <string name="applications">Aplikacje</string>
     <string name="allow_remote_control_intents_summary_off">Zewnętrzne aplikacje nie mogą przełączać tuneli (zalecane)</string>
     <string name="allow_remote_control_intents_summary_on">Zewnętrzne aplikacje mogą przełączać tunele (zaawansowane)</string>
-    <string name="allow_remote_control_intents_title">Zezwól na kontrolowanie przez zewnętrzne aplikacje</string>
+    <string name="allow_remote_control_intents_title">Zezwól na zdalne intenty</string>
+    <string name="allow_tasker_plugin_summary_off">Aplikacje automatyzacji nie mogą sterować tunelami</string>
+    <string name="allow_tasker_plugin_summary_on">Aplikacje automatyzacji mogą sterować tunelami</string>
+    <string name="allow_tasker_plugin_title">Zezwól na wtyczkę Tasker</string>
     <string name="allowed_ips">Dozwolone adresy IP</string>
     <string name="bad_config_context">%1$s dla %2$s</string>
     <string name="bad_config_context_top_level">%s</string>

@@ -48,7 +48,10 @@
     <string name="applications">應用程式</string>
     <string name="allow_remote_control_intents_summary_off">外部程式無法控制通道 (推薦)</string>
     <string name="allow_remote_control_intents_summary_on">外部程式可以控制通道 (進階)</string>
-    <string name="allow_remote_control_intents_title">允許遠端控制應用程式</string>
+    <string name="allow_remote_control_intents_title">允許遠端意圖</string>
+    <string name="allow_tasker_plugin_summary_off">自動化應用程式無法控制隧道</string>
+    <string name="allow_tasker_plugin_summary_on">自動化應用程式可以控制隧道</string>
+    <string name="allow_tasker_plugin_title">允許 Tasker 外掛</string>
     <string name="allowed_ips">允許的 IPs</string>
     <string name="bad_config_context">錯誤設定: %1$s 的 %2$s</string>
     <string name="bad_config_context_top_level">頂層錯誤設定: %s</string>

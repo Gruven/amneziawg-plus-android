@@ -48,7 +48,10 @@
     <string name="applications">Aplikasi</string>
     <string name="allow_remote_control_intents_summary_off">Aplikasi eksternal tidak dapat mengalihkan tunnel (disarankan)</string>
     <string name="allow_remote_control_intents_summary_on">Apl eksternal dapat mengalihkan tunnel (lanjutan)</string>
-    <string name="allow_remote_control_intents_title">Izinkan kendali jarak jauh</string>
+    <string name="allow_remote_control_intents_title">Izinkan intent jarak jauh</string>
+    <string name="allow_tasker_plugin_summary_off">Aplikasi otomatisasi tidak dapat mengontrol terowongan</string>
+    <string name="allow_tasker_plugin_summary_on">Aplikasi otomatisasi dapat mengontrol terowongan</string>
+    <string name="allow_tasker_plugin_title">Izinkan plugin Tasker</string>
     <string name="allowed_ips">IP diizinkan</string>
     <string name="bad_config_context">%1$s %2$s</string>
     <string name="bad_config_context_top_level">%s</string>

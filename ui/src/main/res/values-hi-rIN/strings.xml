@@ -61,7 +61,10 @@
     <string name="applications">ऍप्लिकेशन्स</string>
     <string name="allow_remote_control_intents_summary_off">बाहरी ऐप्स टनल्स को चालू नहीं कर सकते (अनुशंसित)</string>
     <string name="allow_remote_control_intents_summary_on">बाहरी ऐप्स टनल्स को चालू कर सकते है (एडवांस्ड)</string>
-    <string name="allow_remote_control_intents_title">रिमोट कंट्रोल ऐप्स की अनुमति दें</string>
+    <string name="allow_remote_control_intents_title">रिमोट इंटेंट्स की अनुमति दें</string>
+    <string name="allow_tasker_plugin_summary_off">ऑटोमेशन ऐप्स सुरंगों को नियंत्रित नहीं कर सकते</string>
+    <string name="allow_tasker_plugin_summary_on">ऑटोमेशन ऐप्स सुरंगों को नियंत्रित कर सकते हैं</string>
+    <string name="allow_tasker_plugin_title">Tasker प्लगइन की अनुमति दें</string>
     <string name="allowed_ips">अनुमत आईपी</string>
     <string name="bad_config_explanation_pka">: सकारात्मक होना चाहिए और 65535 से अधिक नहीं होना चाहिए</string>
     <string name="bad_config_explanation_positive_number">: सकारात्मक होना चाहिए</string>

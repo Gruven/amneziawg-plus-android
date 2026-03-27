@@ -61,7 +61,10 @@
     <string name="applications">Aplicacions</string>
     <string name="allow_remote_control_intents_summary_off">Aplicacions externes no poden cambiar túnels (recomanat)</string>
     <string name="allow_remote_control_intents_summary_on">Aplicacions externes poden cambiar túnels (avançat)</string>
-    <string name="allow_remote_control_intents_title">Permet aplicacions de control remot</string>
+    <string name="allow_remote_control_intents_title">Permet intents remots</string>
+    <string name="allow_tasker_plugin_summary_off">Les aplicacions d\'automatització no poden controlar els túnels</string>
+    <string name="allow_tasker_plugin_summary_on">Les aplicacions d\'automatització poden controlar els túnels</string>
+    <string name="allow_tasker_plugin_title">Permet el connector Tasker</string>
     <string name="allowed_ips">IPs permeses</string>
     <string name="bad_config_context">%1$s de %2$s</string>
     <string name="bad_config_context_top_level">%s</string>

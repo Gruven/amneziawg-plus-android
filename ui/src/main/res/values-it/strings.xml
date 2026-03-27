@@ -61,7 +61,10 @@
     <string name="applications">Applicazioni</string>
     <string name="allow_remote_control_intents_summary_off">Le app esterne non possono attivare tunnel (consigliato)</string>
     <string name="allow_remote_control_intents_summary_on">Le app esterne possono attivare tunnel (avanzato)</string>
-    <string name="allow_remote_control_intents_title">Consenti app di controllo remoto</string>
+    <string name="allow_remote_control_intents_title">Consenti intent remoti</string>
+    <string name="allow_tasker_plugin_summary_off">Le app di automazione non possono controllare i tunnel</string>
+    <string name="allow_tasker_plugin_summary_on">Le app di automazione possono controllare i tunnel</string>
+    <string name="allow_tasker_plugin_title">Consenti plugin Tasker</string>
     <string name="allowed_ips">IP consentiti</string>
     <string name="bad_config_context">%2$s di %1$s</string>
     <string name="bad_config_context_top_level">%s</string>

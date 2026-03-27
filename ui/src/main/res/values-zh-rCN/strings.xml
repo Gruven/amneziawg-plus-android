@@ -48,7 +48,10 @@
     <string name="applications">应用过滤</string>
     <string name="allow_remote_control_intents_summary_off">不允许外部应用控制隧道（推荐）</string>
     <string name="allow_remote_control_intents_summary_on">允许外部应用控制隧道（面向高级用户）</string>
-    <string name="allow_remote_control_intents_title">授权外部控制</string>
+    <string name="allow_remote_control_intents_title">允许远程意图</string>
+    <string name="allow_tasker_plugin_summary_off">自动化应用无法控制隧道</string>
+    <string name="allow_tasker_plugin_summary_on">自动化应用可以控制隧道</string>
+    <string name="allow_tasker_plugin_title">允许 Tasker 插件</string>
     <string name="allowed_ips">路由的 IP 地址（段）</string>
     <string name="bad_config_context">%1$s 的 %2$s 字段</string>
     <string name="bad_config_context_top_level">%s</string>

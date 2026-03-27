@@ -113,7 +113,10 @@
     <string name="applications">التطبيقات</string>
     <string name="allow_remote_control_intents_summary_off">لا يمكن للتطبيقات الخارجية تبدل الأنفاق (مستحسن)</string>
     <string name="allow_remote_control_intents_summary_on">يمكن للتطبيقات الخارجية تبدل الأنفاق (مستحسن)</string>
-    <string name="allow_remote_control_intents_title">السماح بتطبيقات التحكم عن بعد</string>
+    <string name="allow_remote_control_intents_title">السماح بالأوامر عن بعد</string>
+    <string name="allow_tasker_plugin_summary_off">لا يمكن لتطبيقات الأتمتة التحكم في الأنفاق</string>
+    <string name="allow_tasker_plugin_summary_on">يمكن لتطبيقات الأتمتة التحكم في الأنفاق</string>
+    <string name="allow_tasker_plugin_title">السماح بمكوّن Tasker</string>
     <string name="allowed_ips">عناوين بروتوكول الإنترنت (IP) المسموح بها</string>
     <string name="bad_config_context">%2$s الخاص بـ %1$s</string>
     <string name="bad_config_context_top_level">%s</string>

@@ -38,7 +38,10 @@
     <string name="use_all_applications">සියලුම යෙදුම් භාවිතාකරන්න</string>
     <string name="addresses">ලිපින</string>
     <string name="applications">යෙදුම්</string>
-    <string name="allow_remote_control_intents_title">දුරස්ථ පාලක යෙදුම්වලට ඉඩදෙන්න</string>
+    <string name="allow_remote_control_intents_title">දුරස්ථ intents වලට ඉඩදෙන්න</string>
+    <string name="allow_tasker_plugin_summary_off">ස්වයංක්‍රීය යෙදුම්වලට උමං පාලනය කළ නොහැක</string>
+    <string name="allow_tasker_plugin_summary_on">ස්වයංක්‍රීය යෙදුම්වලට උමං පාලනය කළ හැක</string>
+    <string name="allow_tasker_plugin_title">Tasker ප්ලගිනයට ඉඩදෙන්න</string>
     <string name="allowed_ips">ඉඩදුන් අ.ජා.කෙ.:</string>
     <string name="bad_config_context">%1$s\' %2$s</string>
     <string name="bad_config_context_top_level">%s</string>

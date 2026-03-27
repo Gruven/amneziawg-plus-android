@@ -48,7 +48,10 @@
     <string name="applications">앱</string>
     <string name="allow_remote_control_intents_summary_off">다른 앱이 터널을 조작할 수 없음 (권장)</string>
     <string name="allow_remote_control_intents_summary_on">다른 앱이 터널을 조작할 수 있음 (상급자용)</string>
-    <string name="allow_remote_control_intents_title">앱을 원격으로 조정할 수 있음</string>
+    <string name="allow_remote_control_intents_title">원격 인텐트 허용</string>
+    <string name="allow_tasker_plugin_summary_off">자동화 앱이 터널을 제어할 수 없음</string>
+    <string name="allow_tasker_plugin_summary_on">자동화 앱이 터널을 제어할 수 있음</string>
+    <string name="allow_tasker_plugin_title">Tasker 플러그인 허용</string>
     <string name="allowed_ips">허용된 IP</string>
     <string name="bad_config_context">%1$s의 %2$s</string>
     <string name="bad_config_context_top_level">%s</string>

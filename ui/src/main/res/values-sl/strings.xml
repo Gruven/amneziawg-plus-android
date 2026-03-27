@@ -87,7 +87,10 @@
     <string name="applications">Aplikacije</string>
     <string name="allow_remote_control_intents_summary_off">Zunanjim aplikacijam ni dovoljeno preklapljati tunelov (priporočeno)</string>
     <string name="allow_remote_control_intents_summary_on">Zunanje aplikacije lahko preklapljajo tunele (napredno)</string>
-    <string name="allow_remote_control_intents_title">Dovoljeno upravljanje preko zunanjih aplikacij</string>
+    <string name="allow_remote_control_intents_title">Dovoli oddaljene namere</string>
+    <string name="allow_tasker_plugin_summary_off">Aplikacije za avtomatizacijo ne morejo upravljati tunelov</string>
+    <string name="allow_tasker_plugin_summary_on">Aplikacije za avtomatizacijo lahko upravljajo tunele</string>
+    <string name="allow_tasker_plugin_title">Dovoli vtičnik Tasker</string>
     <string name="allowed_ips">Dovoljeni naslovi IP</string>
     <string name="bad_config_context">%1$s-ov %2$s</string>
     <string name="bad_config_context_top_level">%s</string>

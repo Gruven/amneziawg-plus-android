@@ -61,7 +61,10 @@
     <string name="applications">Aplicações</string>
     <string name="allow_remote_control_intents_summary_off">Aplicações externas não podem controlar túneis (recomendado)</string>
     <string name="allow_remote_control_intents_summary_on">Aplicações externas podem controlar túneis (avançado)</string>
-    <string name="allow_remote_control_intents_title">Permitir controlo remoto por outras aplicações</string>
+    <string name="allow_remote_control_intents_title">Permitir intents remotos</string>
+    <string name="allow_tasker_plugin_summary_off">As aplicações de automatização não podem controlar os túneis</string>
+    <string name="allow_tasker_plugin_summary_on">As aplicações de automatização podem controlar os túneis</string>
+    <string name="allow_tasker_plugin_title">Permitir plugin do Tasker</string>
     <string name="allowed_ips">IPs permitidos</string>
     <string name="bad_config_context">%2$s de %1$s</string>
     <string name="bad_config_context_top_level">%s</string>

@@ -61,7 +61,10 @@
     <string name="applications">Applikationer</string>
     <string name="allow_remote_control_intents_summary_off">Eksterne apps kan ikke slå tunneler til/fra (Anbefales)</string>
     <string name="allow_remote_control_intents_summary_on">Eksterne apps må slå tunneler til/fra (Avanceret)</string>
-    <string name="allow_remote_control_intents_title">Tillad fjernstyring fra eksterne apps</string>
+    <string name="allow_remote_control_intents_title">Tillad fjern-intents</string>
+    <string name="allow_tasker_plugin_summary_off">Automatiseringsapps kan ikke styre tunneller</string>
+    <string name="allow_tasker_plugin_summary_on">Automatiseringsapps kan styre tunneller</string>
+    <string name="allow_tasker_plugin_title">Tillad Tasker-plugin</string>
     <string name="allowed_ips">Tilladte IP-adresser</string>
     <string name="bad_config_context">%1$s\'s %2$s</string>
     <string name="bad_config_context_top_level">%s</string>
