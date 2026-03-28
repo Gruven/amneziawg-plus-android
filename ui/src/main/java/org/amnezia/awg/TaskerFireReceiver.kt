@@ -8,8 +8,10 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
 import org.amnezia.awg.activity.TaskerEditActivity
 import org.amnezia.awg.backend.Tunnel
+import org.amnezia.awg.util.ErrorMessages
 import org.amnezia.awg.util.UserKnobs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -59,6 +61,7 @@ class TaskerFireReceiver : BroadcastReceiver() {
                 }
             } catch (e: Throwable) {
                 Log.e(TAG, "Tasker: error setting tunnel state", e)
+                Toast.makeText(context, ErrorMessages[e], Toast.LENGTH_LONG).show()
             } finally {
                 pendingResult.finish()
             }
