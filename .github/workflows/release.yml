@@ -5,12 +5,11 @@ on:
     tags:
     - "v*.*.*"
 
-permissions:
-  contents: write
-
 jobs:
   build:
     uses: ./.github/workflows/build.yml
+    permissions:
+      contents: read
     with:
       target: release_apk
       ref: ${{ github.ref }}
@@ -24,6 +23,8 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - name: Download build artifact
