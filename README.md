@@ -61,3 +61,11 @@ $ ./gradlew assembleRelease
 ```
 
 macOS users may need [flock(1)](https://github.com/discoteq/flock).
+
+## Issues
+
+Issues are welcome as long as they relate to the [additional features](#additional-features) of this fork (AmneziaWG+). If you encounter a bug of the original application (AmneziaWG), please open an issue in the [upstream repository](https://github.com/amnezia-vpn/amneziawg-android/issues).
+
+## Contributing
+
+PRs are welcome — bug fixes, documentation improvements, refactoring. The exception is new features: please open a [feature request](https://github.com/Gruven/amneziawg-android/issues) first to discuss the idea before starting work.
