@@ -5,7 +5,7 @@ Android GUI for [AmneziaWG](https://docs.amnezia.org/documentation/amnezia-wg/)
 > [!NOTE]
 > This is a fork of the original [amneziawg-android](https://github.com/amnezia-vpn/amneziawg-android) with additional features listed below. For the upstream version, please visit the [original repository](https://github.com/amnezia-vpn/amneziawg-android).
 
-## Additional features
+## ✨ Additional features
 
 - **Android 5.0+ support** — Minimum SDK lowered to 21 (Android 5.0 Lollipop).
 - **Root mode** — Optional tunnel backend that uses root access to create TUN interfaces and configure routing via `iptables`/`ip route`, completely bypassing the Android VPN API. No VPN icon in the status bar, no VPN permission dialogs. All device traffic is routed through the tunnel. Can be enabled in settings. **Requires a rooted device** (SuperSU, Magisk tested).
@@ -16,9 +16,9 @@ Android GUI for [AmneziaWG](https://docs.amnezia.org/documentation/amnezia-wg/)
   - Fixed edge-to-edge layout overlap on Android 15+ — settings and other screens no longer render behind the status bar and toolbar.
   - All settings are now shown at once — removed the collapsible "Advanced" section which rendered incorrectly on older Android versions.
 
-## Automation
+## 🤖 Automation
 
-### Tasker plugin
+### 🔌 Tasker plugin
 
 Requires **"Allow Tasker plugin"** to be enabled in settings.
 
@@ -31,7 +31,7 @@ The app registers as a [Tasker](https://tasker.joaoapps.com/) action plugin:
 
 The plugin appears automatically in Tasker's plugin list once the app is installed. It also works with other automation apps that support the Locale plugin protocol (e.g. [MacroDroid](https://www.macrodroid.com/)).
 
-### Intent API
+### 📡 Intent API
 
 Requires **"Allow remote intents"** to be enabled in settings.
 
@@ -52,7 +52,7 @@ adb shell am broadcast -a org.amnezia.awg.action.SET_TUNNEL_UP \
   -n org.amnezia.awg/.model.TunnelManager\$IntentReceiver
 ```
 
-## Building
+## 🔨 Building
 
 ```
 $ git clone --recurse-submodules https://github.com/Gruven/amneziawg-android
@@ -62,10 +62,22 @@ $ ./gradlew assembleRelease
 
 macOS users may need [flock(1)](https://github.com/discoteq/flock).
 
-## Issues
+## 🐛 Issues
 
 Issues are welcome as long as they relate to the [additional features](#additional-features) of this fork (AmneziaWG+). If you encounter a bug of the original application (AmneziaWG), please open an issue in the [upstream repository](https://github.com/amnezia-vpn/amneziawg-android/issues).
 
-## Contributing
+## 🤝 Contributing
 
 PRs are welcome — bug fixes, documentation improvements, refactoring. The exception is new features: please open a [feature request](https://github.com/Gruven/amneziawg-android/issues) first to discuss the idea before starting work.
+
+## 👀 But why?..
+
+This project primarily aims to support devices that, for whatever reason, are still running older versions of Android. In my case, it's the head unit in my 2021 car, which runs Android 5.1 with the VPN API stripped out.
+
+But! This project also includes quality-of-life features that make it worth using on modern devices too (which I do on my phone).
+
+## ⭐️ Alternatives
+
+If the extra features of this project don't interest you, consider these alternatives:
+- [AmneziaWG](https://github.com/amnezia-vpn/amneziawg-android) (Android 7+) — the original app.
+- [WG Tunnel](https://github.com/wgtunnel/android) (Android 8+) — an excellent alternative WG/AWG client with many additional features and a polished UI.
