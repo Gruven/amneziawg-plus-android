@@ -6,6 +6,10 @@
 package org.amnezia.awg.backend;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkRequest;
 import android.util.Log;
 
 import org.amnezia.awg.backend.BackendException.Reason;
@@ -67,6 +71,8 @@ public final class RootGoBackend implements Backend {
     // Saved ip_forward values to restore on cleanup
     private String savedIpv4Forward = "1";
     private String savedIpv6Forward = "0";
+    // Network change monitor for endpoint route updates
+    @Nullable private ConnectivityManager.NetworkCallback networkCallback;
 
     public RootGoBackend(final Context context, final RootShell rootShell) {
         SharedLibraryLoader.loadSharedLibrary(context, "wg-go");
@@ -160,6 +166,110 @@ public final class RootGoBackend implements Backend {
     @Override
     public void setStatusCallback(@Nullable final StatusCallback callback) {
         this.statusCallback = callback;
+    }
+
+    @SuppressWarnings("MissingPermission") // ACCESS_NETWORK_STATE declared in AndroidManifest
+    private void registerNetworkMonitor() {
+        final ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm == null) return;
+
+        // Defensive copy for thread-safe access from callback —
+        // endpoint IPs don't change during tunnel lifetime
+        final List<String> endpointIps = new ArrayList<>(activeEndpointIps);
+
+        final ConnectivityManager.NetworkCallback cb = new ConnectivityManager.NetworkCallback() {
+            @Override
+            public void onAvailable(final Network network) {
+                new Thread(() -> refreshEndpointRoutes(endpointIps), "EndpointRouteRefresh").start();
+            }
+
+            @Override
+            public void onLost(final Network network) {
+                new Thread(() -> refreshEndpointRoutes(endpointIps), "EndpointRouteRefresh").start();
+            }
+        };
+
+        try {
+            cm.registerNetworkCallback(
+                    new NetworkRequest.Builder()
+                            .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                            .build(), cb);
+            networkCallback = cb;
+        } catch (final Exception e) {
+            Log.w(TAG, "Failed to register network monitor: " + e.getMessage());
+        }
+    }
+
+    private void unregisterNetworkMonitor() {
+        final ConnectivityManager.NetworkCallback cb = networkCallback;
+        networkCallback = null;
+        if (cb == null) return;
+        try {
+            final ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (cm != null) cm.unregisterNetworkCallback(cb);
+        } catch (final Exception e) {
+            Log.w(TAG, "Failed to unregister network monitor: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Refreshes WireGuard endpoint routes on network change.
+     * Finds the current default route (excluding TUN) and re-routes endpoint traffic through it.
+     */
+    private void refreshEndpointRoutes(final List<String> endpointIps) {
+        if (currentTunnelHandle < 0) return;
+
+        try {
+            // IPv4 default route, excluding tunnel interface
+            final List<String> routeLines = new ArrayList<>();
+            rootShell.run(routeLines, "ip route show table all default 2>/dev/null");
+
+            String v4Via = null, v4Dev = null;
+            for (final String line : routeLines) {
+                if (line.contains(TUN_INTERFACE)) continue;
+                final String[] parts = line.trim().split("\\s+");
+                for (int i = 0; i < parts.length - 1; i++) {
+                    if ("via".equals(parts[i])) v4Via = parts[i + 1];
+                    if ("dev".equals(parts[i])) v4Dev = parts[i + 1];
+                }
+                if (v4Dev != null) break;
+            }
+
+            // IPv6 default route
+            routeLines.clear();
+            rootShell.run(routeLines, "ip -6 route show table all default 2>/dev/null");
+
+            String v6Via = null, v6Dev = null;
+            for (final String line : routeLines) {
+                if (line.contains(TUN_INTERFACE)) continue;
+                final String[] parts = line.trim().split("\\s+");
+                for (int i = 0; i < parts.length - 1; i++) {
+                    if ("via".equals(parts[i])) v6Via = parts[i + 1];
+                    if ("dev".equals(parts[i])) v6Dev = parts[i + 1];
+                }
+                if (v6Dev != null) break;
+            }
+
+            for (final String ip : endpointIps) {
+                if (ip.contains(":")) {
+                    if (v6Dev == null) continue;
+                    final String cmd = v6Via != null
+                            ? "ip -6 route replace " + ip + " via " + v6Via + " dev " + v6Dev + " table main 2>/dev/null"
+                            : "ip -6 route replace " + ip + " dev " + v6Dev + " table main 2>/dev/null";
+                    rootShell.run(null, cmd);
+                } else {
+                    if (v4Dev == null) continue;
+                    final String cmd = v4Via != null
+                            ? "ip route replace " + ip + " via " + v4Via + " dev " + v4Dev + " table main 2>/dev/null"
+                            : "ip route replace " + ip + " dev " + v4Dev + " table main 2>/dev/null";
+                    rootShell.run(null, cmd);
+                }
+            }
+
+            Log.d(TAG, "Endpoint routes refreshed: v4=" + v4Via + "/" + v4Dev + " v6=" + v6Via + "/" + v6Dev);
+        } catch (final Exception e) {
+            Log.w(TAG, "Failed to refresh endpoint routes: " + e.getMessage());
+        }
     }
 
     private void launchStatusJob() {
@@ -356,6 +466,7 @@ public final class RootGoBackend implements Backend {
             currentTunnel = tunnel;
             currentConfig = config;
 
+            registerNetworkMonitor();
             launchStatusJob();
 
             tunnel.onStateChange(State.UP);
@@ -364,6 +475,7 @@ public final class RootGoBackend implements Backend {
                 Log.w(TAG, "Tunnel already down");
                 return;
             }
+            unregisterNetworkMonitor();
             stopStatusJob();
 
             final int handleToClose = currentTunnelHandle;
@@ -484,8 +596,8 @@ public final class RootGoBackend implements Backend {
     }
 
     private void setupIptables(final Config config) throws Exception {
-        // TCP MSS clamping — без этого TCP может согласовать MSS по MTU физического
-        // интерфейса, а не TUN, и крупные сегменты не пройдут через туннель
+        // TCP MSS clamping — without this, TCP may negotiate MSS based on the physical
+        // interface MTU instead of TUN, causing large segments to be dropped in the tunnel
         runRootCommand("iptables -t mangle -A POSTROUTING -o " + TUN_INTERFACE + " -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu");
         runRootCommand("ip6tables -t mangle -A POSTROUTING -o " + TUN_INTERFACE + " -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu");
 
