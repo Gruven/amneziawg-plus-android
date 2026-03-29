@@ -64,7 +64,7 @@ macOS users may need [flock(1)](https://github.com/discoteq/flock).
 
 ## 🐛 Issues
 
-Issues are welcome as long as they relate to the [additional features](#additional-features) of this fork (AmneziaWG+). If you encounter a bug of the original application (AmneziaWG), please open an issue in the [upstream repository](https://github.com/amnezia-vpn/amneziawg-android/issues).
+Issues are welcome as long as they relate to the [additional features](#-additional-features) of this fork (AmneziaWG+). If you encounter a bug of the original application (AmneziaWG), please open an issue in the [upstream repository](https://github.com/amnezia-vpn/amneziawg-android/issues).
 
 ## 🤝 Contributing
 
