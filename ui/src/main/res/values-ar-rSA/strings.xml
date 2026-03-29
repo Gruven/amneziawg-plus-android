@@ -318,4 +318,8 @@
     <string name="tasker_action_toggle">تبديل</string>
     <string name="tasker_last_used_tunnel">آخر نفق مستخدم</string>
     <string name="tasker_no_tunnels">لا توجد أنفاق مُعدّة</string>
+    <string name="root_tunnel_notification_channel">AmneziaWG+ نفق الجذر</string>
+    <string name="root_tunnel_notification_connected">متصل</string>
+    <string name="root_tunnel_notification_connecting">جارٍ الاتصال…</string>
+    <string name="root_tunnel_notification_cleanup">جارٍ التنظيف\u2026</string>
 </resources>

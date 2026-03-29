@@ -253,4 +253,8 @@
     <string name="tasker_action_toggle">切り替え</string>
     <string name="tasker_last_used_tunnel">最後に使用したトンネル</string>
     <string name="tasker_no_tunnels">トンネルが設定されていません</string>
+    <string name="root_tunnel_notification_channel">AmneziaWG+ Root\u30c8\u30f3\u30cd\u30eb</string>
+    <string name="root_tunnel_notification_connected">接続済み</string>
+    <string name="root_tunnel_notification_connecting">接続中…</string>
+    <string name="root_tunnel_notification_cleanup">\u30af\u30ea\u30fc\u30f3\u30a2\u30c3\u30d7\u4e2d\u2026</string>
 </resources>

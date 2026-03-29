@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="root_tunnel_notification_channel">AmneziaWG+ Root-tunneli</string>
-    <string name="root_tunnel_notification_connected">Yhdistetty</string>
-    <string name="root_tunnel_notification_connecting">Yhdistetään…</string>
-    <string name="root_tunnel_notification_cleanup">Siivoaa\u2026</string>
-</resources>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="root_tunnel_notification_channel">AmneziaWG+ Root-tunnel</string>
-    <string name="root_tunnel_notification_connected">Ühendatud</string>
-    <string name="root_tunnel_notification_connecting">Ühendamine…</string>
-    <string name="root_tunnel_notification_cleanup">Puhastamine\u2026</string>
-</resources>

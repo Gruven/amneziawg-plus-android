@@ -243,4 +243,8 @@
     <string name="tasker_action_toggle">전환</string>
     <string name="tasker_last_used_tunnel">마지막으로 사용한 터널</string>
     <string name="tasker_no_tunnels">구성된 터널 없음</string>
+    <string name="root_tunnel_notification_channel">AmneziaWG+ Root 터널</string>
+    <string name="root_tunnel_notification_connected">연결됨</string>
+    <string name="root_tunnel_notification_connecting">연결 중…</string>
+    <string name="root_tunnel_notification_cleanup">정리 중\u2026</string>
 </resources>

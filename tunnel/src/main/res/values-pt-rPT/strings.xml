@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="root_tunnel_notification_channel">AmneziaWG+ Túnel root</string>
-    <string name="root_tunnel_notification_connected">Ligado</string>
-    <string name="root_tunnel_notification_connecting">A ligar…</string>
-    <string name="root_tunnel_notification_cleanup">A limpar\u2026</string>
-</resources>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="root_tunnel_notification_channel">AmneziaWG+ Root Tünel</string>
-    <string name="root_tunnel_notification_connected">Bağlandı</string>
-    <string name="root_tunnel_notification_connecting">Bağlanıyor…</string>
-    <string name="root_tunnel_notification_cleanup">Temizleniyor\u2026</string>
-</resources>

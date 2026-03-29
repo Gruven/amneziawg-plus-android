@@ -146,4 +146,8 @@
     <string name="tasker_action_toggle">Εναλλαγή</string>
     <string name="tasker_last_used_tunnel">Τελευταίο χρησιμοποιημένο τούνελ</string>
     <string name="tasker_no_tunnels">Δεν έχουν ρυθμιστεί τούνελ</string>
+    <string name="root_tunnel_notification_channel">AmneziaWG+ Root Tunnel</string>
+    <string name="root_tunnel_notification_connected">Συνδεδεμένο</string>
+    <string name="root_tunnel_notification_connecting">Σύνδεση…</string>
+    <string name="root_tunnel_notification_cleanup">Εκκαθάριση\u2026</string>
 </resources>

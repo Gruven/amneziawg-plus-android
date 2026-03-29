@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="root_tunnel_notification_channel">AmneziaWG+ Root tunel</string>
-    <string name="root_tunnel_notification_connected">Připojeno</string>
-    <string name="root_tunnel_notification_connecting">Připojování…</string>
-    <string name="root_tunnel_notification_cleanup">Čištění\u2026</string>
-</resources>

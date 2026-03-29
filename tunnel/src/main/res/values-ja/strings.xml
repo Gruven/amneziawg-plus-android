@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="root_tunnel_notification_channel">AmneziaWG+ Root\u30c8\u30f3\u30cd\u30eb</string>
-    <string name="root_tunnel_notification_connected">接続済み</string>
-    <string name="root_tunnel_notification_connecting">接続中…</string>
-    <string name="root_tunnel_notification_cleanup">\u30af\u30ea\u30fc\u30f3\u30a2\u30c3\u30d7\u4e2d\u2026</string>
-</resources>

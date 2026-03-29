@@ -253,4 +253,8 @@
     <string name="tasker_action_toggle">ਟੌਗਲ ਕਰੋ</string>
     <string name="tasker_last_used_tunnel">ਆਖਰੀ ਵਰਤੀ ਗਈ ਟਨਲ</string>
     <string name="tasker_no_tunnels">ਕੋਈ ਟਨਲ ਕੌਂਫਿਗਰ ਨਹੀਂ ਹੈ</string>
+    <string name="root_tunnel_notification_channel">AmneziaWG+ Root Tunnel</string>
+    <string name="root_tunnel_notification_connected">ਜੁੜਿਆ</string>
+    <string name="root_tunnel_notification_connecting">ਜੋੜ ਰਿਹਾ ਹੈ…</string>
+    <string name="root_tunnel_notification_cleanup">ਸਾਫ਼ ਕਰ ਰਿਹਾ ਹੈ\u2026</string>
 </resources>

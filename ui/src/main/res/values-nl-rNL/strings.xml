@@ -247,4 +247,8 @@
     <string name="tasker_action_toggle">Schakelen</string>
     <string name="tasker_last_used_tunnel">Laatst gebruikte tunnel</string>
     <string name="tasker_no_tunnels">Geen tunnels geconfigureerd</string>
+    <string name="root_tunnel_notification_channel">AmneziaWG+ Root-tunnel</string>
+    <string name="root_tunnel_notification_connected">Verbonden</string>
+    <string name="root_tunnel_notification_connecting">Verbinden…</string>
+    <string name="root_tunnel_notification_cleanup">Opruimen\u2026</string>
 </resources>

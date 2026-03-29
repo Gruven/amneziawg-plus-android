@@ -179,4 +179,8 @@
     <string name="zip_export_title">जिप फाइल के लिए टनल को एक्सपोर्ट करें</string>
     <string name="key_length_error">चाबी की लम्बाई गलत </string>
     <string name="key_contents_error">चाबी में खराब वर्ण</string>
+    <string name="root_tunnel_notification_channel">AmneziaWG+ Root Tunnel</string>
+    <string name="root_tunnel_notification_connected">कनेक्टेड</string>
+    <string name="root_tunnel_notification_connecting">कनेक्ट हो रहा है…</string>
+    <string name="root_tunnel_notification_cleanup">साफ़ कर रहा है\u2026</string>
 </resources>

@@ -38,4 +38,8 @@
     <string name="root_mode_title">Root mód (nincs VPN API)</string>
     <string name="root_mode_error">A root hozzáférés nem érhető el</string>
     <string name="root_shell_error">A root shell parancs meghiúsult: %d</string>
+    <string name="root_tunnel_notification_channel">AmneziaWG+ Root alagút</string>
+    <string name="root_tunnel_notification_connected">Csatlakozva</string>
+    <string name="root_tunnel_notification_connecting">Csatlakozás…</string>
+    <string name="root_tunnel_notification_cleanup">Tisztítás\u2026</string>
 </resources>

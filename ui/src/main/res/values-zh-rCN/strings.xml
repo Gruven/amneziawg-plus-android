@@ -253,4 +253,8 @@
     <string name="tasker_action_toggle">切换</string>
     <string name="tasker_last_used_tunnel">上次使用的隧道</string>
     <string name="tasker_no_tunnels">未配置隧道</string>
+    <string name="root_tunnel_notification_channel">AmneziaWG+ Root 隧道</string>
+    <string name="root_tunnel_notification_connected">已连接</string>
+    <string name="root_tunnel_notification_connecting">连接中…</string>
+    <string name="root_tunnel_notification_cleanup">正在清理\u2026</string>
 </resources>

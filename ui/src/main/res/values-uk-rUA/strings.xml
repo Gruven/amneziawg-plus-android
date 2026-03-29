@@ -288,4 +288,8 @@
     <string name="tasker_action_toggle">Перемкнути</string>
     <string name="tasker_last_used_tunnel">Останній використаний тунель</string>
     <string name="tasker_no_tunnels">Немає налаштованих тунелів</string>
+    <string name="root_tunnel_notification_channel">AmneziaWG+ Root-тунель</string>
+    <string name="root_tunnel_notification_connected">Підключено</string>
+    <string name="root_tunnel_notification_connecting">Підключення…</string>
+    <string name="root_tunnel_notification_cleanup">Очищення\u2026</string>
 </resources>

@@ -224,4 +224,8 @@
     <string name="tasker_action_toggle">මාරු කරන්න</string>
     <string name="tasker_last_used_tunnel">අවසන් වරට භාවිත උමඟ</string>
     <string name="tasker_no_tunnels">උමං සකසා නැත</string>
+    <string name="root_tunnel_notification_channel">AmneziaWG+ Root Tunnel</string>
+    <string name="root_tunnel_notification_connected">සම්බන්ධිතයි</string>
+    <string name="root_tunnel_notification_connecting">සම්බන්ධ වෙමින්…</string>
+    <string name="root_tunnel_notification_cleanup">පිරිසිදු කරමින්\u2026</string>
 </resources>

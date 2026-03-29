@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="root_tunnel_notification_channel">AmneziaWG+ Root 터널</string>
-    <string name="root_tunnel_notification_connected">연결됨</string>
-    <string name="root_tunnel_notification_connecting">연결 중…</string>
-    <string name="root_tunnel_notification_cleanup">정리 중\u2026</string>
-</resources>

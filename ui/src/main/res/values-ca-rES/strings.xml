@@ -246,4 +246,8 @@
     <string name="tasker_action_toggle">Commutar</string>
     <string name="tasker_last_used_tunnel">Últim túnel utilitzat</string>
     <string name="tasker_no_tunnels">No hi ha túnels configurats</string>
+    <string name="root_tunnel_notification_channel">AmneziaWG+ Túnel root</string>
+    <string name="root_tunnel_notification_connected">Connectat</string>
+    <string name="root_tunnel_notification_connecting">Connectant…</string>
+    <string name="root_tunnel_notification_cleanup">Netejant\u2026</string>
 </resources>

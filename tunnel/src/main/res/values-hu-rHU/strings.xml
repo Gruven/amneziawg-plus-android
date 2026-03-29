@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="root_tunnel_notification_channel">AmneziaWG+ Root alagút</string>
-    <string name="root_tunnel_notification_connected">Csatlakozva</string>
-    <string name="root_tunnel_notification_connecting">Csatlakozás…</string>
-    <string name="root_tunnel_notification_cleanup">Tisztítás\u2026</string>
-</resources>

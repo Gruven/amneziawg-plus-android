@@ -156,4 +156,8 @@
     <string name="tasker_action_toggle">Chuyển đổi</string>
     <string name="tasker_last_used_tunnel">Đường hầm sử dụng gần nhất</string>
     <string name="tasker_no_tunnels">Không có đường hầm nào được cấu hình</string>
+    <string name="root_tunnel_notification_channel">AmneziaWG+ Tunnel Root</string>
+    <string name="root_tunnel_notification_connected">Đã kết nối</string>
+    <string name="root_tunnel_notification_connecting">Đang kết nối…</string>
+    <string name="root_tunnel_notification_cleanup">Đang dọn dẹp\u2026</string>
 </resources>
