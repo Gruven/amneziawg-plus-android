@@ -33,8 +33,17 @@ jobs:
         name: release-apk
         path: artifacts/
 
-    - name: Rename artifact
-      run: mv artifacts/*.apk "artifacts/AmneziaWG-Plus-${{ github.ref_name }}.apk"
+    - name: Rename artifacts
+      run: |
+        for APK in artifacts/*.apk; do
+          BASENAME="$(basename "${APK}")"
+          ABI="$(echo "${BASENAME}" | sed -n 's/^ui-\(.*\)-release.*\.apk$/\1/p')"
+          if [[ -n "${ABI}" ]]; then
+            mv "${APK}" "artifacts/AmneziaWG-Plus-${{ github.ref_name }}-${ABI}.apk"
+          else
+            mv "${APK}" "artifacts/AmneziaWG-Plus-${{ github.ref_name }}.apk"
+          fi
+        done
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
@@ -42,4 +51,5 @@ jobs:
         generate_release_notes: true
         prerelease: ${{ contains(github.ref_name, '-') }}
         make_latest: ${{ !contains(github.ref_name, '-') }}
+        fail_on_unmatched_files: true
         files: artifacts/*.apk

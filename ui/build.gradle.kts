@@ -52,6 +52,14 @@ android {
             matchingFallbacks += "release"
         }
     }
+    splits {
+        abi {
+            isEnable = true
+            reset()
+            include("arm64-v8a", "armeabi-v7a", "x86", "x86_64")
+            isUniversalApk = true
+        }
+    }
     androidResources {
         generateLocaleConfig = true
     }
@@ -59,6 +67,18 @@ android {
         disable += "LongLogTag"
         warning += "MissingTranslation"
         warning += "ImpliedQuantity"
+    }
+}
+
+val abiCodes = mapOf("armeabi-v7a" to 1, "arm64-v8a" to 2, "x86" to 3, "x86_64" to 4)
+
+androidComponents {
+    onVariants { variant ->
+        variant.outputs.forEach { output ->
+            val abi = output.filters.find { it.filterType == com.android.build.api.variant.FilterConfiguration.FilterType.ABI }?.identifier
+            val abiCode = abiCodes[abi] ?: 0
+            output.versionCode.set((output.versionCode.get() ?: 0) * 10 + abiCode)
+        }
     }
 }
 

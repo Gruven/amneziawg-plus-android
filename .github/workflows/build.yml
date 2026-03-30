@@ -117,46 +117,32 @@ jobs:
         chmod +x ./gradlew
         ./gradlew --no-daemon --no-build-cache --stacktrace ${{ steps.cfg.outputs.gradle_task }}
 
-    - name: Locate built artifact
-      id: locate
+    - name: Collect built artifacts
       shell: bash
       run: |
         set -euo pipefail
-
-        FILE=""
+        mkdir -p output
         case "${{ inputs.target }}" in
           release_aab)
-            FILE="./ui/build/outputs/bundle/release/ui-release.aab"
+            cp ./ui/build/outputs/bundle/release/ui-release.aab output/
             ;;
           debug_apk)
-            FILE="./ui/build/outputs/apk/debug/ui-debug.apk"
+            cp ./ui/build/outputs/apk/debug/*.apk output/
             ;;
           release_apk)
-            for CANDIDATE in \
-              "./ui/build/outputs/apk/release/ui-release-unsigned.apk" \
-              "./ui/build/outputs/apk/release/ui-release.apk"; do
-              if [[ -f "${CANDIDATE}" ]]; then
-                FILE="${CANDIDATE}"
-                break
-              fi
-            done
+            cp ./ui/build/outputs/apk/release/*.apk output/
             ;;
           *)
-            echo "Unknown target in locate step: ${{ inputs.target }}" >&2
+            echo "Unknown target: ${{ inputs.target }}" >&2
             exit 1
             ;;
         esac
+        echo "::group::Collected artifacts"
+        ls -lh output/
+        echo "::endgroup::"
 
-        if [[ ! -f "${FILE}" ]]; then
-          echo "Built file not found: ${FILE}" >&2
-          exit 1
-        fi
-
-        echo "built_file=${FILE}" >> "$GITHUB_OUTPUT"
-
-    - name: Sign release artifact
+    - name: Sign release artifacts
       if: ${{ steps.cfg.outputs.needs_signing == 'true' }}
-      id: sign
       shell: bash
       env:
         KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
@@ -170,11 +156,11 @@ jobs:
           exit 1
         fi
 
-        INPUT_FILE="${{ steps.locate.outputs.built_file }}"
         KEY_PASSWORD_EFFECTIVE="${KEY_PASSWORD:-$KEYSTORE_PASSWORD}"
 
         if [[ "${{ steps.cfg.outputs.kind }}" == "aab" ]]; then
-          SIGNED_AAB="${INPUT_FILE%.aab}-signed.aab"
+          AAB="$(ls output/*.aab)"
+          SIGNED_AAB="${AAB%.aab}-signed.aab"
 
           KEYPASS_ARGS=()
           if [[ -n "${KEY_PASSWORD}" ]]; then
@@ -186,10 +172,10 @@ jobs:
             -storepass "${KEYSTORE_PASSWORD}" \
             "${KEYPASS_ARGS[@]}" \
             -signedjar "${SIGNED_AAB}" \
-            "${INPUT_FILE}" \
+            "${AAB}" \
             "${KEY_ALIAS}"
 
-          echo "final_file=${SIGNED_AAB}" >> "$GITHUB_OUTPUT"
+          rm -f "${AAB}"
         else
           ZIPALIGN="$(find "${ANDROID_HOME}/build-tools" -type f -name zipalign | sort -V | tail -n 1)"
           APKSIGNER="$(find "${ANDROID_HOME}/build-tools" -type f -name apksigner | sort -V | tail -n 1)"
@@ -199,30 +185,37 @@ jobs:
             exit 1
           fi
 
-          ALIGNED_APK="${INPUT_FILE%.apk}-aligned.apk"
+          for APK in output/*.apk; do
+            BASENAME="$(basename "${APK}")"
+            ALIGNED="output/${BASENAME%.apk}-aligned.apk"
 
-          if [[ "${INPUT_FILE}" == *-unsigned.apk ]]; then
-            SIGNED_APK="${INPUT_FILE%-unsigned.apk}-signed.apk"
-          else
-            SIGNED_APK="${INPUT_FILE%.apk}-signed.apk"
-          fi
+            if [[ "${BASENAME}" == *-unsigned* ]]; then
+              SIGNED="output/${BASENAME//-unsigned/}"
+            else
+              SIGNED="output/${BASENAME%.apk}-signed.apk"
+            fi
 
-          "${ZIPALIGN}" -f -p 4 "${INPUT_FILE}" "${ALIGNED_APK}"
+            "${ZIPALIGN}" -f -p 4 "${APK}" "${ALIGNED}"
 
-          "${APKSIGNER}" sign \
-            --ks "${KEYSTORE_PATH}" \
-            --ks-key-alias "${KEY_ALIAS}" \
-            --ks-pass "pass:${KEYSTORE_PASSWORD}" \
-            --key-pass "pass:${KEY_PASSWORD_EFFECTIVE}" \
-            --out "${SIGNED_APK}" \
-            "${ALIGNED_APK}"
+            "${APKSIGNER}" sign \
+              --ks "${KEYSTORE_PATH}" \
+              --ks-key-alias "${KEY_ALIAS}" \
+              --ks-pass "pass:${KEYSTORE_PASSWORD}" \
+              --key-pass "pass:${KEY_PASSWORD_EFFECTIVE}" \
+              --out "${SIGNED}" \
+              "${ALIGNED}"
 
-          echo "final_file=${SIGNED_APK}" >> "$GITHUB_OUTPUT"
+            rm -f "${APK}" "${ALIGNED}"
+          done
         fi
+
+        echo "::group::Signed artifacts"
+        ls -lh output/
+        echo "::endgroup::"
 
     - name: Upload artifact
       uses: actions/upload-artifact@v7
       with:
         name: ${{ steps.cfg.outputs.artifact_name }}
-        path: ${{ steps.sign.outputs.final_file || steps.locate.outputs.built_file }}
+        path: output/*
         if-no-files-found: error
