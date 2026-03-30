@@ -5,21 +5,13 @@
 
 package org.amnezia.awg.backend;
 
-import android.annotation.SuppressLint;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ServiceInfo;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
 import android.os.Build;
-import android.os.IBinder;
 import android.util.Log;
 
 import org.amnezia.awg.backend.BackendException.Reason;
@@ -34,11 +26,7 @@ import org.amnezia.awg.util.NonNullForAll;
 import org.amnezia.awg.util.RootShell;
 import org.amnezia.awg.util.SharedLibraryLoader;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.PrintWriter;
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -48,6 +36,7 @@ import androidx.annotation.Nullable;
 import androidx.collection.ArraySet;
 
 import static org.amnezia.awg.GoBackend.*;
+import static org.amnezia.awg.backend.RootNetworkManager.TUN_INTERFACE;
 
 /**
  * {@link Backend} implementation that uses root access to create a TUN interface
@@ -57,18 +46,15 @@ import static org.amnezia.awg.GoBackend.*;
 public final class RootGoBackend implements Backend {
     private static final int DNS_RESOLUTION_RETRIES = 10;
     private static final String TAG = "AmneziaWG/RootGoBackend";
-    private static final String TUN_INTERFACE = "awg0";
-    private static final int FWMARK = 51820;
-    private static final int ROUTING_TABLE = 51820;
     private static final long TURN_OFF_TIMEOUT_MS = 5000;
-    private static final String ENDPOINT_IPS_FILE = "root_endpoint_ips.txt";
-    private static final String NOTIFICATION_CHANNEL_ID = "amneziawg_root_tunnel";
-    private static final int NOTIFICATION_ID = 51820;
+    static final String NOTIFICATION_CHANNEL_ID = "amneziawg_root_tunnel";
+    static final int NOTIFICATION_ID = 51820;
     static final String EXTRA_TUNNEL_NAME = "tunnel_name";
     static final String EXTRA_CONNECTED = "connected";
 
     private final Context context;
     private final RootShell rootShell;
+    private final RootNetworkManager networkManager;
     @Nullable private volatile Config currentConfig;
     @Nullable private volatile Tunnel currentTunnel;
     private volatile int currentTunnelHandle = -1;
@@ -77,14 +63,6 @@ public final class RootGoBackend implements Backend {
     @Nullable private volatile StatusCallback statusCallback;
     // Track zombie awgTurnOff thread on timeout
     @Nullable private volatile Thread zombieTurnOffThread;
-    // Endpoint IPs for targeted route removal during cleanup
-    private final List<String> activeEndpointIps = new ArrayList<>();
-    // DNS IP for targeted rule removal during cleanup
-    @Nullable private String activeDnsIp;
-    private boolean activeDnsIsV6;
-    // Saved ip_forward values to restore on cleanup
-    private String savedIpv4Forward = "1";
-    private String savedIpv6Forward = "0";
     // Network change monitor for endpoint route updates
     @Nullable private ConnectivityManager.NetworkCallback networkCallback;
 
@@ -92,6 +70,7 @@ public final class RootGoBackend implements Backend {
         SharedLibraryLoader.loadSharedLibrary(context, "wg-go");
         this.context = context;
         this.rootShell = rootShell;
+        this.networkManager = new RootNetworkManager(context, rootShell);
         cleanupStaleResources();
     }
 
@@ -106,7 +85,8 @@ public final class RootGoBackend implements Backend {
             rootShell.run(output, "ip link show " + TUN_INTERFACE + " 2>/dev/null");
             if (!output.isEmpty()) {
                 Log.w(TAG, "Stale TUN interface found — cleaning up after previous crash");
-                cleanupRootResources();
+                networkManager.cleanup(tunFd);
+                tunFd = -1;
                 stopTunnelService();
             }
         } catch (final Exception e) {
@@ -210,7 +190,7 @@ public final class RootGoBackend implements Backend {
 
         // Defensive copy for thread-safe access from callback —
         // endpoint IPs don't change during tunnel lifetime
-        final List<String> endpointIps = new ArrayList<>(activeEndpointIps);
+        final List<String> endpointIps = new ArrayList<>(networkManager.getActiveEndpointIps());
 
         final ConnectivityManager.NetworkCallback cb = new ConnectivityManager.NetworkCallback() {
             @Override
@@ -378,12 +358,6 @@ public final class RootGoBackend implements Backend {
         return getState(tunnel);
     }
 
-    private void runRootCommand(final String command) throws Exception {
-        final int ret = rootShell.run(null, command);
-        if (ret != 0)
-            Log.w(TAG, "Root command returned " + ret + ": " + command);
-    }
-
     private void runRootCommandStrict(final String command) throws Exception {
         final int ret = rootShell.run(null, command);
         if (ret != 0)
@@ -426,7 +400,8 @@ public final class RootGoBackend implements Backend {
             }
 
             // Clean up leftovers from a previous run (including after a crash)
-            cleanupRootResources();
+            networkManager.cleanup(tunFd);
+            tunFd = -1;
 
             // DNS resolution for endpoints
             dnsRetry: for (int i = 0; i < DNS_RESOLUTION_RETRIES; ++i) {
@@ -487,15 +462,16 @@ public final class RootGoBackend implements Backend {
                 }
 
                 // Set up routing and iptables
-                setupRouting(config);
-                setupIptables(config);
+                networkManager.setupRouting(config);
+                networkManager.setupIptables(config);
             } catch (final Exception e) {
                 // Stop Go (if it started successfully) and clean up resources
                 if (currentTunnelHandle >= 0) {
                     awgTurnOff(currentTunnelHandle);
                 }
                 currentTunnelHandle = -1;
-                cleanupRootResources();
+                networkManager.cleanup(tunFd);
+                tunFd = -1;
                 throw e;
             }
 
@@ -532,7 +508,8 @@ public final class RootGoBackend implements Backend {
                 // Clear interrupt flag so rootShell.run() in cleanup won't be interrupted;
                 // restore it after cleanup
                 final boolean wasInterrupted = Thread.interrupted();
-                cleanupRootResources();
+                networkManager.cleanup(tunFd);
+                tunFd = -1;
                 if (wasInterrupted) Thread.currentThread().interrupt();
 
                 try {
@@ -547,254 +524,8 @@ public final class RootGoBackend implements Backend {
         }
     }
 
-    private void setupRouting(final Config config) throws Exception {
-        // Collect endpoint IPs to exclude from tunnel routing
-        activeEndpointIps.clear();
-        for (final Peer peer : config.getPeers()) {
-            final InetEndpoint ep = peer.getEndpoint().orElse(null);
-            if (ep == null) continue;
-            final InetEndpoint resolved = ep.getResolved().orElse(null);
-            if (resolved != null)
-                activeEndpointIps.add(resolved.getHost());
-        }
-
-        // Persist endpoint IPs to disk for crash recovery
-        saveEndpointIps();
-
-        // Save current ip_forward values to restore on cleanup
-        final List<String> fwdOutput = new ArrayList<>();
-        try {
-            rootShell.run(fwdOutput, "cat /proc/sys/net/ipv4/ip_forward");
-            if (!fwdOutput.isEmpty()) savedIpv4Forward = fwdOutput.get(0).trim();
-        } catch (final Exception e) {
-            Log.w(TAG, "Failed to read ipv4.ip_forward: " + e.getMessage());
-        }
-        fwdOutput.clear();
-        try {
-            rootShell.run(fwdOutput, "cat /proc/sys/net/ipv6/conf/all/forwarding");
-            if (!fwdOutput.isEmpty()) savedIpv6Forward = fwdOutput.get(0).trim();
-        } catch (final Exception e) {
-            Log.w(TAG, "Failed to read ipv6 forwarding: " + e.getMessage());
-        }
-
-        // Enable IP forwarding
-        runRootCommand("echo 1 > /proc/sys/net/ipv4/ip_forward");
-        runRootCommand("echo 1 > /proc/sys/net/ipv6/conf/all/forwarding");
-
-        // Save routes to endpoints BEFORE setting up tunnel routing.
-        // On Android the default route lives in per-network tables, not in main.
-        // We add explicit host routes so that endpoints remain reachable.
-        for (final String ip : activeEndpointIps) {
-            final List<String> routeOutput = new ArrayList<>();
-            if (ip.contains(":"))
-                rootShell.run(routeOutput, "ip -6 route get " + ip + " | sed 's/ uid .*//'");
-            else
-                rootShell.run(routeOutput, "ip route get " + ip + " | sed 's/ uid .*//'");
-            if (!routeOutput.isEmpty()) {
-                final String route = routeOutput.get(0).trim();
-                Log.d(TAG, "Saving endpoint route: " + route);
-                runRootCommand("ip route add " + route + " table main 2>/dev/null");
-            }
-        }
-
-        // Packets with fwmark (from our app) use main table — IPv4 + IPv6
-        // (bypass tunnel for WireGuard UDP traffic to endpoints)
-        runRootCommand("ip rule add fwmark " + FWMARK + " table main priority 10");
-        runRootCommand("ip -6 rule add fwmark " + FWMARK + " table main priority 10");
-
-        // Routes for AllowedIPs
-        for (final Peer peer : config.getPeers()) {
-            for (final InetNetwork addr : peer.getAllowedIps()) {
-                final String route = addr.getAddress().getHostAddress() + "/" + addr.getMask();
-                if (addr.getAddress() instanceof java.net.Inet6Address)
-                    runRootCommand("ip -6 route add " + route + " dev " + TUN_INTERFACE + " table " + ROUTING_TABLE);
-                else
-                    runRootCommand("ip route add " + route + " dev " + TUN_INTERFACE + " table " + ROUTING_TABLE);
-            }
-        }
-
-        // All traffic without fwmark goes through the tunnel table — IPv4 + IPv6
-        runRootCommand("ip rule add not fwmark " + FWMARK + " table " + ROUTING_TABLE + " priority 100");
-        runRootCommand("ip -6 rule add not fwmark " + FWMARK + " table " + ROUTING_TABLE + " priority 100");
-        runRootCommand("ip rule add not fwmark " + FWMARK + " table main suppress_prefixlength 0 priority 90");
-        runRootCommand("ip -6 rule add not fwmark " + FWMARK + " table main suppress_prefixlength 0 priority 90");
-
-        // Exclude endpoints from tunnel routing (extra safeguard)
-        for (final String ip : activeEndpointIps) {
-            if (ip.contains(":"))
-                runRootCommand("ip -6 rule add to " + ip + " table main priority 80");
-            else
-                runRootCommand("ip rule add to " + ip + " table main priority 80");
-        }
-    }
-
-    private void setupIptables(final Config config) throws Exception {
-        // TCP MSS clamping — without this, TCP may negotiate MSS based on the physical
-        // interface MTU instead of TUN, causing large segments to be dropped in the tunnel
-        runRootCommand("iptables -t mangle -A POSTROUTING -o " + TUN_INTERFACE + " -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu");
-        runRootCommand("ip6tables -t mangle -A POSTROUTING -o " + TUN_INTERFACE + " -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu");
-
-        // Mark our app's UDP packets via iptables mangle (bypass tunnel for endpoint traffic)
-        final int myUid = android.os.Process.myUid();
-        runRootCommand("iptables -t mangle -A OUTPUT -m owner --uid-owner " + myUid + " -p udp -j MARK --set-mark " + FWMARK);
-        runRootCommand("ip6tables -t mangle -A OUTPUT -m owner --uid-owner " + myUid + " -p udp -j MARK --set-mark " + FWMARK);
-
-        // NAT for traffic through the tunnel
-        runRootCommand("iptables -t nat -A POSTROUTING -o " + TUN_INTERFACE + " -j MASQUERADE");
-        runRootCommand("ip6tables -t nat -A POSTROUTING -o " + TUN_INTERFACE + " -j MASQUERADE");
-
-        // DNS redirect to the first DNS server from config
-        activeDnsIp = null;
-        for (final InetAddress dns : config.getInterface().getDnsServers()) {
-            activeDnsIp = dns.getHostAddress();
-            activeDnsIsV6 = dns instanceof java.net.Inet6Address;
-            if (activeDnsIsV6) {
-                runRootCommand("ip6tables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination [" + activeDnsIp + "]:53");
-                runRootCommand("ip6tables -t nat -A OUTPUT -p tcp --dport 53 -j DNAT --to-destination [" + activeDnsIp + "]:53");
-            } else {
-                runRootCommand("iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination " + activeDnsIp + ":53");
-                runRootCommand("iptables -t nat -A OUTPUT -p tcp --dport 53 -j DNAT --to-destination " + activeDnsIp + ":53");
-            }
-            break;
-        }
-    }
-
-    private void saveEndpointIps() {
-        try {
-            final File file = new File(context.getCacheDir(), ENDPOINT_IPS_FILE);
-            try (PrintWriter pw = new PrintWriter(file)) {
-                for (final String ip : activeEndpointIps) pw.println(ip);
-            }
-        } catch (final Exception e) {
-            Log.w(TAG, "Failed to save endpoint IPs: " + e.getMessage());
-        }
-    }
-
-    private List<String> loadSavedEndpointIps() {
-        final List<String> ips = new ArrayList<>();
-        final File file = new File(context.getCacheDir(), ENDPOINT_IPS_FILE);
-        if (file.exists()) {
-            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    line = line.trim();
-                    if (!line.isEmpty()) ips.add(line);
-                }
-            } catch (final Exception e) {
-                Log.w(TAG, "Failed to load endpoint IPs: " + e.getMessage());
-            }
-            file.delete();
-        }
-        return ips;
-    }
-
-    private void cleanupRootResources() {
-        // Merge current and saved endpoint IPs for complete crash recovery cleanup
-        final List<String> savedIps = loadSavedEndpointIps();
-        final Set<String> allEndpointIps = new ArraySet<>(activeEndpointIps);
-        allEndpointIps.addAll(savedIps);
-
-        // Network cleanup (deletes TUN first to prevent traffic leaks)
-        performNetworkCleanup(rootShell, android.os.Process.myUid(),
-                activeDnsIp, activeDnsIsV6,
-                new ArrayList<>(allEndpointIps),
-                savedIpv4Forward, savedIpv6Forward);
-
-        // Close fd (only if Go didn't take ownership — error before awgTurnOn)
-        if (tunFd >= 0) {
-            final int fd = tunFd;
-            tunFd = -1;
-            try {
-                closeTun(fd);
-            } catch (final Exception e) {
-                Log.w(TAG, "Cleanup failed [close TUN fd]: " + e.getMessage());
-            }
-        }
-
-        activeDnsIp = null;
-        activeEndpointIps.clear();
-    }
-
-    /**
-     * Shared network cleanup logic — used both from the instance method
-     * and from TunnelService after a crash (when no RootGoBackend instance exists).
-     */
-    private static void performNetworkCleanup(final RootShell shell, final int uid,
-            @Nullable final String dnsIp, final boolean dnsIsV6,
-            final List<String> endpointIps,
-            final String ipv4Forward, final String ipv6Forward) {
-        // 1. Delete TUN interface FIRST — instantly blocks all traffic through the tunnel,
-        //    preventing unencrypted traffic leaks while routing rules are being removed
-        safeRun(shell, "ip link delete " + TUN_INTERFACE + " 2>/dev/null", "TUN interface");
-
-        // 2. Remove routing rules by priority — IPv4 + IPv6
-        safeRun(shell, "while ip rule del priority 10 2>/dev/null; do :; done; " +
-                "while ip -6 rule del priority 10 2>/dev/null; do :; done; " +
-                "while ip rule del priority 80 2>/dev/null; do :; done; " +
-                "while ip -6 rule del priority 80 2>/dev/null; do :; done; " +
-                "while ip rule del priority 90 2>/dev/null; do :; done; " +
-                "while ip -6 rule del priority 90 2>/dev/null; do :; done; " +
-                "while ip rule del priority 100 2>/dev/null; do :; done; " +
-                "while ip -6 rule del priority 100 2>/dev/null; do :; done", "routing rules");
-
-        // 3. Flush the routing table
-        safeRun(shell, "ip route flush table " + ROUTING_TABLE + " 2>/dev/null; " +
-                "ip -6 route flush table " + ROUTING_TABLE + " 2>/dev/null", "routing table");
-
-        // 4. Remove NAT POSTROUTING rules
-        safeRun(shell, "iptables -t nat -D POSTROUTING -o " + TUN_INTERFACE + " -j MASQUERADE 2>/dev/null; " +
-                "ip6tables -t nat -D POSTROUTING -o " + TUN_INTERFACE + " -j MASQUERADE 2>/dev/null", "NAT POSTROUTING");
-
-        // 5. Remove DNS redirect rules by saved IP
-        if (dnsIp != null) {
-            if (dnsIsV6) {
-                safeRun(shell, "ip6tables -t nat -D OUTPUT -p udp --dport 53 -j DNAT --to-destination [" + dnsIp + "]:53 2>/dev/null; " +
-                        "ip6tables -t nat -D OUTPUT -p tcp --dport 53 -j DNAT --to-destination [" + dnsIp + "]:53 2>/dev/null", "DNS redirect");
-            } else {
-                safeRun(shell, "iptables -t nat -D OUTPUT -p udp --dport 53 -j DNAT --to-destination " + dnsIp + ":53 2>/dev/null; " +
-                        "iptables -t nat -D OUTPUT -p tcp --dport 53 -j DNAT --to-destination " + dnsIp + ":53 2>/dev/null", "DNS redirect");
-            }
-        }
-        // Aggressive DNS DNAT cleanup for crash recovery (when dnsIp is lost)
-        safeRun(shell,
-                "iptables -t nat -S OUTPUT 2>/dev/null | grep '\\-\\-dport 53 -j DNAT' | sed 's/^-A /-D /' | while IFS= read -r rule; do iptables -t nat $rule 2>/dev/null; done; " +
-                "ip6tables -t nat -S OUTPUT 2>/dev/null | grep '\\-\\-dport 53 -j DNAT' | sed 's/^-A /-D /' | while IFS= read -r rule; do ip6tables -t nat $rule 2>/dev/null; done",
-                "DNS DNAT from iptables");
-
-        // 6. Remove mangle rules
-        safeRun(shell, "iptables -t mangle -D POSTROUTING -o " + TUN_INTERFACE + " -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu 2>/dev/null; " +
-                "ip6tables -t mangle -D POSTROUTING -o " + TUN_INTERFACE + " -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu 2>/dev/null",
-                "mangle MSS clamp");
-        safeRun(shell, "iptables -t mangle -D OUTPUT -m owner --uid-owner " + uid + " -p udp -j MARK --set-mark " + FWMARK + " 2>/dev/null; " +
-                "ip6tables -t mangle -D OUTPUT -m owner --uid-owner " + uid + " -p udp -j MARK --set-mark " + FWMARK + " 2>/dev/null",
-                "mangle fwmark");
-
-        // 7. Remove endpoint routes from the main table
-        for (final String ip : endpointIps) {
-            if (ip.contains(":"))
-                safeRun(shell, "ip -6 route del " + ip + " table main 2>/dev/null", "endpoint route " + ip);
-            else
-                safeRun(shell, "ip route del " + ip + " table main 2>/dev/null", "endpoint route " + ip);
-        }
-
-        // 8. Restore ip_forward
-        safeRun(shell, "echo " + ipv4Forward + " > /proc/sys/net/ipv4/ip_forward 2>/dev/null", "ip_forward restore");
-        safeRun(shell, "echo " + ipv6Forward + " > /proc/sys/net/ipv6/conf/all/forwarding 2>/dev/null", "ip_forward restore");
-
-        // 9. Restore /dev/net/tun and /dev/tun permissions
-        safeRun(shell, "chmod 660 /dev/net/tun 2>/dev/null; chmod 660 /dev/tun 2>/dev/null", "TUN permissions");
-    }
-
-    private static void safeRun(final RootShell shell, final String command, final String step) {
-        try {
-            shell.run(null, command);
-        } catch (final Exception e) {
-            Log.w(TAG, "Cleanup failed [" + step + "]: " + e.getMessage());
-        }
-    }
-
     private void startTunnelService(final String tunnelName) {
-        final Intent intent = new Intent(context, TunnelService.class);
+        final Intent intent = new Intent(context, RootTunnelService.class);
         intent.putExtra(EXTRA_TUNNEL_NAME, tunnelName);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(intent);
@@ -806,149 +537,13 @@ public final class RootGoBackend implements Backend {
     private void updateTunnelServiceStatus(final boolean connected) {
         final Tunnel tunnel = currentTunnel;
         if (tunnel == null) return;
-        final Intent intent = new Intent(context, TunnelService.class);
+        final Intent intent = new Intent(context, RootTunnelService.class);
         intent.putExtra(EXTRA_TUNNEL_NAME, tunnel.getName());
         intent.putExtra(EXTRA_CONNECTED, connected);
         context.startService(intent);
     }
 
     private void stopTunnelService() {
-        context.stopService(new Intent(context, TunnelService.class));
+        context.stopService(new Intent(context, RootTunnelService.class));
     }
-
-    /**
-     * Foreground service that keeps the app process alive while root tunnel is active.
-     * Shows a persistent notification with the tunnel name.
-     * On restart after crash (null intent / START_STICKY), cleans up stale
-     * networking resources and stops itself.
-     */
-    public static class TunnelService extends Service {
-        @Override
-        public int onStartCommand(@Nullable final Intent intent, final int flags, final int startId) {
-            final String tunnelName = intent != null ? intent.getStringExtra(EXTRA_TUNNEL_NAME) : null;
-
-            // Restart after crash: intent is null, tunnel is dead — clean up and exit
-            if (tunnelName == null) {
-                Log.w(TAG, "TunnelService restarted after crash — running cleanup");
-                final String cleanupText = getLocalizedString("root_tunnel_notification_cleanup", "Cleaning up\u2026");
-                showNotification(cleanupText, "");
-                new Thread(() -> {
-                    try {
-                        cleanupAfterCrash();
-                    } finally {
-                        stopSelf();
-                    }
-                }, "TunnelService-Cleanup").start();
-                return START_NOT_STICKY;
-            }
-
-            final boolean connected = intent.getBooleanExtra(EXTRA_CONNECTED, false);
-            final String status = connected
-                    ? getLocalizedString("root_tunnel_notification_connected", "Connected")
-                    : getLocalizedString("root_tunnel_notification_connecting", "Connecting\u2026");
-            showNotification(tunnelName, status);
-            return START_STICKY;
-        }
-
-        @SuppressLint("DiscouragedApi")
-        @SuppressWarnings("deprecation")
-        private void showNotification(final String title, final String text) {
-            final Notification.Builder builder;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                // Ensure channel exists (may be first call after process restart)
-                final NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                if (nm != null && nm.getNotificationChannel(NOTIFICATION_CHANNEL_ID) == null) {
-                    final NotificationChannel channel = new NotificationChannel(
-                            NOTIFICATION_CHANNEL_ID,
-                            getLocalizedString("root_tunnel_notification_channel", "AmneziaWG+ Root Tunnel"),
-                            NotificationManager.IMPORTANCE_LOW);
-                    channel.setShowBadge(false);
-                    nm.createNotificationChannel(channel);
-                }
-                builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID);
-            } else {
-                builder = new Notification.Builder(this);
-                builder.setPriority(Notification.PRIORITY_LOW);
-            }
-
-            int iconRes = getResources().getIdentifier("ic_notification", "drawable", getPackageName());
-            if (iconRes == 0)
-                iconRes = getApplicationInfo().icon;
-
-            final Intent launchIntent = getPackageManager().getLaunchIntentForPackage(getPackageName());
-            if (launchIntent != null) {
-                launchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                builder.setContentIntent(PendingIntent.getActivity(this, 0, launchIntent,
-                        PendingIntent.FLAG_IMMUTABLE));
-            }
-
-            builder.setContentTitle(title)
-                    .setContentText(text)
-                    .setSmallIcon(iconRes)
-                    .setOngoing(true);
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                startForeground(NOTIFICATION_ID, builder.build(),
-                        ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
-            } else {
-                startForeground(NOTIFICATION_ID, builder.build());
-            }
-        }
-
-        /**
-         * Cleanup networking resources using a temporary root shell.
-         * Runs the same commands as {@link #cleanupRootResources()} but
-         * without depending on a RootGoBackend instance.
-         */
-        private void cleanupAfterCrash() {
-            try {
-                final RootShell shell = new RootShell(getApplicationContext());
-
-                // Load saved endpoint IPs from file
-                final List<String> endpointIps = new ArrayList<>();
-                final File file = new File(getApplicationContext().getCacheDir(), ENDPOINT_IPS_FILE);
-                if (file.exists()) {
-                    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-                        String line;
-                        while ((line = br.readLine()) != null) {
-                            line = line.trim();
-                            if (!line.isEmpty()) endpointIps.add(line);
-                        }
-                    } catch (final Exception e) {
-                        Log.w(TAG, "Failed to load endpoint IPs: " + e.getMessage());
-                    }
-                    file.delete();
-                }
-
-                performNetworkCleanup(shell, android.os.Process.myUid(),
-                        null, false, endpointIps, "1", "0");
-
-                shell.stop();
-                Log.i(TAG, "Post-crash cleanup completed");
-            } catch (final Exception e) {
-                Log.w(TAG, "Post-crash cleanup failed: " + e.getMessage());
-            }
-        }
-
-        @SuppressLint("DiscouragedApi")
-        private String getLocalizedString(final String name, final String fallback) {
-            final int id = getApplicationContext().getResources()
-                    .getIdentifier(name, "string", getPackageName());
-            if (id != 0) {
-                try {
-                    return getApplicationContext().getString(id);
-                } catch (final Exception e) {
-                    Log.w(TAG, "Failed to get string " + name + ": " + e.getMessage());
-                }
-            }
-            return fallback;
-        }
-
-        @Nullable
-        @Override
-        public IBinder onBind(@Nullable final Intent intent) {
-            return null;
-        }
-    }
-
 }

@@ -21,7 +21,7 @@
         </service>
 
         <service
-            android:name="org.amnezia.awg.backend.RootGoBackend$TunnelService"
+            android:name="org.amnezia.awg.backend.RootTunnelService"
             android:exported="false"
             android:foregroundServiceType="specialUse">
             <property
