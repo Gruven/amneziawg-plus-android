@@ -6,6 +6,7 @@
 package org.amnezia.awg.backend;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 
 import org.amnezia.awg.backend.BackendException.Reason;
@@ -124,14 +125,20 @@ final class RootNetworkManager {
         runCommand("echo 1 > /proc/sys/net/ipv4/ip_forward");
         runCommand("echo 1 > /proc/sys/net/ipv6/conf/all/forwarding");
 
-        // Loose reverse path filtering on TUN interface — on 3.x kernels rp_filter
-        // does not consult policy routing (ip rules), so strict mode (1) drops reply
-        // packets arriving on awg0 because the main table routes them via the physical
-        // interface.  Effective rp_filter = max(conf/all, conf/<iface>), so both must
-        // be relaxed.  Value 2 (loose) still validates that a route to the source
-        // exists, just not that it uses the same interface.
-        runCommand("echo 2 > /proc/sys/net/ipv4/conf/all/rp_filter");
+        // Reverse path filtering on the TUN interface.
+        // Always disable rp_filter on awg0 itself — there is no reason for the kernel
+        // to validate return paths on a userspace TUN device.
         runCommand("echo 0 > /proc/sys/net/ipv4/conf/" + TUN_INTERFACE + "/rp_filter");
+        // On 3.x kernels (Android < 7) rp_filter does not consult policy routing
+        // (ip rules), so strict mode (1) drops reply packets arriving on awg0 because
+        // the main table routes them via the physical interface.  Effective rp_filter =
+        // max(conf/all, conf/<iface>), so conf/all must also be relaxed.  Value 2
+        // (loose) still validates that a route to the source exists in any table.
+        // On 4.x+ kernels this is unnecessary and may interfere with Android's
+        // connectivity management, so we leave conf/all untouched.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            runCommand("echo 2 > /proc/sys/net/ipv4/conf/all/rp_filter");
+        }
 
         // Liberal TCP window tracking in conntrack — MASQUERADE relies on conntrack
         // to de-NAT reply packets.  On 3.x kernels strict window tracking may mark
@@ -369,7 +376,10 @@ final class RootNetworkManager {
 
         // 8a. Restore rp_filter and conntrack tcp_be_liberal.
         // conf/awg0/rp_filter needs no restore — the TUN interface was already deleted in step 1.
-        safeRun(shell, "echo " + rpFilterAll + " > /proc/sys/net/ipv4/conf/all/rp_filter 2>/dev/null", "rp_filter restore");
+        // conf/all/rp_filter is only modified on 3.x kernels (Android < 7).
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            safeRun(shell, "echo " + rpFilterAll + " > /proc/sys/net/ipv4/conf/all/rp_filter 2>/dev/null", "rp_filter restore");
+        }
         safeRun(shell, "echo " + beLiberal + " > /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 2>/dev/null", "be_liberal restore");
 
         // 9. Flush conntrack — stale MASQUERADE entries may prevent new connections
