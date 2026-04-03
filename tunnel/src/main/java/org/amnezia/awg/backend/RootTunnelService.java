@@ -143,24 +143,31 @@ public class RootTunnelService extends Service {
                 file.delete();
             }
 
-            // Load saved ip_forward values from file
+            // Load saved sysctl values from file
             String ipv4Forward = "1";
             String ipv6Forward = "0";
+            String rpFilterAll = "0";
+            String beLiberal = "0";
             final File fwdFile = new File(getApplicationContext().getCacheDir(), IP_FORWARD_FILE);
             if (fwdFile.exists()) {
                 try (BufferedReader br = new BufferedReader(new FileReader(fwdFile))) {
                     final String line4 = br.readLine();
                     final String line6 = br.readLine();
+                    final String lineRp = br.readLine();
+                    final String lineBl = br.readLine();
                     if (line4 != null) ipv4Forward = RootNetworkManager.sanitizeForwardValue(line4.trim());
                     if (line6 != null) ipv6Forward = RootNetworkManager.sanitizeForwardValue(line6.trim());
+                    if (lineRp != null) rpFilterAll = RootNetworkManager.sanitizeSysctlValue(lineRp.trim());
+                    if (lineBl != null) beLiberal = RootNetworkManager.sanitizeSysctlValue(lineBl.trim());
                 } catch (final Exception e) {
-                    Log.w(TAG, "Failed to load ip_forward values: " + e.getMessage());
+                    Log.w(TAG, "Failed to load sysctl values: " + e.getMessage());
                 }
                 fwdFile.delete();
             }
 
             RootNetworkManager.performNetworkCleanup(shell, android.os.Process.myUid(),
-                    null, false, endpointIps, ipv4Forward, ipv6Forward);
+                    null, false, endpointIps, ipv4Forward, ipv6Forward,
+                    rpFilterAll, beLiberal);
 
             shell.stop();
             Log.i(TAG, "Post-crash cleanup completed");

@@ -55,6 +55,9 @@ final class RootNetworkManager {
     // Saved ip_forward values to restore on cleanup
     private String savedIpv4Forward = "1";
     private String savedIpv6Forward = "0";
+    // Saved sysctl values to restore on cleanup
+    private String savedRpFilterAll = "0";
+    private String savedBeLiberal = "0";
 
     RootNetworkManager(final Context context, final RootShell rootShell) {
         this.context = context;
@@ -95,12 +98,48 @@ final class RootNetworkManager {
             Log.w(TAG, "Failed to read ipv6 forwarding: " + e.getMessage());
         }
 
-        // Persist ip_forward values to disk for crash recovery
-        saveIpForward();
+        // Save rp_filter BEFORE enabling ip_forward — on 3.x kernels enabling
+        // forwarding can silently reset rp_filter to 1
+        fwdOutput.clear();
+        try {
+            rootShell.run(fwdOutput, "cat /proc/sys/net/ipv4/conf/all/rp_filter");
+            if (!fwdOutput.isEmpty()) savedRpFilterAll = sanitizeSysctlValue(fwdOutput.get(0).trim());
+        } catch (final Exception e) {
+            Log.w(TAG, "Failed to read rp_filter: " + e.getMessage());
+        }
+
+        // Save nf_conntrack_tcp_be_liberal (may fail if nf_conntrack not yet loaded)
+        fwdOutput.clear();
+        try {
+            rootShell.run(fwdOutput, "cat /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 2>/dev/null");
+            if (!fwdOutput.isEmpty()) savedBeLiberal = sanitizeSysctlValue(fwdOutput.get(0).trim());
+        } catch (final Exception e) {
+            Log.w(TAG, "Failed to read nf_conntrack_tcp_be_liberal: " + e.getMessage());
+        }
+
+        // Persist sysctl values to disk for crash recovery
+        saveSysctlValues();
 
         // Enable IP forwarding
         runCommand("echo 1 > /proc/sys/net/ipv4/ip_forward");
         runCommand("echo 1 > /proc/sys/net/ipv6/conf/all/forwarding");
+
+        // Loose reverse path filtering on TUN interface — on 3.x kernels rp_filter
+        // does not consult policy routing (ip rules), so strict mode (1) drops reply
+        // packets arriving on awg0 because the main table routes them via the physical
+        // interface.  Effective rp_filter = max(conf/all, conf/<iface>), so both must
+        // be relaxed.  Value 2 (loose) still validates that a route to the source
+        // exists, just not that it uses the same interface.
+        runCommand("echo 2 > /proc/sys/net/ipv4/conf/all/rp_filter");
+        runCommand("echo 0 > /proc/sys/net/ipv4/conf/" + TUN_INTERFACE + "/rp_filter");
+
+        // Liberal TCP window tracking in conntrack — MASQUERADE relies on conntrack
+        // to de-NAT reply packets.  On 3.x kernels strict window tracking may mark
+        // legitimate TCP segments as INVALID after window scaling ramps up (~10 s),
+        // causing MASQUERADE de-NAT to silently fail and breaking long-lived
+        // connections (streaming, large downloads).  This is a no-op if nf_conntrack
+        // is not yet loaded; setupIptables() retries after MASQUERADE loads it.
+        runCommand("echo 1 > /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 2>/dev/null");
 
         // Save routes to endpoints BEFORE setting up tunnel routing.
         // On Android the default route lives in per-network tables, not in main.
@@ -207,6 +246,9 @@ final class RootNetworkManager {
         runCommand("iptables -t nat -A POSTROUTING -o " + TUN_INTERFACE + " -j MASQUERADE");
         runCommand("ip6tables -t nat -A POSTROUTING -o " + TUN_INTERFACE + " -j MASQUERADE");
 
+        // Retry be_liberal now that MASQUERADE has loaded nf_conntrack
+        runCommand("echo 1 > /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 2>/dev/null");
+
         // DNS redirect to the first DNS server from config
         activeDnsIp = null;
         for (final InetAddress dns : config.getInterface().getDnsServers()) {
@@ -239,7 +281,8 @@ final class RootNetworkManager {
         performNetworkCleanup(rootShell, android.os.Process.myUid(),
                 activeDnsIp, activeDnsIsV6,
                 new ArrayList<>(allEndpointIps),
-                savedIpv4Forward, savedIpv6Forward);
+                savedIpv4Forward, savedIpv6Forward,
+                savedRpFilterAll, savedBeLiberal);
 
         // Close fd (only if Go didn't take ownership — error before awgTurnOn)
         if (tunFd >= 0) {
@@ -262,7 +305,8 @@ final class RootNetworkManager {
     static void performNetworkCleanup(final RootShell shell, final int uid,
             @Nullable final String dnsIp, final boolean dnsIsV6,
             final List<String> endpointIps,
-            final String ipv4Forward, final String ipv6Forward) {
+            final String ipv4Forward, final String ipv6Forward,
+            final String rpFilterAll, final String beLiberal) {
         // 1. Delete TUN interface FIRST — instantly blocks all traffic through the tunnel,
         //    preventing unencrypted traffic leaks while routing rules are being removed
         safeRun(shell, "ip link delete " + TUN_INTERFACE + " 2>/dev/null", "TUN interface");
@@ -323,6 +367,10 @@ final class RootNetworkManager {
         safeRun(shell, "echo " + ipv4Forward + " > /proc/sys/net/ipv4/ip_forward 2>/dev/null", "ip_forward restore");
         safeRun(shell, "echo " + ipv6Forward + " > /proc/sys/net/ipv6/conf/all/forwarding 2>/dev/null", "ip_forward restore");
 
+        // 8a. Restore rp_filter and conntrack tcp_be_liberal
+        safeRun(shell, "echo " + rpFilterAll + " > /proc/sys/net/ipv4/conf/all/rp_filter 2>/dev/null", "rp_filter restore");
+        safeRun(shell, "echo " + beLiberal + " > /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 2>/dev/null", "be_liberal restore");
+
         // 9. Flush conntrack — stale MASQUERADE entries may prevent new connections
         //    after tunnel restart (especially on older kernels)
         safeRun(shell, "conntrack -F 2>/dev/null", "conntrack flush");
@@ -341,6 +389,16 @@ final class RootNetworkManager {
         return "0";
     }
 
+    /**
+     * Sysctl values accept "0", "1", or "2" (rp_filter uses 0/1/2) —
+     * guard against shell injection when restoring from a file on disk.
+     */
+    static String sanitizeSysctlValue(final String value) {
+        if ("0".equals(value) || "1".equals(value) || "2".equals(value)) return value;
+        Log.w(TAG, "Unexpected sysctl value: " + value + ", defaulting to 0");
+        return "0";
+    }
+
     static void safeRun(final RootShell shell, final String command, final String step) {
         try {
             shell.run(null, command);
@@ -349,15 +407,17 @@ final class RootNetworkManager {
         }
     }
 
-    private void saveIpForward() {
+    private void saveSysctlValues() {
         try {
             final File file = new File(context.getCacheDir(), IP_FORWARD_FILE);
             try (PrintWriter pw = new PrintWriter(file)) {
                 pw.println(savedIpv4Forward);
                 pw.println(savedIpv6Forward);
+                pw.println(savedRpFilterAll);
+                pw.println(savedBeLiberal);
             }
         } catch (final Exception e) {
-            Log.w(TAG, "Failed to save ip_forward values: " + e.getMessage());
+            Log.w(TAG, "Failed to save sysctl values: " + e.getMessage());
         }
     }
 
