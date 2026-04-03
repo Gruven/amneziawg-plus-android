@@ -146,7 +146,7 @@ public class RootTunnelService extends Service {
             // Load saved sysctl values from file
             String ipv4Forward = "1";
             String ipv6Forward = "0";
-            String rpFilterAll = "0";
+            String rpFilterAll = "1";
             String beLiberal = "0";
             final File fwdFile = new File(getApplicationContext().getCacheDir(), IP_FORWARD_FILE);
             if (fwdFile.exists()) {
