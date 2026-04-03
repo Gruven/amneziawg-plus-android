@@ -56,7 +56,7 @@ final class RootNetworkManager {
     private String savedIpv4Forward = "1";
     private String savedIpv6Forward = "0";
     // Saved sysctl values to restore on cleanup
-    private String savedRpFilterAll = "0";
+    private String savedRpFilterAll = "1";
     private String savedBeLiberal = "0";
 
     RootNetworkManager(final Context context, final RootShell rootShell) {
@@ -367,7 +367,8 @@ final class RootNetworkManager {
         safeRun(shell, "echo " + ipv4Forward + " > /proc/sys/net/ipv4/ip_forward 2>/dev/null", "ip_forward restore");
         safeRun(shell, "echo " + ipv6Forward + " > /proc/sys/net/ipv6/conf/all/forwarding 2>/dev/null", "ip_forward restore");
 
-        // 8a. Restore rp_filter and conntrack tcp_be_liberal
+        // 8a. Restore rp_filter and conntrack tcp_be_liberal.
+        // conf/awg0/rp_filter needs no restore — the TUN interface was already deleted in step 1.
         safeRun(shell, "echo " + rpFilterAll + " > /proc/sys/net/ipv4/conf/all/rp_filter 2>/dev/null", "rp_filter restore");
         safeRun(shell, "echo " + beLiberal + " > /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 2>/dev/null", "be_liberal restore");
 
