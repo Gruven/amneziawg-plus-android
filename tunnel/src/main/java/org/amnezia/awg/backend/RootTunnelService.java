@@ -151,8 +151,8 @@ public class RootTunnelService extends Service {
                 try (BufferedReader br = new BufferedReader(new FileReader(fwdFile))) {
                     final String line4 = br.readLine();
                     final String line6 = br.readLine();
-                    if (line4 != null) ipv4Forward = line4.trim();
-                    if (line6 != null) ipv6Forward = line6.trim();
+                    if (line4 != null) ipv4Forward = RootNetworkManager.sanitizeForwardValue(line4.trim());
+                    if (line6 != null) ipv6Forward = RootNetworkManager.sanitizeForwardValue(line6.trim());
                 } catch (final Exception e) {
                     Log.w(TAG, "Failed to load ip_forward values: " + e.getMessage());
                 }

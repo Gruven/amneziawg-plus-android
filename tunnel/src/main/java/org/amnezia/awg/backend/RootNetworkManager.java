@@ -83,14 +83,14 @@ final class RootNetworkManager {
         final List<String> fwdOutput = new ArrayList<>();
         try {
             rootShell.run(fwdOutput, "cat /proc/sys/net/ipv4/ip_forward");
-            if (!fwdOutput.isEmpty()) savedIpv4Forward = fwdOutput.get(0).trim();
+            if (!fwdOutput.isEmpty()) savedIpv4Forward = sanitizeForwardValue(fwdOutput.get(0).trim());
         } catch (final Exception e) {
             Log.w(TAG, "Failed to read ipv4.ip_forward: " + e.getMessage());
         }
         fwdOutput.clear();
         try {
             rootShell.run(fwdOutput, "cat /proc/sys/net/ipv6/conf/all/forwarding");
-            if (!fwdOutput.isEmpty()) savedIpv6Forward = fwdOutput.get(0).trim();
+            if (!fwdOutput.isEmpty()) savedIpv6Forward = sanitizeForwardValue(fwdOutput.get(0).trim());
         } catch (final Exception e) {
             Log.w(TAG, "Failed to read ipv6 forwarding: " + e.getMessage());
         }
@@ -107,14 +107,15 @@ final class RootNetworkManager {
         // We add explicit host routes so that endpoints remain reachable.
         for (final String ip : activeEndpointIps) {
             final List<String> routeOutput = new ArrayList<>();
-            if (ip.contains(":"))
+            final boolean isV6 = ip.contains(":");
+            if (isV6)
                 rootShell.run(routeOutput, "ip -6 route get " + ip + " | sed 's/ uid .*//'");
             else
                 rootShell.run(routeOutput, "ip route get " + ip + " | sed 's/ uid .*//'");
             if (!routeOutput.isEmpty()) {
                 final String route = routeOutput.get(0).trim();
                 Log.d(TAG, "Saving endpoint route: " + route);
-                runCommand("ip route add " + route + " table main 2>/dev/null");
+                runCommand((isV6 ? "ip -6" : "ip") + " route add " + route + " table main 2>/dev/null");
             }
         }
 
@@ -134,11 +135,53 @@ final class RootNetworkManager {
             }
         }
 
+        // suppress_prefixlength 0: use main table for specific routes but not for default.
+        // On Android 5.x the ip utility does not support suppress_prefixlength — add a
+        // fallback: explicit rule for the connected subnet so local traffic stays off the tunnel.
+        // IMPORTANT: must run BEFORE adding priority 100 rules, otherwise ip route get
+        // will resolve through awg0 and the fallback won't detect the real interface.
+        // Active interface is detected dynamically (wlan0, rmnet_data0, eth0, etc.)
+        // All shell commands use awk instead of grep -o/-oE because toolbox grep
+        // on Android 5.x does not support -o and -E flags
+        if (rootShell.run(null, "ip rule add not fwmark " + FWMARK + " table main suppress_prefixlength 0 priority 90") != 0) {
+            Log.w(TAG, "suppress_prefixlength not supported, adding connected subnet fallback");
+            final List<String> devOutput = new ArrayList<>();
+            rootShell.run(devOutput, "ip route get 8.8.8.8 2>/dev/null | awk '/dev /{for(i=1;i<=NF;i++)if($i==\"dev\"){print $(i+1);exit}}'");
+            if (!devOutput.isEmpty()) {
+                final String dev = devOutput.get(0).trim();
+                if (!dev.isEmpty() && dev.matches("[a-zA-Z0-9_.-]+")) {
+                    final List<String> subnetOutput = new ArrayList<>();
+                    rootShell.run(subnetOutput, "ip route show scope link dev " + dev + " 2>/dev/null | awk 'match($1,/^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+\\/[0-9]/){print $1;exit}'");
+                    if (!subnetOutput.isEmpty()) {
+                        final String subnet = subnetOutput.get(0).trim();
+                        if (!subnet.isEmpty())
+                            runCommand("ip rule add to " + subnet + " table main priority 90");
+                    }
+                }
+            }
+        }
+        // IPv6: suppress_prefixlength fallback is less critical (IPv6 on Android 5.x is rare),
+        // and ip -6 route get may not work on old kernels, so we try without guarantees
+        if (rootShell.run(null, "ip -6 rule add not fwmark " + FWMARK + " table main suppress_prefixlength 0 priority 90") != 0) {
+            final List<String> dev6Output = new ArrayList<>();
+            rootShell.run(dev6Output, "ip -6 route get 2001:4860:4860::8888 2>/dev/null | awk '/dev /{for(i=1;i<=NF;i++)if($i==\"dev\"){print $(i+1);exit}}'");
+            if (!dev6Output.isEmpty()) {
+                final String dev6 = dev6Output.get(0).trim();
+                if (!dev6.isEmpty() && dev6.matches("[a-zA-Z0-9_.-]+")) {
+                    final List<String> subnet6Output = new ArrayList<>();
+                    rootShell.run(subnet6Output, "ip -6 route show scope link dev " + dev6 + " 2>/dev/null | awk 'match($1,/^[0-9a-f]*:[0-9a-f:]*\\/[0-9]/){print $1;exit}'");
+                    if (!subnet6Output.isEmpty()) {
+                        final String subnet6 = subnet6Output.get(0).trim();
+                        if (!subnet6.isEmpty())
+                            runCommand("ip -6 rule add to " + subnet6 + " table main priority 90");
+                    }
+                }
+            }
+        }
+
         // All traffic without fwmark goes through the tunnel table — IPv4 + IPv6
         runCommand("ip rule add not fwmark " + FWMARK + " table " + ROUTING_TABLE + " priority 100");
         runCommand("ip -6 rule add not fwmark " + FWMARK + " table " + ROUTING_TABLE + " priority 100");
-        runCommand("ip rule add not fwmark " + FWMARK + " table main suppress_prefixlength 0 priority 90");
-        runCommand("ip -6 rule add not fwmark " + FWMARK + " table main suppress_prefixlength 0 priority 90");
 
         // Exclude endpoints from tunnel routing (extra safeguard)
         for (final String ip : activeEndpointIps) {
@@ -258,9 +301,11 @@ final class RootNetworkManager {
                 "ip6tables -t nat -S OUTPUT 2>/dev/null | grep '\\-\\-dport 53 -j DNAT' | sed 's/^-A /-D /' | while IFS= read -r rule; do ip6tables -t nat $rule 2>/dev/null; done",
                 "DNS DNAT from iptables");
 
-        // 6. Remove mangle rules
-        safeRun(shell, "iptables -t mangle -D POSTROUTING -o " + TUN_INTERFACE + " -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu 2>/dev/null; " +
-                "ip6tables -t mangle -D POSTROUTING -o " + TUN_INTERFACE + " -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu 2>/dev/null",
+        // 6. Remove mangle rules — delete by pattern to catch both old
+        //    (--clamp-mss-to-pmtu) and new (--set-mss) rules
+        safeRun(shell,
+                "iptables -t mangle -S POSTROUTING 2>/dev/null | grep -- '-o " + TUN_INTERFACE + " .* -j TCPMSS' | sed 's/^-A /-D /' | while IFS= read -r rule; do iptables -t mangle $rule 2>/dev/null; done; " +
+                "ip6tables -t mangle -S POSTROUTING 2>/dev/null | grep -- '-o " + TUN_INTERFACE + " .* -j TCPMSS' | sed 's/^-A /-D /' | while IFS= read -r rule; do ip6tables -t mangle $rule 2>/dev/null; done",
                 "mangle MSS clamp");
         safeRun(shell, "iptables -t mangle -D OUTPUT -m owner --uid-owner " + uid + " -p udp -j MARK --set-mark " + FWMARK + " 2>/dev/null; " +
                 "ip6tables -t mangle -D OUTPUT -m owner --uid-owner " + uid + " -p udp -j MARK --set-mark " + FWMARK + " 2>/dev/null",
@@ -278,8 +323,22 @@ final class RootNetworkManager {
         safeRun(shell, "echo " + ipv4Forward + " > /proc/sys/net/ipv4/ip_forward 2>/dev/null", "ip_forward restore");
         safeRun(shell, "echo " + ipv6Forward + " > /proc/sys/net/ipv6/conf/all/forwarding 2>/dev/null", "ip_forward restore");
 
-        // 9. Restore /dev/net/tun and /dev/tun permissions
+        // 9. Flush conntrack — stale MASQUERADE entries may prevent new connections
+        //    after tunnel restart (especially on older kernels)
+        safeRun(shell, "conntrack -F 2>/dev/null", "conntrack flush");
+
+        // 10. Restore /dev/net/tun and /dev/tun permissions
         safeRun(shell, "chmod 660 /dev/net/tun 2>/dev/null; chmod 660 /dev/tun 2>/dev/null", "TUN permissions");
+    }
+
+    /**
+     * ip_forward only accepts "0" or "1" — guard against shell injection
+     * when restoring from a file on disk.
+     */
+    static String sanitizeForwardValue(final String value) {
+        if ("0".equals(value) || "1".equals(value)) return value;
+        Log.w(TAG, "Unexpected ip_forward value: " + value + ", defaulting to 0");
+        return "0";
     }
 
     static void safeRun(final RootShell shell, final String command, final String step) {
