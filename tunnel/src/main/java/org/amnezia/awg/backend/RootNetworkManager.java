@@ -42,7 +42,7 @@ final class RootNetworkManager {
     static final int FWMARK = 51820;
     static final int ROUTING_TABLE = 51820;
     static final String ENDPOINT_IPS_FILE = "root_endpoint_ips.txt";
-    static final String IP_FORWARD_FILE = "root_ip_forward.txt";
+    static final String SYSCTL_FILE = "root_sysctl.txt";
 
     private final Context context;
     private final RootShell rootShell;
@@ -53,7 +53,7 @@ final class RootNetworkManager {
     @Nullable private String activeDnsIp;
     private boolean activeDnsIsV6;
     // Saved ip_forward values to restore on cleanup
-    private String savedIpv4Forward = "1";
+    private String savedIpv4Forward = "0";
     private String savedIpv6Forward = "0";
     // Saved sysctl values to restore on cleanup
     private String savedRpFilterAll = "1";
@@ -285,6 +285,11 @@ final class RootNetworkManager {
         final Set<String> allEndpointIps = new ArraySet<>(activeEndpointIps);
         allEndpointIps.addAll(savedIps);
 
+        // Load saved sysctl values from disk (written by saveSysctlValues during setupRouting).
+        // This ensures cleanupStaleResources in the constructor restores the correct
+        // original values instead of field defaults when the app restarts after a crash.
+        loadSavedSysctlValues();
+
         // Network cleanup (deletes TUN first to prevent traffic leaks)
         performNetworkCleanup(rootShell, android.os.Process.myUid(),
                 activeDnsIp, activeDnsIsV6,
@@ -303,7 +308,7 @@ final class RootNetworkManager {
 
         activeDnsIp = null;
         activeEndpointIps.clear();
-        new File(context.getCacheDir(), IP_FORWARD_FILE).delete();
+        new File(context.getCacheDir(), SYSCTL_FILE).delete();
     }
 
     /**
@@ -420,7 +425,7 @@ final class RootNetworkManager {
 
     private void saveSysctlValues() {
         try {
-            final File file = new File(context.getCacheDir(), IP_FORWARD_FILE);
+            final File file = new File(context.getCacheDir(), SYSCTL_FILE);
             try (PrintWriter pw = new PrintWriter(file)) {
                 pw.println(savedIpv4Forward);
                 pw.println(savedIpv6Forward);
@@ -440,6 +445,23 @@ final class RootNetworkManager {
             }
         } catch (final Exception e) {
             Log.w(TAG, "Failed to save endpoint IPs: " + e.getMessage());
+        }
+    }
+
+    private void loadSavedSysctlValues() {
+        final File file = new File(context.getCacheDir(), SYSCTL_FILE);
+        if (!file.exists()) return;
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            final String line4 = br.readLine();
+            final String line6 = br.readLine();
+            final String lineRp = br.readLine();
+            final String lineBl = br.readLine();
+            if (line4 != null) savedIpv4Forward = sanitizeForwardValue(line4.trim());
+            if (line6 != null) savedIpv6Forward = sanitizeForwardValue(line6.trim());
+            if (lineRp != null) savedRpFilterAll = sanitizeSysctlValue(lineRp.trim());
+            if (lineBl != null) savedBeLiberal = sanitizeSysctlValue(lineBl.trim());
+        } catch (final Exception e) {
+            Log.w(TAG, "Failed to load sysctl values: " + e.getMessage());
         }
     }
 

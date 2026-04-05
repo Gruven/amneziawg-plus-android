@@ -34,7 +34,7 @@ import static org.amnezia.awg.backend.RootGoBackend.EXTRA_TUNNEL_NAME;
 import static org.amnezia.awg.backend.RootGoBackend.NOTIFICATION_CHANNEL_ID;
 import static org.amnezia.awg.backend.RootGoBackend.NOTIFICATION_ID;
 import static org.amnezia.awg.backend.RootNetworkManager.ENDPOINT_IPS_FILE;
-import static org.amnezia.awg.backend.RootNetworkManager.IP_FORWARD_FILE;
+import static org.amnezia.awg.backend.RootNetworkManager.SYSCTL_FILE;
 
 /**
  * Foreground service that keeps the app process alive while root tunnel is active.
@@ -144,11 +144,11 @@ public class RootTunnelService extends Service {
             }
 
             // Load saved sysctl values from file
-            String ipv4Forward = "1";
+            String ipv4Forward = "0";
             String ipv6Forward = "0";
             String rpFilterAll = "1";
             String beLiberal = "0";
-            final File fwdFile = new File(getApplicationContext().getCacheDir(), IP_FORWARD_FILE);
+            final File fwdFile = new File(getApplicationContext().getCacheDir(), SYSCTL_FILE);
             if (fwdFile.exists()) {
                 try (BufferedReader br = new BufferedReader(new FileReader(fwdFile))) {
                     final String line4 = br.readLine();
