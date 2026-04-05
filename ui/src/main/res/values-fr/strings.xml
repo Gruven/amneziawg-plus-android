@@ -266,6 +266,13 @@
     <string name="tasker_action_toggle">Basculer</string>
     <string name="tasker_last_used_tunnel">Dernier tunnel utilisé</string>
     <string name="tasker_no_tunnels">Aucun tunnel configuré</string>
+    <string name="battery_optimization_title">Désactiver l\'optimisation de la batterie</string>
+    <string name="battery_optimization_summary_off">L\'optimisation de la batterie est active (le système peut restreindre le travail en arrière-plan)</string>
+    <string name="battery_optimization_summary_on">L\'optimisation de la batterie est désactivée (l\'application peut fonctionner librement en arrière-plan)</string>
+    <string name="process_protection_title">Protection du processus</string>
+    <string name="process_protection_summary_off">Le processus n\'est pas protégé contre l\'arrêt par le système</string>
+    <string name="process_protection_summary_on">Le processus est protégé contre l\'arrêt (priorité OOM basse)</string>
+    <string name="process_protection_error">Échec de l\'application de la protection du processus</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Tunnel root</string>
     <string name="root_tunnel_notification_connected">Connecté</string>
     <string name="root_tunnel_notification_connecting">Connexion…</string>

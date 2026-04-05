@@ -263,6 +263,13 @@
     <string name="tasker_action_toggle">Lülita ümber</string>
     <string name="tasker_last_used_tunnel">Viimati kasutatud tunnel</string>
     <string name="tasker_no_tunnels">Tunneleid pole seadistatud</string>
+    <string name="battery_optimization_title">Keela aku optimeerimine</string>
+    <string name="battery_optimization_summary_off">Aku optimeerimine on aktiivne (süsteem võib piirata taustatööd)</string>
+    <string name="battery_optimization_summary_on">Aku optimeerimine on keelatud (rakendus saab vabalt taustal töötada)</string>
+    <string name="process_protection_title">Protsessi kaitse</string>
+    <string name="process_protection_summary_off">Protsess ei ole kaitstud süsteemi poolt sulgemise eest</string>
+    <string name="process_protection_summary_on">Protsess on kaitstud sulgemise eest (madal OOM-prioriteet)</string>
+    <string name="process_protection_error">Protsessi kaitse rakendamine ebaõnnestus</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root-tunnel</string>
     <string name="root_tunnel_notification_connected">Ühendatud</string>
     <string name="root_tunnel_notification_connecting">Ühendamine…</string>

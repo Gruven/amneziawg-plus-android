@@ -253,6 +253,13 @@
     <string name="tasker_action_toggle">切り替え</string>
     <string name="tasker_last_used_tunnel">最後に使用したトンネル</string>
     <string name="tasker_no_tunnels">トンネルが設定されていません</string>
+    <string name="battery_optimization_title">バッテリー最適化を無効にする</string>
+    <string name="battery_optimization_summary_off">バッテリー最適化が有効です（システムがバックグラウンド動作を制限する場合があります）</string>
+    <string name="battery_optimization_summary_on">バッテリー最適化が無効です（アプリはバックグラウンドで自由に動作できます）</string>
+    <string name="process_protection_title">プロセス保護</string>
+    <string name="process_protection_summary_off">プロセスはシステムによる終了から保護されていません</string>
+    <string name="process_protection_summary_on">プロセスは終了から保護されています（低OOM優先度）</string>
+    <string name="process_protection_error">プロセス保護の適用に失敗しました</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root\u30c8\u30f3\u30cd\u30eb</string>
     <string name="root_tunnel_notification_connected">接続済み</string>
     <string name="root_tunnel_notification_connecting">接続中…</string>

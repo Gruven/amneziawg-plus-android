@@ -245,6 +245,13 @@
     <string name="tasker_action_toggle">Alihkan</string>
     <string name="tasker_last_used_tunnel">Terowongan terakhir digunakan</string>
     <string name="tasker_no_tunnels">Tidak ada terowongan yang dikonfigurasi</string>
+    <string name="battery_optimization_title">Nonaktifkan optimisasi baterai</string>
+    <string name="battery_optimization_summary_off">Optimisasi baterai aktif (sistem dapat membatasi kerja latar belakang)</string>
+    <string name="battery_optimization_summary_on">Optimisasi baterai dinonaktifkan (aplikasi dapat berjalan bebas di latar belakang)</string>
+    <string name="process_protection_title">Perlindungan proses</string>
+    <string name="process_protection_summary_off">Proses tidak dilindungi dari penghentian oleh sistem</string>
+    <string name="process_protection_summary_on">Proses dilindungi dari penghentian (prioritas OOM rendah)</string>
+    <string name="process_protection_error">Gagal menerapkan perlindungan proses</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Tunnel Root</string>
     <string name="root_tunnel_notification_connected">Terhubung</string>
     <string name="root_tunnel_notification_connecting">Menghubungkan…</string>

@@ -246,6 +246,13 @@
     <string name="tasker_action_toggle">Commutar</string>
     <string name="tasker_last_used_tunnel">Últim túnel utilitzat</string>
     <string name="tasker_no_tunnels">No hi ha túnels configurats</string>
+    <string name="battery_optimization_title">Desactiva l\'optimització de la bateria</string>
+    <string name="battery_optimization_summary_off">L\'optimització de la bateria està activada (el sistema pot restringir el treball en segon pla)</string>
+    <string name="battery_optimization_summary_on">L\'optimització de la bateria està desactivada (l\'aplicació pot funcionar lliurement en segon pla)</string>
+    <string name="process_protection_title">Protecció del procés</string>
+    <string name="process_protection_summary_off">El procés no està protegit contra la finalització pel sistema</string>
+    <string name="process_protection_summary_on">El procés està protegit contra la finalització (prioritat OOM baixa)</string>
+    <string name="process_protection_error">No s\'ha pogut aplicar la protecció del procés</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Túnel root</string>
     <string name="root_tunnel_notification_connected">Connectat</string>
     <string name="root_tunnel_notification_connecting">Connectant…</string>

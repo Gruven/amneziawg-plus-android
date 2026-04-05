@@ -260,6 +260,13 @@
     <string name="tasker_action_toggle">Veksle</string>
     <string name="tasker_last_used_tunnel">Sist brukte tunnel</string>
     <string name="tasker_no_tunnels">Ingen tunneler konfigurert</string>
+    <string name="battery_optimization_title">Deaktiver batterioptimalisering</string>
+    <string name="battery_optimization_summary_off">Batterioptimalisering er aktiv (systemet kan begrense bakgrunnsarbeid)</string>
+    <string name="battery_optimization_summary_on">Batterioptimalisering er deaktivert (appen kan kjøre fritt i bakgrunnen)</string>
+    <string name="process_protection_title">Prosessbeskyttelse</string>
+    <string name="process_protection_summary_off">Prosessen er ikke beskyttet mot å bli avsluttet av systemet</string>
+    <string name="process_protection_summary_on">Prosessen er beskyttet mot avslutning (lav OOM-prioritet)</string>
+    <string name="process_protection_error">Kunne ikke aktivere prosessbeskyttelse</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root-tunnel</string>
     <string name="root_tunnel_notification_connected">Tilkoblet</string>
     <string name="root_tunnel_notification_connecting">Kobler til…</string>

@@ -146,6 +146,13 @@
     <string name="tasker_action_toggle">Εναλλαγή</string>
     <string name="tasker_last_used_tunnel">Τελευταίο χρησιμοποιημένο τούνελ</string>
     <string name="tasker_no_tunnels">Δεν έχουν ρυθμιστεί τούνελ</string>
+    <string name="battery_optimization_title">Απενεργοποίηση βελτιστοποίησης μπαταρίας</string>
+    <string name="battery_optimization_summary_off">Η βελτιστοποίηση μπαταρίας είναι ενεργή (το σύστημα μπορεί να περιορίσει τη λειτουργία στο παρασκήνιο)</string>
+    <string name="battery_optimization_summary_on">Η βελτιστοποίηση μπαταρίας είναι απενεργοποιημένη (η εφαρμογή μπορεί να λειτουργεί ελεύθερα στο παρασκήνιο)</string>
+    <string name="process_protection_title">Προστασία διεργασίας</string>
+    <string name="process_protection_summary_off">Η διεργασία δεν προστατεύεται από τερματισμό από το σύστημα</string>
+    <string name="process_protection_summary_on">Η διεργασία προστατεύεται από τερματισμό (χαμηλή προτεραιότητα OOM)</string>
+    <string name="process_protection_error">Αποτυχία εφαρμογής προστασίας διεργασίας</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root Tunnel</string>
     <string name="root_tunnel_notification_connected">Συνδεδεμένο</string>
     <string name="root_tunnel_notification_connecting">Σύνδεση…</string>

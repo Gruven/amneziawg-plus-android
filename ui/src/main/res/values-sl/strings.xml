@@ -282,6 +282,13 @@
     <string name="tasker_action_toggle">Preklopi</string>
     <string name="tasker_last_used_tunnel">Nazadnje uporabljen tunel</string>
     <string name="tasker_no_tunnels">Ni nastavljenih tunelov</string>
+    <string name="battery_optimization_title">Onemogoči optimizacijo baterije</string>
+    <string name="battery_optimization_summary_off">Optimizacija baterije je aktivna (sistem lahko omeji delo v ozadju)</string>
+    <string name="battery_optimization_summary_on">Optimizacija baterije je onemogočena (aplikacija lahko prosto deluje v ozadju)</string>
+    <string name="process_protection_title">Zaščita procesa</string>
+    <string name="process_protection_summary_off">Proces ni zaščiten pred zaustavitvijo s strani sistema</string>
+    <string name="process_protection_summary_on">Proces je zaščiten pred zaustavitvijo (nizka prioriteta OOM)</string>
+    <string name="process_protection_error">Zaščite procesa ni bilo mogoče uporabiti</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root tunel</string>
     <string name="root_tunnel_notification_connected">Povezano</string>
     <string name="root_tunnel_notification_connecting">Povezovanje…</string>

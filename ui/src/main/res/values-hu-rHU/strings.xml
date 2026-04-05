@@ -38,6 +38,13 @@
     <string name="root_mode_title">Root mód (nincs VPN API)</string>
     <string name="root_mode_error">A root hozzáférés nem érhető el</string>
     <string name="root_shell_error">A root shell parancs meghiúsult: %d</string>
+    <string name="battery_optimization_title">Akkumulátor-optimalizálás kikapcsolása</string>
+    <string name="battery_optimization_summary_off">Az akkumulátor-optimalizálás aktív (a rendszer korlátozhatja a háttérben végzett munkát)</string>
+    <string name="battery_optimization_summary_on">Az akkumulátor-optimalizálás ki van kapcsolva (az alkalmazás szabadon futhat a háttérben)</string>
+    <string name="process_protection_title">Folyamatvédelem</string>
+    <string name="process_protection_summary_off">A folyamat nincs védve a rendszer általi leállítás ellen</string>
+    <string name="process_protection_summary_on">A folyamat védett a leállítás ellen (alacsony OOM-prioritás)</string>
+    <string name="process_protection_error">A folyamatvédelem alkalmazása sikertelen</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root alagút</string>
     <string name="root_tunnel_notification_connected">Csatlakozva</string>
     <string name="root_tunnel_notification_connecting">Csatlakozás…</string>

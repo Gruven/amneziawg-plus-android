@@ -247,6 +247,13 @@
     <string name="tasker_action_toggle">Schakelen</string>
     <string name="tasker_last_used_tunnel">Laatst gebruikte tunnel</string>
     <string name="tasker_no_tunnels">Geen tunnels geconfigureerd</string>
+    <string name="battery_optimization_title">Batterijoptimalisatie uitschakelen</string>
+    <string name="battery_optimization_summary_off">Batterijoptimalisatie is actief (systeem kan achtergrondwerk beperken)</string>
+    <string name="battery_optimization_summary_on">Batterijoptimalisatie is uitgeschakeld (app kan vrij op de achtergrond draaien)</string>
+    <string name="process_protection_title">Procesbescherming</string>
+    <string name="process_protection_summary_off">Proces is niet beschermd tegen beëindiging door het systeem</string>
+    <string name="process_protection_summary_on">Proces is beschermd tegen beëindiging (lage OOM-prioriteit)</string>
+    <string name="process_protection_error">Procesbescherming kon niet worden toegepast</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root-tunnel</string>
     <string name="root_tunnel_notification_connected">Verbonden</string>
     <string name="root_tunnel_notification_connecting">Verbinden…</string>

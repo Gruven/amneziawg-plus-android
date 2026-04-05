@@ -243,6 +243,13 @@
     <string name="tasker_action_toggle">전환</string>
     <string name="tasker_last_used_tunnel">마지막으로 사용한 터널</string>
     <string name="tasker_no_tunnels">구성된 터널 없음</string>
+    <string name="battery_optimization_title">배터리 최적화 비활성화</string>
+    <string name="battery_optimization_summary_off">배터리 최적화가 활성화되어 있습니다 (시스템이 백그라운드 작업을 제한할 수 있습니다)</string>
+    <string name="battery_optimization_summary_on">배터리 최적화가 비활성화되어 있습니다 (앱이 백그라운드에서 자유롭게 실행될 수 있습니다)</string>
+    <string name="process_protection_title">프로세스 보호</string>
+    <string name="process_protection_summary_off">프로세스가 시스템에 의한 종료로부터 보호되지 않습니다</string>
+    <string name="process_protection_summary_on">프로세스가 종료로부터 보호됩니다 (낮은 OOM 우선순위)</string>
+    <string name="process_protection_error">프로세스 보호 적용에 실패했습니다</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root 터널</string>
     <string name="root_tunnel_notification_connected">연결됨</string>
     <string name="root_tunnel_notification_connecting">연결 중…</string>

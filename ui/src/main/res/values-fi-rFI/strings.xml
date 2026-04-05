@@ -93,6 +93,13 @@
     <string name="root_mode_error">Root-käyttöoikeus ei ole saatavilla</string>
     <string name="root_shell_error">Root shell -komento epäonnistui: %d</string>
     <string name="type_name_root_go_userspace">Root Go userspace</string>
+    <string name="battery_optimization_title">Poista akun optimointi käytöstä</string>
+    <string name="battery_optimization_summary_off">Akun optimointi on käytössä (järjestelmä voi rajoittaa taustatyötä)</string>
+    <string name="battery_optimization_summary_on">Akun optimointi on poistettu käytöstä (sovellus voi toimia vapaasti taustalla)</string>
+    <string name="process_protection_title">Prosessin suojaus</string>
+    <string name="process_protection_summary_off">Prosessi ei ole suojattu järjestelmän lopettamiselta</string>
+    <string name="process_protection_summary_on">Prosessi on suojattu lopettamiselta (matala OOM-prioriteetti)</string>
+    <string name="process_protection_error">Prosessin suojauksen käyttöönotto epäonnistui</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root-tunneli</string>
     <string name="root_tunnel_notification_connected">Yhdistetty</string>
     <string name="root_tunnel_notification_connecting">Yhdistetään…</string>

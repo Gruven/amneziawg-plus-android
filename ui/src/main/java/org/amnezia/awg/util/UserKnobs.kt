@@ -47,6 +47,18 @@ object UserKnobs {
         }
     }
 
+    private val ENABLE_PROCESS_PROTECTION = booleanPreferencesKey("enable_process_protection")
+    val enableProcessProtection: Flow<Boolean>
+        get() = Application.getPreferencesDataStore().data.map {
+            it[ENABLE_PROCESS_PROTECTION] ?: false
+        }
+
+    suspend fun setEnableProcessProtection(enable: Boolean) {
+        Application.getPreferencesDataStore().edit {
+            it[ENABLE_PROCESS_PROTECTION] = enable
+        }
+    }
+
     private val DARK_THEME = booleanPreferencesKey("dark_theme")
     val darkTheme: Flow<Boolean>
         get() = Application.getPreferencesDataStore().data.map {

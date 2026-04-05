@@ -276,6 +276,13 @@
     <string name="tasker_action_toggle">Comută</string>
     <string name="tasker_last_used_tunnel">Ultimul tunel utilizat</string>
     <string name="tasker_no_tunnels">Niciun tunel configurat</string>
+    <string name="battery_optimization_title">Dezactivează optimizarea bateriei</string>
+    <string name="battery_optimization_summary_off">Optimizarea bateriei este activă (sistemul poate restricționa activitatea în fundal)</string>
+    <string name="battery_optimization_summary_on">Optimizarea bateriei este dezactivată (aplicația poate rula liber în fundal)</string>
+    <string name="process_protection_title">Protecția procesului</string>
+    <string name="process_protection_summary_off">Procesul nu este protejat împotriva închiderii de către sistem</string>
+    <string name="process_protection_summary_on">Procesul este protejat împotriva închiderii (prioritate OOM scăzută)</string>
+    <string name="process_protection_error">Aplicarea protecției procesului a eșuat</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Tunel root</string>
     <string name="root_tunnel_notification_connected">Conectat</string>
     <string name="root_tunnel_notification_connecting">Se conectează…</string>

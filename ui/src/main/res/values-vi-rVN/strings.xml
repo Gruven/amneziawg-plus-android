@@ -156,6 +156,13 @@
     <string name="tasker_action_toggle">Chuyển đổi</string>
     <string name="tasker_last_used_tunnel">Đường hầm sử dụng gần nhất</string>
     <string name="tasker_no_tunnels">Không có đường hầm nào được cấu hình</string>
+    <string name="battery_optimization_title">Tắt tối ưu hóa pin</string>
+    <string name="battery_optimization_summary_off">Tối ưu hóa pin đang hoạt động (hệ thống có thể hạn chế hoạt động nền)</string>
+    <string name="battery_optimization_summary_on">Tối ưu hóa pin đã tắt (ứng dụng có thể chạy tự do trong nền)</string>
+    <string name="process_protection_title">Bảo vệ tiến trình</string>
+    <string name="process_protection_summary_off">Tiến trình không được bảo vệ khỏi bị hệ thống kết thúc</string>
+    <string name="process_protection_summary_on">Tiến trình được bảo vệ khỏi bị kết thúc (ưu tiên OOM thấp)</string>
+    <string name="process_protection_error">Không thể áp dụng bảo vệ tiến trình</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Tunnel Root</string>
     <string name="root_tunnel_notification_connected">Đã kết nối</string>
     <string name="root_tunnel_notification_connecting">Đang kết nối…</string>

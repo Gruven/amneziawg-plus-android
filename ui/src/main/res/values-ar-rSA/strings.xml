@@ -318,6 +318,13 @@
     <string name="tasker_action_toggle">تبديل</string>
     <string name="tasker_last_used_tunnel">آخر نفق مستخدم</string>
     <string name="tasker_no_tunnels">لا توجد أنفاق مُعدّة</string>
+    <string name="battery_optimization_title">تعطيل تحسين البطارية</string>
+    <string name="battery_optimization_summary_off">تحسين البطارية مفعّل (قد يقيّد النظام العمل في الخلفية)</string>
+    <string name="battery_optimization_summary_on">تحسين البطارية معطّل (يمكن للتطبيق العمل بحرية في الخلفية)</string>
+    <string name="process_protection_title">حماية العملية</string>
+    <string name="process_protection_summary_off">العملية غير محمية من الإنهاء بواسطة النظام</string>
+    <string name="process_protection_summary_on">العملية محمية من الإنهاء (أولوية OOM منخفضة)</string>
+    <string name="process_protection_error">فشل تطبيق حماية العملية</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ نفق الجذر</string>
     <string name="root_tunnel_notification_connected">متصل</string>
     <string name="root_tunnel_notification_connecting">جارٍ الاتصال…</string>

@@ -27,11 +27,25 @@
         android:title="@string/dark_theme_title" />
     <CheckBoxPreference
         android:defaultValue="false"
+        android:key="disable_battery_optimization"
+        android:singleLineTitle="false"
+        android:summaryOff="@string/battery_optimization_summary_off"
+        android:summaryOn="@string/battery_optimization_summary_on"
+        android:title="@string/battery_optimization_title" />
+    <CheckBoxPreference
+        android:defaultValue="false"
         android:key="enable_root_mode"
         android:singleLineTitle="false"
         android:summaryOff="@string/root_mode_summary_off"
         android:summaryOn="@string/root_mode_summary_on"
         android:title="@string/root_mode_title" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="enable_process_protection"
+        android:singleLineTitle="false"
+        android:summaryOff="@string/process_protection_summary_off"
+        android:summaryOn="@string/process_protection_summary_on"
+        android:title="@string/process_protection_title" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="multiple_tunnels"

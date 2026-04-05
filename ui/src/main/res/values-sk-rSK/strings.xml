@@ -178,6 +178,13 @@
     <string name="tasker_action_toggle">Prepnúť</string>
     <string name="tasker_last_used_tunnel">Naposledy použitý tunel</string>
     <string name="tasker_no_tunnels">Žiadne tunely nie sú nakonfigurované</string>
+    <string name="battery_optimization_title">Vypnúť optimalizáciu batérie</string>
+    <string name="battery_optimization_summary_off">Optimalizácia batérie je aktívna (systém môže obmedziť prácu na pozadí)</string>
+    <string name="battery_optimization_summary_on">Optimalizácia batérie je vypnutá (aplikácia môže voľne bežať na pozadí)</string>
+    <string name="process_protection_title">Ochrana procesu</string>
+    <string name="process_protection_summary_off">Proces nie je chránený pred ukončením systémom</string>
+    <string name="process_protection_summary_on">Proces je chránený pred ukončením (nízka priorita OOM)</string>
+    <string name="process_protection_error">Nepodarilo sa aktivovať ochranu procesu</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root tunel</string>
     <string name="root_tunnel_notification_connected">Pripojené</string>
     <string name="root_tunnel_notification_connecting">Pripájanie…</string>

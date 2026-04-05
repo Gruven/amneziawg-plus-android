@@ -139,6 +139,7 @@ class Application : android.app.Application() {
                 backend = determineBackend()
                 futureBackend.complete(backend!!)
                 networkState.bindNetworkListener()
+                reapplyProcessProtection()
             } catch (e: Throwable) {
                 Log.e(TAG, Log.getStackTraceString(e))
             }
@@ -197,6 +198,22 @@ class Application : android.app.Application() {
             } catch (e: Exception) {
                 Log.e(TAG, "Error during network change handling", e)
             }
+        }
+    }
+
+    private suspend fun reapplyProcessProtection() {
+        if (!UserKnobs.enableRootMode.first() || !UserKnobs.enableProcessProtection.first()) return
+        try {
+            rootShell.start()
+            val myPid = android.os.Process.myPid()
+            val oomRet = rootShell.run(null, "echo -1000 > /proc/$myPid/oom_score_adj")
+            if (oomRet != 0) {
+                Log.w(TAG, "Process protection failed on startup: oom=$oomRet")
+            } else {
+                Log.i(TAG, "Process protection reapplied on startup")
+            }
+        } catch (e: Throwable) {
+            Log.w(TAG, "Failed to reapply process protection", e)
         }
     }
 

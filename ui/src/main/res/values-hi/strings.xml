@@ -178,6 +178,13 @@
     <string name="zip_export_title">जिप फाइल के लिए टनल को एक्सपोर्ट करें</string>
     <string name="key_length_error">चाबी की लम्बाई गलत </string>
     <string name="key_contents_error">चाबी में खराब वर्ण</string>
+    <string name="battery_optimization_title">बैटरी ऑप्टिमाइज़ेशन अक्षम करें</string>
+    <string name="battery_optimization_summary_off">बैटरी ऑप्टिमाइज़ेशन सक्रिय है (सिस्टम बैकग्राउंड कार्य को प्रतिबंधित कर सकता है)</string>
+    <string name="battery_optimization_summary_on">बैटरी ऑप्टिमाइज़ेशन अक्षम है (ऐप बैकग्राउंड में स्वतंत्र रूप से चल सकता है)</string>
+    <string name="process_protection_title">प्रक्रिया सुरक्षा</string>
+    <string name="process_protection_summary_off">प्रक्रिया सिस्टम द्वारा बंद किए जाने से सुरक्षित नहीं है</string>
+    <string name="process_protection_summary_on">प्रक्रिया बंद किए जाने से सुरक्षित है (कम OOM प्राथमिकता)</string>
+    <string name="process_protection_error">प्रक्रिया सुरक्षा लागू करने में विफल</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root Tunnel</string>
     <string name="root_tunnel_notification_connected">कनेक्टेड</string>
     <string name="root_tunnel_notification_connecting">कनेक्ट हो रहा है…</string>

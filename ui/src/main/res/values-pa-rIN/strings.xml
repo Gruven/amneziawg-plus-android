@@ -253,6 +253,13 @@
     <string name="tasker_action_toggle">ਟੌਗਲ ਕਰੋ</string>
     <string name="tasker_last_used_tunnel">ਆਖਰੀ ਵਰਤੀ ਗਈ ਟਨਲ</string>
     <string name="tasker_no_tunnels">ਕੋਈ ਟਨਲ ਕੌਂਫਿਗਰ ਨਹੀਂ ਹੈ</string>
+    <string name="battery_optimization_title">ਬੈਟਰੀ ਅਨੁਕੂਲਨ ਅਯੋਗ ਕਰੋ</string>
+    <string name="battery_optimization_summary_off">ਬੈਟਰੀ ਅਨੁਕੂਲਨ ਸਰਗਰਮ ਹੈ (ਸਿਸਟਮ ਬੈਕਗ੍ਰਾਊਂਡ ਕੰਮ ਨੂੰ ਸੀਮਤ ਕਰ ਸਕਦਾ ਹੈ)</string>
+    <string name="battery_optimization_summary_on">ਬੈਟਰੀ ਅਨੁਕੂਲਨ ਅਯੋਗ ਹੈ (ਐਪ ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਸੁਤੰਤਰ ਰੂਪ ਵਿੱਚ ਚੱਲ ਸਕਦੀ ਹੈ)</string>
+    <string name="process_protection_title">ਪ੍ਰਕਿਰਿਆ ਸੁਰੱਖਿਆ</string>
+    <string name="process_protection_summary_off">ਪ੍ਰਕਿਰਿਆ ਸਿਸਟਮ ਦੁਆਰਾ ਬੰਦ ਕੀਤੇ ਜਾਣ ਤੋਂ ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਹੈ</string>
+    <string name="process_protection_summary_on">ਪ੍ਰਕਿਰਿਆ ਬੰਦ ਕੀਤੇ ਜਾਣ ਤੋਂ ਸੁਰੱਖਿਅਤ ਹੈ (ਘੱਟ OOM ਤਰਜੀਹ)</string>
+    <string name="process_protection_error">ਪ੍ਰਕਿਰਿਆ ਸੁਰੱਖਿਆ ਲਾਗੂ ਕਰਨ ਵਿੱਚ ਅਸਫਲ</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root Tunnel</string>
     <string name="root_tunnel_notification_connected">ਜੁੜਿਆ</string>
     <string name="root_tunnel_notification_connecting">ਜੋੜ ਰਿਹਾ ਹੈ…</string>

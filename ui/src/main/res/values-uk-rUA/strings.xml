@@ -288,6 +288,13 @@
     <string name="tasker_action_toggle">Перемкнути</string>
     <string name="tasker_last_used_tunnel">Останній використаний тунель</string>
     <string name="tasker_no_tunnels">Немає налаштованих тунелів</string>
+    <string name="battery_optimization_title">Вимкнути оптимізацію батареї</string>
+    <string name="battery_optimization_summary_off">Оптимізація батареї активна (система може обмежувати фонову роботу)</string>
+    <string name="battery_optimization_summary_on">Оптимізація батареї вимкнена (застосунок може вільно працювати у фоні)</string>
+    <string name="process_protection_title">Захист процесу</string>
+    <string name="process_protection_summary_off">Процес не захищений від завершення системою</string>
+    <string name="process_protection_summary_on">Процес захищений від завершення (низький пріоритет OOM)</string>
+    <string name="process_protection_error">Не вдалося застосувати захист процесу</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root-тунель</string>
     <string name="root_tunnel_notification_connected">Підключено</string>
     <string name="root_tunnel_notification_connecting">Підключення…</string>

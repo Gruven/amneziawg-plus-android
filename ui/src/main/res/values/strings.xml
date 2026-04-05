@@ -286,6 +286,13 @@
     <string name="tasker_action_toggle">Toggle</string>
     <string name="tasker_last_used_tunnel">Last used tunnel</string>
     <string name="tasker_no_tunnels">No tunnels configured</string>
+    <string name="battery_optimization_title">Disable battery optimization</string>
+    <string name="battery_optimization_summary_off">Battery optimization is active (system may restrict background work)</string>
+    <string name="battery_optimization_summary_on">Battery optimization is disabled (app can run freely in background)</string>
+    <string name="process_protection_title">Process protection</string>
+    <string name="process_protection_summary_off">Process is not protected from being killed by the system</string>
+    <string name="process_protection_summary_on">Process is protected from being killed (low OOM priority)</string>
+    <string name="process_protection_error">Failed to apply process protection</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root Tunnel</string>
     <string name="root_tunnel_notification_connected">Connected</string>
     <string name="root_tunnel_notification_connecting">Connecting\u2026</string>

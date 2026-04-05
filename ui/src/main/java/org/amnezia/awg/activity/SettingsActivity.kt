@@ -7,7 +7,10 @@ package org.amnezia.awg.activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.PowerManager
+import android.provider.Settings
 import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
@@ -28,6 +31,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.getSystemService
+import androidx.core.net.toUri
 import androidx.preference.CheckBoxPreference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -57,6 +61,29 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
+        private var batteryOptPref: CheckBoxPreference? = null
+
+        private val batteryOptLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            updateBatteryOptimizationState()
+        }
+
+        private fun updateBatteryOptimizationState() {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                batteryOptPref?.parent?.removePreference(batteryOptPref!!)
+                return
+            }
+            val pm = requireContext().getSystemService(PowerManager::class.java)
+            val ignored = pm.isIgnoringBatteryOptimizations(requireContext().packageName)
+            if (ignored) {
+                batteryOptPref?.parent?.removePreference(batteryOptPref!!)
+            } else {
+                batteryOptPref?.isChecked = false
+            }
+        }
+
+
         private suspend fun shutdownTunnelsAndRestart() {
             try {
                 val manager = Application.getTunnelManager()
@@ -136,6 +163,31 @@ class SettingsActivity : AppCompatActivity() {
                 kernelModuleEnabler?.parent?.removePreference(kernelModuleEnabler)
             }
 
+            // Battery optimization toggle (no root needed)
+            batteryOptPref = preferenceManager.findPreference("disable_battery_optimization")
+            updateBatteryOptimizationState()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                batteryOptPref?.setOnPreferenceChangeListener { _, _ ->
+                    @Suppress("BatteryLife")
+                    val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
+                        data = "package:${requireContext().packageName}".toUri()
+                    }
+                    batteryOptLauncher.launch(intent)
+                    false
+                }
+            }
+
+            // Process protection toggle (root only — hidden when root mode is off)
+            val processProtPref = preferenceManager.findPreference<CheckBoxPreference>("enable_process_protection")
+            lifecycleScope.launch {
+                val rootEnabled = UserKnobs.enableRootMode.first()
+                if (!rootEnabled) {
+                    processProtPref?.parent?.removePreference(processProtPref)
+                } else {
+                    processProtPref?.isChecked = UserKnobs.enableProcessProtection.first()
+                }
+            }
+
             val rootModePref = preferenceManager.findPreference<CheckBoxPreference>("enable_root_mode")
             lifecycleScope.launch {
                 rootModePref?.isChecked = UserKnobs.enableRootMode.first()
@@ -164,11 +216,49 @@ class SettingsActivity : AppCompatActivity() {
                     false
                 } else {
                     lifecycleScope.launch {
+                        if (UserKnobs.enableProcessProtection.first()) {
+                            try {
+                                val rootShell = Application.getRootShell()
+                                val myPid = android.os.Process.myPid()
+                                withContext(Dispatchers.IO) {
+                                    rootShell.run(null, "echo 0 > /proc/$myPid/oom_score_adj")
+                                }
+                            } catch (_: Throwable) { }
+                        }
+                        UserKnobs.setEnableProcessProtection(false)
                         UserKnobs.setEnableRootMode(false)
                         shutdownTunnelsAndRestart()
                     }
                     false
                 }
+            }
+            processProtPref?.setOnPreferenceChangeListener { _, newValue ->
+                val enable = newValue as Boolean
+                lifecycleScope.launch {
+                    val myPid = android.os.Process.myPid()
+                    try {
+                        val rootShell = Application.getRootShell()
+                        withContext(Dispatchers.IO) { rootShell.start() }
+                        if (enable) {
+                            val oomRet = withContext(Dispatchers.IO) {
+                                rootShell.run(null, "echo -1000 > /proc/$myPid/oom_score_adj")
+                            }
+                            if (oomRet != 0) throw Exception("oom_score_adj failed: $oomRet")
+                        } else {
+                            val oomRet = withContext(Dispatchers.IO) {
+                                rootShell.run(null, "echo 0 > /proc/$myPid/oom_score_adj")
+                            }
+                            if (oomRet != 0) throw Exception("oom_score_adj cleanup failed: $oomRet")
+                        }
+                        UserKnobs.setEnableProcessProtection(enable)
+                        processProtPref.isChecked = enable
+                    } catch (e: Throwable) {
+                        Log.e("AmneziaWG/Settings", "Process protection failed", e)
+                        processProtPref.isChecked = !enable
+                        Toast.makeText(requireContext(), R.string.process_protection_error, Toast.LENGTH_SHORT).show()
+                    }
+                }
+                false
             }
 
             val remoteIntentsPref = preferenceManager.findPreference<CheckBoxPreference>("allow_remote_control_intents")

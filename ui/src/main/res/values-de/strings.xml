@@ -266,6 +266,13 @@
     <string name="tasker_action_toggle">Umschalten</string>
     <string name="tasker_last_used_tunnel">Zuletzt verwendeter Tunnel</string>
     <string name="tasker_no_tunnels">Keine Tunnel konfiguriert</string>
+    <string name="battery_optimization_title">Akkuoptimierung deaktivieren</string>
+    <string name="battery_optimization_summary_off">Akkuoptimierung ist aktiv (System kann Hintergrundarbeit einschränken)</string>
+    <string name="battery_optimization_summary_on">Akkuoptimierung ist deaktiviert (App kann frei im Hintergrund laufen)</string>
+    <string name="process_protection_title">Prozessschutz</string>
+    <string name="process_protection_summary_off">Prozess ist nicht vor Beendigung durch das System geschützt</string>
+    <string name="process_protection_summary_on">Prozess ist vor Beendigung geschützt (niedrige OOM-Priorität)</string>
+    <string name="process_protection_error">Prozessschutz konnte nicht angewendet werden</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root-Tunnel</string>
     <string name="root_tunnel_notification_connected">Verbunden</string>
     <string name="root_tunnel_notification_connecting">Verbinde…</string>

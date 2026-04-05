@@ -266,6 +266,13 @@
     <string name="tasker_action_toggle">Växla</string>
     <string name="tasker_last_used_tunnel">Senast använda tunnel</string>
     <string name="tasker_no_tunnels">Inga tunnlar konfigurerade</string>
+    <string name="battery_optimization_title">Inaktivera batterioptimering</string>
+    <string name="battery_optimization_summary_off">Batterioptimering är aktiv (systemet kan begränsa bakgrundsarbete)</string>
+    <string name="battery_optimization_summary_on">Batterioptimering är inaktiverad (appen kan köras fritt i bakgrunden)</string>
+    <string name="process_protection_title">Processskydd</string>
+    <string name="process_protection_summary_off">Processen är inte skyddad mot att avslutas av systemet</string>
+    <string name="process_protection_summary_on">Processen är skyddad mot avslutning (låg OOM-prioritet)</string>
+    <string name="process_protection_error">Kunde inte aktivera processskydd</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root-tunnel</string>
     <string name="root_tunnel_notification_connected">Ansluten</string>
     <string name="root_tunnel_notification_connecting">Ansluter…</string>

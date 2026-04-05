@@ -224,6 +224,13 @@
     <string name="tasker_action_toggle">මාරු කරන්න</string>
     <string name="tasker_last_used_tunnel">අවසන් වරට භාවිත උමඟ</string>
     <string name="tasker_no_tunnels">උමං සකසා නැත</string>
+    <string name="battery_optimization_title">බැටරි ප්‍රශස්තකරණය අක්‍රිය කරන්න</string>
+    <string name="battery_optimization_summary_off">බැටරි ප්‍රශස්තකරණය සක්‍රියයි (පද්ධතියට පසුබිම් කාර්යයන් සීමා කළ හැක)</string>
+    <string name="battery_optimization_summary_on">බැටරි ප්‍රශස්තකරණය අක්‍රියයි (යෙදුම පසුබිමේ නිදහසේ ක්‍රියාත්මක විය හැක)</string>
+    <string name="process_protection_title">ක්‍රියාවලි ආරක්ෂාව</string>
+    <string name="process_protection_summary_off">ක්‍රියාවලිය පද්ධතිය මගින් අවසන් කිරීමෙන් ආරක්ෂා නොවේ</string>
+    <string name="process_protection_summary_on">ක්‍රියාවලිය අවසන් කිරීමෙන් ආරක්ෂා වේ (අඩු OOM ප්‍රමුඛතාව)</string>
+    <string name="process_protection_error">ක්‍රියාවලි ආරක්ෂාව යෙදීම අසාර්ථකයි</string>
     <string name="root_tunnel_notification_channel">AmneziaWG+ Root Tunnel</string>
     <string name="root_tunnel_notification_connected">සම්බන්ධිතයි</string>
     <string name="root_tunnel_notification_connecting">සම්බන්ධ වෙමින්…</string>
