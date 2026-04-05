@@ -512,13 +512,6 @@ public final class RootGoBackend implements Backend {
                 tunFd = -1;
                 if (wasInterrupted) Thread.currentThread().interrupt();
 
-                try {
-                    final StatusCallback cb = statusCallback;
-                    if (cb != null) cb.onStatusChanged(false);
-                } catch (final Exception e) {
-                    Log.w(TAG, "statusCallback.onStatusChanged failed: " + e.getMessage());
-                }
-
                 tunnel.onStateChange(State.DOWN);
             }
         }
