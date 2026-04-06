@@ -5,6 +5,7 @@
 package org.amnezia.awg.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -18,6 +19,7 @@ import org.amnezia.awg.Application
 import org.amnezia.awg.R
 import org.amnezia.awg.activity.BaseActivity
 import org.amnezia.awg.activity.BaseActivity.OnSelectedTunnelChangedListener
+import org.amnezia.awg.activity.LogViewerActivity
 import org.amnezia.awg.backend.GoBackend
 import org.amnezia.awg.backend.Tunnel
 import org.amnezia.awg.databinding.TunnelDetailFragmentBinding
@@ -100,6 +102,9 @@ abstract class BaseFragment : Fragment(), OnSelectedTunnelChangedListener {
                 if (view != null)
                     Snackbar.make(view, message, Snackbar.LENGTH_LONG)
                         .setAnchorView(view.findViewById(R.id.create_fab))
+                        .setAction(R.string.log_viewer_title) {
+                            startActivity(Intent(activity, LogViewerActivity::class.java))
+                        }
                         .show()
                 else
                     Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
