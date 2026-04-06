@@ -73,8 +73,6 @@ public class RootTunnelService extends Service {
         return START_STICKY;
     }
 
-    @SuppressLint("DiscouragedApi")
-    @SuppressWarnings("deprecation")
     private void showNotification(final String title, final String text) {
         final Notification.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

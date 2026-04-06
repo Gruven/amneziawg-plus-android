@@ -5,6 +5,7 @@
 package org.amnezia.awg.activity
 
 import android.content.ComponentName
+import android.os.Build
 import android.os.Bundle
 import android.service.quicksettings.TileService
 import android.util.Log
@@ -30,7 +31,7 @@ class TunnelToggleActivity : AppCompatActivity() {
             try {
                 tunnel.setStateAsync(Tunnel.State.TOGGLE)
             } catch (e: Throwable) {
-                TileService.requestListeningState(this@TunnelToggleActivity, ComponentName(this@TunnelToggleActivity, QuickTileService::class.java))
+                requestTileServiceUpdate()
                 val error = ErrorMessages[e]
                 val message = getString(R.string.toggle_error, error)
                 Log.e(TAG, message, e)
@@ -38,9 +39,14 @@ class TunnelToggleActivity : AppCompatActivity() {
                 finishAffinity()
                 return@launch
             }
-            TileService.requestListeningState(this@TunnelToggleActivity, ComponentName(this@TunnelToggleActivity, QuickTileService::class.java))
+            requestTileServiceUpdate()
             finishAffinity()
         }
+    }
+
+    private fun requestTileServiceUpdate() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            TileService.requestListeningState(this, ComponentName(this, QuickTileService::class.java))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
