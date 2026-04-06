@@ -173,6 +173,11 @@
     <string name="key_length_explanation_hex">: HEX-ключи AmneziaWG должны содержать 64 символа (32 байта)</string>
     <string name="latest_handshake">Последнее рукопожатие</string>
     <string name="latest_handshake_ago">%s назад</string>
+    <string name="latest_handshake_now">сейчас</string>
+    <string name="duration_days">%d д</string>
+    <string name="duration_hours">%d ч</string>
+    <string name="duration_minutes">%d мин</string>
+    <string name="duration_seconds">%d с</string>
     <string name="listen_port">Порт</string>
     <string name="log_export_error">Не удалось экспортировать журнал: %s</string>
     <string name="log_export_subject">Файл журнала AmneziaWG Android</string>

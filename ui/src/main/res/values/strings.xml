@@ -145,6 +145,11 @@
     <string name="key_length_explanation_hex">: AmneziaWG hex keys must be 64 characters (32 bytes)</string>
     <string name="latest_handshake">Latest handshake</string>
     <string name="latest_handshake_ago">%s ago</string>
+    <string name="latest_handshake_now">now</string>
+    <string name="duration_days">%dd</string>
+    <string name="duration_hours">%dh</string>
+    <string name="duration_minutes">%dm</string>
+    <string name="duration_seconds">%ds</string>
     <string name="listen_port">Listen port</string>
     <string name="log_export_error">Unable to export log: %s</string>
     <string name="log_export_subject">AmneziaWG Android Log File</string>
