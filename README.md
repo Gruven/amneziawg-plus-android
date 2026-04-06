@@ -16,6 +16,7 @@ Android GUI for [AmneziaWG](https://docs.amnezia.org/documentation/amnezia-wg/)
   - Fixed dark theme colors — buttons and accents were invisible on dark backgrounds due to incorrect `colorPrimary` for dark mode.
   - Fixed edge-to-edge layout overlap on Android 15+ — settings and other screens no longer render behind the status bar and toolbar.
   - All settings are now shown at once — removed the collapsible "Advanced" section which rendered incorrectly on older Android versions.
+  - Added a "Log" action to tunnel error notifications — quickly jump to the log viewer for error details.
 
 ## 🤖 Automation
 
