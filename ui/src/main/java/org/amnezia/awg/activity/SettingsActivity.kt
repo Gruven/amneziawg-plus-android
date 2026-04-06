@@ -105,10 +105,9 @@ class SettingsActivity : AppCompatActivity() {
         private fun restartApp() {
             try {
                 Toast.makeText(requireContext(), R.string.success_application_will_restart, Toast.LENGTH_LONG).show()
-                val intent = requireContext().packageManager.getLaunchIntentForPackage(requireContext().packageName)
-                intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                requireActivity().finishAffinity()
-                if (intent != null) startActivity(intent)
+                val intent = Intent(requireContext(), SettingsActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                Application.get().startActivity(intent)
             } catch (e: Throwable) {
                 Log.w("AmneziaWG/Settings", "Restart failed", e)
             }
