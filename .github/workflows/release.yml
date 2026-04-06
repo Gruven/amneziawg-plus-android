@@ -65,6 +65,7 @@ jobs:
 
   release:
     needs: build
+    if: ${{ !cancelled() && needs.build.result == 'success' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
