@@ -31,20 +31,25 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    outputs:
+      should-build: ${{ steps.check.outputs.should-build }}
     steps:
     - name: Check release does not already exist
+      id: check
       env:
         GH_TOKEN: ${{ github.token }}
         TAG_NAME: ${{ inputs.tag || github.ref_name }}
       run: |
         if gh release view "${TAG_NAME}" --repo "${GITHUB_REPOSITORY}" > /dev/null 2>&1; then
-          echo "::error::Release for tag '${TAG_NAME}' already exists"
-          exit 1
+          echo "::notice::Release for tag '${TAG_NAME}' already exists — skipping"
+          echo "should-build=false" >> "$GITHUB_OUTPUT"
+        else
+          echo "should-build=true" >> "$GITHUB_OUTPUT"
         fi
 
   build:
     needs: [validate, check-release]
-    if: ${{ !cancelled() && (needs.validate.result == 'success' || needs.validate.result == 'skipped') && needs.check-release.result == 'success' }}
+    if: ${{ !cancelled() && (needs.validate.result == 'success' || needs.validate.result == 'skipped') && needs.check-release.result == 'success' && needs.check-release.outputs.should-build == 'true' }}
     uses: ./.github/workflows/build.yml
     permissions:
       contents: read
