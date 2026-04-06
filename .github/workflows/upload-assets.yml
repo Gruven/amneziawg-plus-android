@@ -1,18 +1,17 @@
-name: Release
+name: Upload Assets
 
 on:
-  push:
-    tags:
-    - "v*.*.*"
+  release:
+    types: [published]
   workflow_dispatch:
     inputs:
       tag:
-        description: "Tag to release"
+        description: "Tag of existing release to upload assets to"
         required: true
         type: string
 
 concurrency:
-  group: release-tag-${{ inputs.tag || github.ref_name }}
+  group: release-tag-${{ inputs.tag || github.event.release.tag_name }}
   cancel-in-progress: false
 
 jobs:
@@ -31,20 +30,28 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    outputs:
+      should-build: ${{ steps.check.outputs.should-build }}
     steps:
-    - name: Check release does not already exist
+    - name: Verify release exists and check assets
+      id: check
       env:
         GH_TOKEN: ${{ github.token }}
-        TAG_NAME: ${{ inputs.tag || github.ref_name }}
+        TAG_NAME: ${{ inputs.tag || github.event.release.tag_name }}
+        EVENT_NAME: ${{ github.event_name }}
       run: |
-        if gh release view "${TAG_NAME}" --repo "${GITHUB_REPOSITORY}" > /dev/null 2>&1; then
-          echo "::error::Release for tag '${TAG_NAME}' already exists"
-          exit 1
+        gh release view "${TAG_NAME}" --repo "${GITHUB_REPOSITORY}" --json assets --jq '.assets[].name' > /tmp/assets.txt 2>/dev/null \
+          || { echo "::error::Release for tag '${TAG_NAME}' does not exist. Create it first."; exit 1; }
+        if [[ "${EVENT_NAME}" == "release" ]] && grep -q '\.apk$' /tmp/assets.txt; then
+          echo "::notice::Release '${TAG_NAME}' already has APK assets — skipping build"
+          echo "should-build=false" >> "$GITHUB_OUTPUT"
+        else
+          echo "should-build=true" >> "$GITHUB_OUTPUT"
         fi
 
   build:
     needs: [validate, check-release]
-    if: ${{ !cancelled() && (needs.validate.result == 'success' || needs.validate.result == 'skipped') && needs.check-release.result == 'success' }}
+    if: ${{ !cancelled() && (needs.validate.result == 'success' || needs.validate.result == 'skipped') && needs.check-release.result == 'success' && needs.check-release.outputs.should-build == 'true' }}
     uses: ./.github/workflows/build.yml
     permissions:
       contents: read
@@ -58,7 +65,7 @@ jobs:
       ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
       ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
-  release:
+  upload:
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -74,7 +81,7 @@ jobs:
     - name: Rename artifacts
       shell: bash
       env:
-        TAG_NAME: ${{ inputs.tag || github.ref_name }}
+        TAG_NAME: ${{ inputs.tag || github.event.release.tag_name }}
       run: |
         set -euo pipefail
         for APK in artifacts/*.apk; do
@@ -87,12 +94,11 @@ jobs:
           fi
         done
 
-    - name: Create GitHub Release
-      uses: softprops/action-gh-release@v2
-      with:
-        tag_name: ${{ inputs.tag || github.ref_name }}
-        generate_release_notes: true
-        prerelease: ${{ contains(inputs.tag || github.ref_name, '-') }}
-        make_latest: ${{ !contains(inputs.tag || github.ref_name, '-') }}
-        fail_on_unmatched_files: true
-        files: artifacts/*.apk
+    - name: Upload assets to existing release
+      env:
+        GH_TOKEN: ${{ github.token }}
+        TAG_NAME: ${{ inputs.tag || github.event.release.tag_name }}
+      run: |
+        gh release upload "${TAG_NAME}" artifacts/*.apk \
+          --repo "${GITHUB_REPOSITORY}" \
+          --clobber
