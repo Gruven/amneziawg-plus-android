@@ -4,15 +4,34 @@ on:
   push:
     tags:
     - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to release"
+        required: true
+        type: string
 
 jobs:
+  validate:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Validate tag exists
+      env:
+        TAG: ${{ inputs.tag }}
+      run: |
+        git ls-remote --tags "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}" "refs/tags/${TAG}" | grep -q . \
+          || { echo "::error::Tag '${TAG}' does not exist"; exit 1; }
+
   build:
+    needs: validate
+    if: ${{ !cancelled() && (needs.validate.result == 'success' || needs.validate.result == 'skipped') }}
     uses: ./.github/workflows/build.yml
     permissions:
       contents: read
     with:
       target: release_apk
-      ref: ${{ github.ref }}
+      ref: ${{ inputs.tag && format('refs/tags/{0}', inputs.tag) || github.ref }}
     secrets:
       CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
       ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
@@ -36,7 +55,7 @@ jobs:
     - name: Rename artifacts
       shell: bash
       env:
-        TAG_NAME: ${{ github.ref_name }}
+        TAG_NAME: ${{ inputs.tag || github.ref_name }}
       run: |
         set -euo pipefail
         for APK in artifacts/*.apk; do
@@ -52,8 +71,9 @@ jobs:
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       with:
+        tag_name: ${{ inputs.tag || github.ref_name }}
         generate_release_notes: true
-        prerelease: ${{ contains(github.ref_name, '-') }}
-        make_latest: ${{ !contains(github.ref_name, '-') }}
+        prerelease: ${{ contains(inputs.tag || github.ref_name, '-') }}
+        make_latest: ${{ !contains(inputs.tag || github.ref_name, '-') }}
         fail_on_unmatched_files: true
         files: artifacts/*.apk
