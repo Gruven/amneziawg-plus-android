@@ -6,7 +6,6 @@
 package org.amnezia.awg.util;
 
 import android.content.Context;
-import android.system.OsConstants;
 import android.util.Log;
 
 import org.amnezia.awg.util.RootShell.RootShellException;
@@ -49,7 +48,8 @@ public final class ToolsInstaller {
     @Nullable private Boolean installAsMagiskModule;
 
     public ToolsInstaller(final Context context, final RootShell rootShell) {
-        localBinaryDir = new File(context.getCodeCacheDir(), "bin");
+        localBinaryDir = new File(new File(context.getCacheDir(), "code_cache"), "bin");
+        localBinaryDir.mkdirs();
         this.context = context;
         this.rootShell = rootShell;
     }
@@ -76,10 +76,10 @@ public final class ToolsInstaller {
                     new File(localBinaryDir, name).getAbsolutePath(),
                     new File(INSTALL_DIR, name).getAbsolutePath()));
         }
-        script.append("exit ").append(OsConstants.EALREADY).append(';');
+        script.append("exit ").append(114).append(';'); // EALREADY
         try {
             final int ret = rootShell.run(null, script.toString());
-            if (ret == OsConstants.EALREADY)
+            if (ret == 114) // EALREADY
                 return willInstallAsMagiskModule() ? YES | MAGISK : YES | SYSTEM;
             else
                 return willInstallAsMagiskModule() ? NO | MAGISK : NO | SYSTEM;
@@ -167,7 +167,7 @@ public final class ToolsInstaller {
 
     private int installSystem() throws RootShellException, IOException {
         if (INSTALL_DIR == null)
-            return OsConstants.ENOENT;
+            return 2; // ENOENT
         extract();
         final StringBuilder script = new StringBuilder("set -ex; ");
         script.append("trap 'mount -o ro,remount /system' EXIT; mount -o rw,remount /system; ");
@@ -191,7 +191,7 @@ public final class ToolsInstaller {
         synchronized (lock) {
             if (installAsMagiskModule == null) {
                 try {
-                    installAsMagiskModule = rootShell.run(null, "[ -d /data/adb/modules -a ! -f /cache/.disable_magisk ]") == OsConstants.EXIT_SUCCESS;
+                    installAsMagiskModule = rootShell.run(null, "[ -d /data/adb/modules -a ! -f /cache/.disable_magisk ]") == 0; // EXIT_SUCCESS
                 } catch (final Exception ignored) {
                     installAsMagiskModule = false;
                 }

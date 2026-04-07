@@ -596,7 +596,7 @@
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/set_excluded_applications"
-                            style="@style/Widget.Material3.Button.TextButton"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
@@ -628,7 +628,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/add_peer_button"
-                    style="@style/Widget.Material3.Button.TextButton"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"

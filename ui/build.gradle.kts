@@ -20,7 +20,7 @@ extensions.configure<ApplicationExtension> {
     namespace = pkg
     defaultConfig {
         applicationId = pkg
-        targetSdk = 35
+        targetSdk = 20
         versionCode = providers.gradleProperty("amneziawgVersionCode").get().toInt()
         versionName = providers.gradleProperty("amneziawgVersionName").get()
         buildConfigField("int", "MIN_SDK_VERSION", minSdk.toString())
@@ -61,7 +61,6 @@ extensions.configure<ApplicationExtension> {
         }
     }
     androidResources {
-        generateLocaleConfig = true
     }
     lint {
         disable += "LongLogTag"

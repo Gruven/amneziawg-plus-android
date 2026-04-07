@@ -4,17 +4,13 @@
  */
 package org.amnezia.awg.activity
 
-import android.content.ComponentName
-import android.os.Build
 import android.os.Bundle
-import android.service.quicksettings.TileService
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import org.amnezia.awg.Application
-import org.amnezia.awg.QuickTileService
 import org.amnezia.awg.R
 import org.amnezia.awg.backend.GoBackend
 import org.amnezia.awg.backend.Tunnel
@@ -45,8 +41,7 @@ class TunnelToggleActivity : AppCompatActivity() {
     }
 
     private fun requestTileServiceUpdate() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-            TileService.requestListeningState(this, ComponentName(this, QuickTileService::class.java))
+        // Quick Tiles require API 24+, not available on this branch
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

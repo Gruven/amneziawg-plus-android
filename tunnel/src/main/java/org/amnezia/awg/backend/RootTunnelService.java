@@ -7,14 +7,10 @@ package org.amnezia.awg.backend;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ServiceInfo;
-import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -73,24 +69,10 @@ public class RootTunnelService extends Service {
         return START_STICKY;
     }
 
+    @SuppressWarnings("deprecation")
     private void showNotification(final String title, final String text) {
-        final Notification.Builder builder;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Ensure channel exists (may be first call after process restart)
-            final NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            if (nm != null && nm.getNotificationChannel(NOTIFICATION_CHANNEL_ID) == null) {
-                final NotificationChannel channel = new NotificationChannel(
-                        NOTIFICATION_CHANNEL_ID,
-                        getLocalizedString("root_tunnel_notification_channel", "AmneziaWG+ Root Tunnel"),
-                        NotificationManager.IMPORTANCE_LOW);
-                channel.setShowBadge(false);
-                nm.createNotificationChannel(channel);
-            }
-            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID);
-        } else {
-            builder = new Notification.Builder(this);
-            builder.setPriority(Notification.PRIORITY_LOW);
-        }
+        final Notification.Builder builder = new Notification.Builder(this);
+        builder.setPriority(Notification.PRIORITY_LOW);
 
         int iconRes = getResources().getIdentifier("ic_notification", "drawable", getPackageName());
         if (iconRes == 0)
@@ -99,8 +81,7 @@ public class RootTunnelService extends Service {
         final Intent launchIntent = getPackageManager().getLaunchIntentForPackage(getPackageName());
         if (launchIntent != null) {
             launchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            builder.setContentIntent(PendingIntent.getActivity(this, 0, launchIntent,
-                    PendingIntent.FLAG_IMMUTABLE));
+            builder.setContentIntent(PendingIntent.getActivity(this, 0, launchIntent, 0));
         }
 
         builder.setContentTitle(title)
@@ -108,12 +89,7 @@ public class RootTunnelService extends Service {
                 .setSmallIcon(iconRes)
                 .setOngoing(true);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            startForeground(NOTIFICATION_ID, builder.build(),
-                    ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
-        } else {
-            startForeground(NOTIFICATION_ID, builder.build());
-        }
+        startForeground(NOTIFICATION_ID, builder.build());
     }
 
     /**

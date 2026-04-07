@@ -7,9 +7,7 @@ package org.amnezia.awg.backend;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.ParcelFileDescriptor;
-import android.system.OsConstants;
 import android.util.Log;
 
 import org.amnezia.awg.backend.BackendException.Reason;
@@ -376,12 +374,6 @@ public final class GoBackend implements Backend {
             final VpnService.Builder builder = service.getBuilder();
             builder.setSession(tunnel.getName());
 
-            for (final String excludedApplication : config.getInterface().getExcludedApplications())
-                builder.addDisallowedApplication(excludedApplication);
-
-            for (final String includedApplication : config.getInterface().getIncludedApplications())
-                builder.addAllowedApplication(includedApplication);
-
             for (final InetNetwork addr : config.getInterface().getAddresses())
                 builder.addAddress(addr.getAddress(), addr.getMask());
 
@@ -400,20 +392,8 @@ public final class GoBackend implements Backend {
                 }
             }
 
-            // "Kill-switch" semantics
-            if (!(sawDefaultRoute && config.getPeers().size() == 1)) {
-                builder.allowFamily(OsConstants.AF_INET);
-                builder.allowFamily(OsConstants.AF_INET6);
-            }
-
             builder.setMtu(config.getInterface().getMtu().orElse(1280));
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-                builder.setMetered(false);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                service.setUnderlyingNetworks(null);
-
-            builder.setBlocking(true);
             try (final ParcelFileDescriptor tun = builder.establish()) {
                 if (tun == null)
                     throw new BackendException(Reason.TUN_CREATION_ERROR);

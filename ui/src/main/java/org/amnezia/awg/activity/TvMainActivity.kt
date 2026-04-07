@@ -11,11 +11,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.os.storage.StorageManager
-import android.os.storage.StorageVolume
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -63,12 +60,8 @@ class TvMainActivity : AppCompatActivity() {
 
             /* AndroidTV now comes with stubs that do nothing but display a Toast less helpful than
              * what we can do, so detect this and throw an exception that we can catch later. */
-            val activitiesToResolveIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                context.packageManager.queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_DEFAULT_ONLY.toLong()))
-            } else {
-                @Suppress("DEPRECATION")
-                context.packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
-            }
+            @Suppress("DEPRECATION")
+            val activitiesToResolveIntent = context.packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
             if (activitiesToResolveIntent.all {
                     val name = it.activityInfo.packageName
                     name.startsWith("com.google.android.tv.frameworkpackagestubs") || name.startsWith("com.android.tv.frameworkpackagestubs")
@@ -115,10 +108,8 @@ class TvMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-                applicationScope.launch {
-                    UserKnobs.setDarkTheme(true)
-                }
+            applicationScope.launch {
+                UserKnobs.setDarkTheme(true)
             }
         }
         super.onCreate(savedInstanceState)
@@ -194,33 +185,16 @@ class TvMainActivity : AppCompatActivity() {
         }
 
         binding.importButton.setOnClickListener {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-                if (filesRoot.get()?.isEmpty() != false) {
-                    navigateTo(File("/"))
-                    runOnUiThread {
-                        binding.filesList.requestFocus()
-                    }
-                } else {
-                    files.clear()
-                    filesRoot.set("")
-                    runOnUiThread {
-                        binding.tunnelList.requestFocus()
-                    }
+            if (filesRoot.get()?.isEmpty() != false) {
+                navigateTo(File("/"))
+                runOnUiThread {
+                    binding.filesList.requestFocus()
                 }
             } else {
-                try {
-                    tunnelFileImportResultLauncher.launch(arrayOf("*/*"))
-                } catch (_: Throwable) {
-                    MaterialAlertDialogBuilder(binding.root.context).setMessage(R.string.tv_no_file_picker).setCancelable(false)
-                        .setPositiveButton(android.R.string.ok) { _, _ ->
-                            try {
-                                startActivity(Intent(Intent.ACTION_VIEW).apply {
-                                    data = Uri.parse("https://play.google.com/store/apps/details?id=com.cxinventor.file.explorer")
-                                    setPackage("com.android.vending")
-                                })
-                            } catch (_: Throwable) {
-                            }
-                        }.show()
+                files.clear()
+                filesRoot.set("")
+                runOnUiThread {
+                    binding.tunnelList.requestFocus()
                 }
             }
         }
@@ -266,19 +240,8 @@ class TvMainActivity : AppCompatActivity() {
     private suspend fun makeStorageRoots(): Collection<KeyedFile> = withContext(Dispatchers.IO) {
         cachedRoots?.let { return@withContext it }
         val list = HashSet<KeyedFile>()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            val storageManager: StorageManager = getSystemService() ?: return@withContext list
-            list.addAll(storageManager.storageVolumes.mapNotNull { volume ->
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    volume.directory?.let { KeyedFile(it, volume.getDescription(this@TvMainActivity)) }
-                } else {
-                    KeyedFile((StorageVolume::class.java.getMethod("getPathFile").invoke(volume) as File), volume.getDescription(this@TvMainActivity))
-                }
-            })
-        } else {
-            @Suppress("DEPRECATION")
-            list.add(KeyedFile(Environment.getExternalStorageDirectory()))
-        }
+        @Suppress("DEPRECATION")
+        list.add(KeyedFile(Environment.getExternalStorageDirectory()))
         cachedRoots = list
         list
     }
@@ -293,7 +256,6 @@ class TvMainActivity : AppCompatActivity() {
     }
 
     private fun navigateTo(directory: File) {
-        require(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q)
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             pendingNavigation = directory

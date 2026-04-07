@@ -8,8 +8,6 @@ import android.Manifest
 import android.app.Dialog
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.content.pm.PackageManager.PackageInfoFlags
-import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -84,12 +82,8 @@ class AppListDialogFragment : DialogFragment() {
     }
 
     private fun getPackagesHoldingPermissions(pm: PackageManager, permissions: Array<String>): List<PackageInfo> {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            pm.getPackagesHoldingPermissions(permissions, PackageInfoFlags.of(0L))
-        } else {
-            @Suppress("DEPRECATION")
-            pm.getPackagesHoldingPermissions(permissions, 0)
-        }
+        @Suppress("DEPRECATION")
+        return pm.getPackagesHoldingPermissions(permissions, 0)
     }
 
     private fun setButtonText() {

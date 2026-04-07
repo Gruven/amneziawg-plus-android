@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
 
     <application>
         <service
@@ -22,11 +21,7 @@
 
         <service
             android:name="org.amnezia.awg.backend.RootTunnelService"
-            android:exported="false"
-            android:foregroundServiceType="specialUse">
-            <property
-                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
-                android:value="Root-based VPN tunnel requiring persistent process" />
+            android:exported="false">
         </service>
     </application>
 </manifest>

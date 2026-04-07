@@ -36,10 +36,18 @@ public final class SharedLibraryLoader {
         final Collection<String> apks = new HashSet<>();
         if (context.getApplicationInfo().sourceDir != null)
             apks.add(context.getApplicationInfo().sourceDir);
-        if (context.getApplicationInfo().splitSourceDirs != null)
-            apks.addAll(Arrays.asList(context.getApplicationInfo().splitSourceDirs));
+        @SuppressWarnings("deprecation")
+        final String abi1 = Build.CPU_ABI;
+        @SuppressWarnings("deprecation")
+        final String abi2 = Build.CPU_ABI2;
+        final String[] abis;
+        if (abi2 != null && !abi2.isEmpty()) {
+            abis = new String[]{abi1, abi2};
+        } else {
+            abis = new String[]{abi1};
+        }
 
-        for (final String abi : Build.SUPPORTED_ABIS) {
+        for (final String abi : abis) {
             for (final String apk : apks) {
                 try (final ZipFile zipFile = new ZipFile(new File(apk), ZipFile.OPEN_READ)) {
                     final String mappedLibName = System.mapLibraryName(libName);
@@ -75,7 +83,9 @@ public final class SharedLibraryLoader {
         }
         File f = null;
         try {
-            f = File.createTempFile("lib", ".so", context.getCodeCacheDir());
+            final File codeCacheDir = new File(context.getCacheDir(), "code_cache");
+            codeCacheDir.mkdirs();
+            f = File.createTempFile("lib", ".so", codeCacheDir);
             if (extractLibrary(context, libName, f)) {
                 System.load(f.getAbsolutePath());
                 return;

@@ -41,7 +41,7 @@ public class RootShell {
     @Nullable private BufferedReader stdout;
 
     public RootShell(final Context context) {
-        localBinaryDir = new File(context.getCodeCacheDir(), "bin");
+        localBinaryDir = new File(new File(context.getCacheDir(), "code_cache"), "bin");
         localTemporaryDir = new File(context.getCacheDir(), "tmp");
         final String packageName = context.getPackageName();
         if (packageName.contains("'"))

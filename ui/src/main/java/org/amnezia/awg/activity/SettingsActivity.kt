@@ -5,10 +5,7 @@
 package org.amnezia.awg.activity
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.os.PowerManager
-import android.provider.Settings
 import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +14,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import org.amnezia.awg.Application
-import org.amnezia.awg.QuickTileService
 import org.amnezia.awg.R
 import org.amnezia.awg.backend.AwgQuickBackend
 import org.amnezia.awg.backend.RootGoBackend
@@ -70,17 +66,8 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         private fun updateBatteryOptimizationState() {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-                batteryOptPref?.parent?.removePreference(batteryOptPref!!)
-                return
-            }
-            val pm = requireContext().getSystemService(PowerManager::class.java)
-            val ignored = pm.isIgnoringBatteryOptimizations(requireContext().packageName)
-            if (ignored) {
-                batteryOptPref?.parent?.removePreference(batteryOptPref!!)
-            } else {
-                batteryOptPref?.isChecked = false
-            }
+            // Battery optimization (Doze) is API 23+, not available on this branch
+            batteryOptPref?.parent?.removePreference(batteryOptPref!!)
         }
 
 
@@ -118,14 +105,8 @@ class SettingsActivity : AppCompatActivity() {
             preferenceManager.preferenceDataStore = PreferencesPreferenceDataStore(lifecycleScope, Application.getPreferencesDataStore())
             addPreferencesFromResource(R.xml.preferences)
 
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU || QuickTileService.isAdded) {
-                val quickTile = preferenceManager.findPreference<Preference>("quick_tile")
-                quickTile?.parent?.removePreference(quickTile)
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                val darkTheme = preferenceManager.findPreference<Preference>("dark_theme")
-                darkTheme?.parent?.removePreference(darkTheme)
-            }
+            val quickTile = preferenceManager.findPreference<Preference>("quick_tile")
+            quickTile?.parent?.removePreference(quickTile)
             if (AdminKnobs.disableConfigExport) {
                 val zipExporter = preferenceManager.findPreference<Preference>("zip_exporter")
                 zipExporter?.parent?.removePreference(zipExporter)
@@ -165,16 +146,7 @@ class SettingsActivity : AppCompatActivity() {
             // Battery optimization toggle (no root needed)
             batteryOptPref = preferenceManager.findPreference("disable_battery_optimization")
             updateBatteryOptimizationState()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                batteryOptPref?.setOnPreferenceChangeListener { _, _ ->
-                    @Suppress("BatteryLife")
-                    val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
-                        data = "package:${requireContext().packageName}".toUri()
-                    }
-                    batteryOptLauncher.launch(intent)
-                    false
-                }
-            }
+            // Battery optimization UI removed — requires API 23+
 
             // Process protection toggle (root only — hidden when root mode is off)
             val processProtPref = preferenceManager.findPreference<CheckBoxPreference>("enable_process_protection")
@@ -311,8 +283,6 @@ class SettingsActivity : AppCompatActivity() {
                         minimumWidth = 0
                         setPadding(pad / 2, 0, pad / 2, 0)
                         contentDescription = getString(R.string.remote_control_token_regenerate)
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                            tooltipText = getString(R.string.remote_control_token_regenerate)
                         setOnClickListener {
                             editText.setText(UserKnobs.generateToken())
                         }

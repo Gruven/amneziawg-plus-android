@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AmneziaWgTheme.Toolbar" parent="Widget.Material3.Toolbar">
+    <style name="AmneziaWgTheme.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:background">?attr/colorSurface</item>
     </style>
 
@@ -9,18 +9,17 @@
         <item name="materialCardViewStyle">@style/AmneziaWgTheme.MaterialCardView</item>
         <item name="toolbarStyle">@style/AmneziaWgTheme.Toolbar</item>
         <item name="bottomSheetDialogTheme">@style/AmneziaWgTheme.BottomSheetDialog</item>
-        <item name="android:statusBarColor">@null</item>
     </style>
 
     <!-- Various additional API-specific features in values-v*/styles.xml -->
     <style name="AppTheme" parent="AppThemeBase" />
 
-    <style name="AmneziaWgTheme.MaterialCardView" parent="Widget.Material3.CardView.Elevated">
+    <style name="AmneziaWgTheme.MaterialCardView" parent="Widget.MaterialComponents.CardView">
         <item name="cornerRadius">4dp</item>
         <item name="contentPadding">8dp</item>
     </style>
 
-    <style name="AmneziaWgTheme.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+    <style name="AmneziaWgTheme.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>

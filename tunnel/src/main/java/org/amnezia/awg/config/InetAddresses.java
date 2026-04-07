@@ -28,9 +28,8 @@ public final class InetAddresses {
     static {
         Method m = null;
         try {
-            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.Q)
-                // noinspection JavaReflectionMemberAccess
-                m = InetAddress.class.getMethod("parseNumericAddress", String.class);
+            // noinspection JavaReflectionMemberAccess
+            m = InetAddress.class.getMethod("parseNumericAddress", String.class);
         } catch (final Exception ignored) {
         }
         PARSER_METHOD = m;
@@ -59,9 +58,7 @@ public final class InetAddresses {
         if (address.isEmpty())
             throw new ParseException(InetAddress.class, address, "Empty address");
         try {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q)
-                return android.net.InetAddresses.parseNumericAddress(address);
-            else if (PARSER_METHOD != null)
+            if (PARSER_METHOD != null)
                 return (InetAddress) PARSER_METHOD.invoke(null, address);
             else
                 throw new NoSuchMethodException("parseNumericAddress");

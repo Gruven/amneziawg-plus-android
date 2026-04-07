@@ -4,7 +4,6 @@
  */
 package org.amnezia.awg.viewmodel
 
-import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.core.os.ParcelCompat
@@ -20,11 +19,7 @@ class ConfigProxy : Parcelable {
 
     private constructor(parcel: Parcel) {
         `interface` = ParcelCompat.readParcelable(parcel, InterfaceProxy::class.java.classLoader, InterfaceProxy::class.java) ?: InterfaceProxy()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            ParcelCompat.readParcelableList(parcel, peers, PeerProxy::class.java.classLoader, PeerProxy::class.java)
-        } else {
-            parcel.readTypedList(peers, PeerProxy.CREATOR)
-        }
+        parcel.readTypedList(peers, PeerProxy.CREATOR)
         peers.forEach { it.bind(this) }
     }
 
@@ -62,11 +57,7 @@ class ConfigProxy : Parcelable {
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeParcelable(`interface`, flags)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            dest.writeParcelableList(peers, flags)
-        } else {
-            dest.writeTypedList(peers)
-        }
+        dest.writeTypedList(peers)
     }
 
     private class ConfigProxyCreator : Parcelable.Creator<ConfigProxy> {

@@ -7,11 +7,6 @@ package org.amnezia.awg.backend;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkCapabilities;
-import android.net.NetworkRequest;
-import android.os.Build;
 import android.util.Log;
 
 import org.amnezia.awg.backend.BackendException.Reason;
@@ -63,9 +58,6 @@ public final class RootGoBackend implements Backend {
     @Nullable private volatile StatusCallback statusCallback;
     // Track zombie awgTurnOff thread on timeout
     @Nullable private volatile Thread zombieTurnOffThread;
-    // Network change monitor for endpoint route updates
-    @Nullable private ConnectivityManager.NetworkCallback networkCallback;
-
     public RootGoBackend(final Context context, final RootShell rootShell) {
         SharedLibraryLoader.loadSharedLibrary(context, "wg-go");
         this.context = context;
@@ -181,50 +173,6 @@ public final class RootGoBackend implements Backend {
     @Override
     public void setStatusCallback(@Nullable final StatusCallback callback) {
         this.statusCallback = callback;
-    }
-
-    @SuppressWarnings("MissingPermission") // ACCESS_NETWORK_STATE declared in AndroidManifest
-    private void registerNetworkMonitor() {
-        final ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm == null) return;
-
-        // Defensive copy for thread-safe access from callback —
-        // endpoint IPs don't change during tunnel lifetime
-        final List<String> endpointIps = new ArrayList<>(networkManager.getActiveEndpointIps());
-
-        final ConnectivityManager.NetworkCallback cb = new ConnectivityManager.NetworkCallback() {
-            @Override
-            public void onAvailable(final Network network) {
-                new Thread(() -> refreshEndpointRoutes(endpointIps), "EndpointRouteRefresh").start();
-            }
-
-            @Override
-            public void onLost(final Network network) {
-                new Thread(() -> refreshEndpointRoutes(endpointIps), "EndpointRouteRefresh").start();
-            }
-        };
-
-        try {
-            cm.registerNetworkCallback(
-                    new NetworkRequest.Builder()
-                            .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-                            .build(), cb);
-            networkCallback = cb;
-        } catch (final Exception e) {
-            Log.w(TAG, "Failed to register network monitor: " + e.getMessage());
-        }
-    }
-
-    private void unregisterNetworkMonitor() {
-        final ConnectivityManager.NetworkCallback cb = networkCallback;
-        networkCallback = null;
-        if (cb == null) return;
-        try {
-            final ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            if (cm != null) cm.unregisterNetworkCallback(cb);
-        } catch (final Exception e) {
-            Log.w(TAG, "Failed to unregister network monitor: " + e.getMessage());
-        }
     }
 
     /**
@@ -478,7 +426,6 @@ public final class RootGoBackend implements Backend {
             currentTunnel = tunnel;
             currentConfig = config;
 
-            registerNetworkMonitor();
             launchStatusJob();
             startTunnelService(tunnel.getName());
 
@@ -489,7 +436,6 @@ public final class RootGoBackend implements Backend {
                 return;
             }
             stopTunnelService();
-            unregisterNetworkMonitor();
             stopStatusJob();
 
             final int handleToClose = currentTunnelHandle;
@@ -520,11 +466,7 @@ public final class RootGoBackend implements Backend {
     private void startTunnelService(final String tunnelName) {
         final Intent intent = new Intent(context, RootTunnelService.class);
         intent.putExtra(EXTRA_TUNNEL_NAME, tunnelName);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            context.startForegroundService(intent);
-        } else {
-            context.startService(intent);
-        }
+        context.startService(intent);
     }
 
     private void updateTunnelServiceStatus(final boolean connected) {
