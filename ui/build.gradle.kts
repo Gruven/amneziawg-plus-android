@@ -20,10 +20,12 @@ extensions.configure<ApplicationExtension> {
     namespace = pkg
     defaultConfig {
         applicationId = pkg
+        //noinspection ExpiredTargetSdkVersion
         targetSdk = 19
         versionCode = providers.gradleProperty("amneziawgVersionCode").get().toInt()
         versionName = providers.gradleProperty("amneziawgVersionName").get()
         buildConfigField("int", "MIN_SDK_VERSION", minSdk.toString())
+        multiDexEnabled = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -94,6 +96,7 @@ dependencies {
     implementation(libs.androidx.preference.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.multidex)
     implementation(libs.google.material)
     implementation(libs.zxing.android.embedded)
     implementation(libs.kotlinx.coroutines.android)

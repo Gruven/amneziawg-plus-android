@@ -30,5 +30,5 @@ include(":ui")
 configure<SettingsExtension> {
     compileSdk = 35
     minSdk = 19
-    ndkVersion = "26.1.10909125"
+    ndkVersion = "25.2.9519653"
 }
