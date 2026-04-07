@@ -12,11 +12,7 @@ Android GUI for [AmneziaWG](https://docs.amnezia.org/documentation/amnezia-wg/)
 - **Tasker plugin** — Integrates as a Tasker action plugin for automation. Select a tunnel and action (on/off/toggle) directly from Tasker.
 - **Token-based intent authentication** — Replaced the `CONTROL_TUNNELS` Android permission with a simple token for intent API authentication. No need to declare permissions in the calling app's manifest — just pass the token as an intent extra. More compatible with `adb`, scripts, and automation tools.
 - **Per-ABI APKs** — Separate APKs for each CPU architecture (`arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`). Smaller download size compared to a universal APK.
-- **UI fixes:**
-  - Fixed dark theme colors — buttons and accents were invisible on dark backgrounds due to incorrect `colorPrimary` for dark mode.
-  - Fixed edge-to-edge layout overlap on Android 15+ — settings and other screens no longer render behind the status bar and toolbar.
-  - All settings are now shown at once — removed the collapsible "Advanced" section which rendered incorrectly on older Android versions.
-  - Added a "Log" action to tunnel error notifications — quickly jump to the log viewer for error details.
+- **UI rewrite** — Simplified UI for Android 4.4.
 
 ## 🤖 Automation
 
