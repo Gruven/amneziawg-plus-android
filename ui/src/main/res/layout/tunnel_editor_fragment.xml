@@ -580,6 +580,7 @@
                             android:hint="@string/special_junk_i5"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/special_junk_i4_layout">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -589,29 +590,11 @@
                                 android:imeOptions="actionDone"
                                 android:inputType="textNoSuggestions"
                                 android:nextFocusUp="@id/special_junk_i4_text"
-                                android:nextFocusDown="@id/set_excluded_applications"
-                                android:nextFocusForward="@id/set_excluded_applications"
+                                android:nextFocusDown="@id/peers_layout"
+                                android:nextFocusForward="@id/peers_layout"
                                 android:text="@={config.interface.specialJunkI5}" />
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/set_excluded_applications"
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:nextFocusUp="@id/special_junk_i5_text"
-                            android:nextFocusDown="@id/peers_layout"
-                            android:nextFocusForward="@id/peers_layout"
-                            android:onClick="@{fragment::onRequestSetExcludedIncludedApplications}"
-                            android:text="@{config.interface.includedApplications.size > 0 ? @plurals/set_included_applications(config.interface.includedApplications.size, config.interface.includedApplications.size) : config.interface.excludedApplications.size > 0 ? @plurals/set_excluded_applications(config.interface.excludedApplications.size, config.interface.excludedApplications.size) : @string/all_applications}"
-                            android:textColor="?attr/colorSecondary"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/special_junk_i5_layout"
-                            app:rippleColor="?attr/colorSecondary"
-                            tools:text="4 excluded applications" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 

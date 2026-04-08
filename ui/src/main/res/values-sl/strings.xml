@@ -30,45 +30,6 @@
         <item quantity="few">%d tuneli uvoženi</item>
         <item quantity="other">%d tunelov uvoženih</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d izvzeta aplikacija</item>
-        <item quantity="two">%d izvzeti aplikaciji</item>
-        <item quantity="few">%d izvzete aplikacije</item>
-        <item quantity="other">%d izvzetih aplikacij</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d vključena aplikacija</item>
-        <item quantity="two">%d vključeni aplikaciji</item>
-        <item quantity="few">%d vključene aplikacije</item>
-        <item quantity="other">%d vključenih aplikacij</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d izvzeta</item>
-        <item quantity="two">%d izvzeti</item>
-        <item quantity="few">%d izvzete</item>
-        <item quantity="other">%d izvzetih</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d vključena</item>
-        <item quantity="two">%d vključeni</item>
-        <item quantity="few">%d vključene</item>
-        <item quantity="other">%d vključenih</item>
-    </plurals>
-    <string name="all_applications">Vse aplikacije</string>
-    <string name="exclude_from_tunnel">Izvzemi</string>
-    <string name="include_in_tunnel">Vključi samo za</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Vključi za %d aplikacijo</item>
-        <item quantity="two">Vključi za %d aplikaciji</item>
-        <item quantity="few">Vključi za %d aplikacije</item>
-        <item quantity="other">Vključi za %d aplikacij</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Izvzemi %d aplikacijo</item>
-        <item quantity="two">Izvzemi %d aplikaciji</item>
-        <item quantity="few">Izvzemi %d aplikacije</item>
-        <item quantity="other">Izvzemi %d aplikacij</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">vsako %d sekundo</item>
         <item quantity="two">vsaki %d sekundi</item>
@@ -81,10 +42,8 @@
         <item quantity="few">sekunde</item>
         <item quantity="other">sekund</item>
     </plurals>
-    <string name="use_all_applications">Vse aplikacije</string>
     <string name="add_peer">Dodaj vrstnike</string>
     <string name="addresses">Naslovi</string>
-    <string name="applications">Aplikacije</string>
     <string name="allow_remote_control_intents_summary_off">Zunanjim aplikacijam ni dovoljeno preklapljati tunelov (priporočeno)</string>
     <string name="allow_remote_control_intents_summary_on">Zunanje aplikacije lahko preklapljajo tunele (napredno)</string>
     <string name="allow_remote_control_intents_title">Dovoli oddaljene namere</string>
@@ -147,7 +106,6 @@
     <string name="edit">Uredi</string>
     <string name="endpoint">Končna točka</string>
     <string name="error_down">Napaka pri zaključevanju tunela: %s</string>
-    <string name="error_fetching_apps">Napaka pri poizvedovanju seznama aplikacij: %s</string>
     <string name="error_root">Prosim omogočite dostop root in poskusite ponovno</string>
     <string name="error_up">Napaka pri vzpostavitvi tunela: %s</string>
     <string name="exclude_private_ips">Izvzemi zasebne naslove IP</string>
@@ -226,7 +184,6 @@
     <string name="shell_marker_count_error">Lupina je pričakovala 4 oznake, dobila pa je %d</string>
     <string name="shell_start_error">Lupina se ni mogla zagnati: %d</string>
     <string name="success_application_will_restart">Uspešno. Aplikacija se bo znova zagnala …</string>
-    <string name="toggle_all">Preklopi vse</string>
     <string name="toggle_error">Napaka pri preklopu tunela AmneziaWG: %s</string>
     <string name="tools_installer_already">awg in awg-quick sta že nameščena</string>
     <string name="tools_installer_failure">Orodij ukazne vrstice ni bilo mogoče namestiti (ni dostopa root?)</string>

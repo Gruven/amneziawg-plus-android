@@ -20,33 +20,6 @@
         <item quantity="one">Importerade %d tunnel</item>
         <item quantity="other">Importerade %d tunnlar</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d exkluderad applikation</item>
-        <item quantity="other">%d Exkluderade applikationer</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d inkluderad applikation</item>
-        <item quantity="other">%d inkluderade applikationer</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d exkluderad</item>
-        <item quantity="other">%d exkluderade</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d inkluderad</item>
-        <item quantity="other">%d inkluderade</item>
-    </plurals>
-    <string name="all_applications">Alla applikationer</string>
-    <string name="exclude_from_tunnel">Exkludera</string>
-    <string name="include_in_tunnel">Inkludera endast</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Inkludera %d app</item>
-        <item quantity="other">Inkludera %d appar</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Exkludera %d app</item>
-        <item quantity="other">Exkludera %d appar</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">varje sekund</item>
         <item quantity="other">var %d sekund</item>
@@ -55,10 +28,8 @@
         <item quantity="one">sekund</item>
         <item quantity="other">sekunder</item>
     </plurals>
-    <string name="use_all_applications">Använd alla appar</string>
     <string name="add_peer">Lägg till klient</string>
     <string name="addresses">Adresser</string>
-    <string name="applications">Applikationer</string>
     <string name="allow_remote_control_intents_summary_off">Externa appar kan inte växla tunnlar (rekommenderas)</string>
     <string name="allow_remote_control_intents_summary_on">Externa appar kan växla tunnlar (avancerat)</string>
     <string name="allow_remote_control_intents_title">Tillåt fjärrintents</string>
@@ -123,7 +94,6 @@
     <string name="edit">Redigera</string>
     <string name="endpoint">Slutpunkt</string>
     <string name="error_down">Fel vid nedtagning av tunnel: %s</string>
-    <string name="error_fetching_apps">Fel vid hämtning av applista: %s</string>
     <string name="error_root">Vänligen få rootbehörighet och försök igen</string>
     <string name="error_prepare">Fel vid förberedelse av tunnel: %s</string>
     <string name="error_up">Fel vid uppstart av tunnel: %s</string>
@@ -209,7 +179,6 @@
     <string name="shell_marker_count_error">Shell förväntade sig 4 markörer, tog emot %d</string>
     <string name="shell_start_error">Shell kunde inte starta: %d</string>
     <string name="success_application_will_restart">Framgång. Applikationen kommer nu att starta om…</string>
-    <string name="toggle_all">Växla alla</string>
     <string name="toggle_error">Fel vid växling av AmneziaWG-tunnel: %s</string>
     <string name="tools_installer_already">awg och awg-quick är redan installerade</string>
     <string name="tools_installer_failure">Kan inte installera kommandoradsverktyg (ej root?)</string>

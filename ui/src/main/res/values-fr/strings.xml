@@ -20,33 +20,6 @@
         <item quantity="one">%d tunnel importé</item>
         <item quantity="other">%d tunnels importés</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d application exclue</item>
-        <item quantity="other">%d applications exclues</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d application incluse</item>
-        <item quantity="other">%d applications incluses</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d exclue</item>
-        <item quantity="other">%d exclues</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d incluse</item>
-        <item quantity="other">%d incluses</item>
-    </plurals>
-    <string name="all_applications">Toutes les Applications</string>
-    <string name="exclude_from_tunnel">Exclure</string>
-    <string name="include_in_tunnel">Inclure uniquement</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Inclure %d application</item>
-        <item quantity="other">Inclure %d applications</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Exclure %d application</item>
-        <item quantity="other">Exclure %d applications</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">chaque seconde</item>
         <item quantity="other">tous les %d secondes</item>
@@ -55,10 +28,8 @@
         <item quantity="one">seconde</item>
         <item quantity="other">secondes</item>
     </plurals>
-    <string name="use_all_applications">Utiliser toutes les applications</string>
     <string name="add_peer">Ajouter un pair</string>
     <string name="addresses">Adresses</string>
-    <string name="applications">Applications</string>
     <string name="allow_remote_control_intents_summary_off">Les applications externes ne peuvent pas activer les tunnels (recommandé)</string>
     <string name="allow_remote_control_intents_summary_on">Les applications externes peuvent activer les tunnels (avancés)</string>
     <string name="allow_remote_control_intents_title">Autoriser les intents distants</string>
@@ -123,7 +94,6 @@
     <string name="edit">Modifier</string>
     <string name="endpoint">Point de terminaison</string>
     <string name="error_down">Erreur lors de la désactivation du tunnel : %s</string>
-    <string name="error_fetching_apps">Erreur lors de la récupération de la liste d\'applications : %s</string>
     <string name="error_root">Veuillez obtenir l\'accès root et essayez à nouveau</string>
     <string name="error_prepare">Erreur lors de la préparation du tunnel : %s</string>
     <string name="error_up">Erreur lors de la mise en place du tunnel : %s</string>
@@ -209,7 +179,6 @@
     <string name="shell_marker_count_error">L\'interpréteur de commandes attendait 4 marqueurs, %d reçus</string>
     <string name="shell_start_error">L\'interpréteur de commande n\'a pas pu démarrer : %d</string>
     <string name="success_application_will_restart">Succès. L\'application va redémarrer maintenant…</string>
-    <string name="toggle_all">Tout basculer</string>
     <string name="toggle_error">Erreur lors de l\'activation du tunnel AmneziaWG : %s</string>
     <string name="tools_installer_already">awg et awg-quick sont déjà installés</string>
     <string name="tools_installer_failure">Impossible d\'installer les outils en ligne de commande (pas de root?)</string>

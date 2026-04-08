@@ -25,39 +25,6 @@
         <item quantity="few">%d tuneluri importate</item>
         <item quantity="other">%d de tuneluri importate</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d aplicație exclusă</item>
-        <item quantity="few">%d aplicații excluse</item>
-        <item quantity="other">%d de aplicații excluse</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d aplicație inclusă</item>
-        <item quantity="few">%d aplicații incluse</item>
-        <item quantity="other">%d de aplicații incluse</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d exclusă</item>
-        <item quantity="few">%d excluse</item>
-        <item quantity="other">%d excluse</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d inclusă</item>
-        <item quantity="few">%d incluse</item>
-        <item quantity="other">%d incluse</item>
-    </plurals>
-    <string name="all_applications">Toate aplicațiile</string>
-    <string name="exclude_from_tunnel">Excludere</string>
-    <string name="include_in_tunnel">Includere numai</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Include %d aplicație</item>
-        <item quantity="few">Include %d aplicații</item>
-        <item quantity="other">Include %d de aplicații</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Exclude %d aplicație</item>
-        <item quantity="few">Exclude %d aplicații</item>
-        <item quantity="other">Exclude %d de aplicații</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">în fiecare secundă</item>
         <item quantity="few">la fiecare %d secunde</item>
@@ -68,10 +35,8 @@
         <item quantity="few">secunde</item>
         <item quantity="other">secunde</item>
     </plurals>
-    <string name="use_all_applications">Utilizează toate aplicațiile</string>
     <string name="add_peer">Adăugare pereche</string>
     <string name="addresses">Adrese</string>
-    <string name="applications">Aplicații</string>
     <string name="allow_remote_control_intents_summary_off">Aplicațiile externe nu pot comuta tunelurile (recomandat)</string>
     <string name="allow_remote_control_intents_summary_on">Aplicațiile externe pot comuta tunelurile (avansat)</string>
     <string name="allow_remote_control_intents_title">Permite intent-uri la distanță</string>
@@ -136,7 +101,6 @@
     <string name="edit">Editare</string>
     <string name="endpoint">Punct final</string>
     <string name="error_down">Eroare la oprirea tunelului: %s</string>
-    <string name="error_fetching_apps">Eroare la preluarea listei de aplicații: %s</string>
     <string name="error_root">Obține acces root și încearcă din nou</string>
     <string name="error_prepare">Eroare la pregătirea tunelului: %s</string>
     <string name="error_up">Eroare la pornirea tunelului: %s</string>
@@ -220,7 +184,6 @@
     <string name="shell_marker_count_error">Interfața de comunicare a așteptat 4 marcatori, a primit %d</string>
     <string name="shell_start_error">Interfața de comunicare nu a putut porni: %d</string>
     <string name="success_application_will_restart">Succes. Aplicația se va reporni acum…</string>
-    <string name="toggle_all">Comutare toate</string>
     <string name="toggle_error">Eroare la comutarea tunelului AmneziaWG: %s</string>
     <string name="tools_installer_already">awg și awg-quick sunt deja instalate</string>
     <string name="tools_installer_failure">Nu se pot instala instrumentele de linie de comandă (lipsă root?)</string>

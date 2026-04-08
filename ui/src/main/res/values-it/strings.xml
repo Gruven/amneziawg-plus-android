@@ -20,33 +20,6 @@
         <item quantity="one">Importato %d tunnel</item>
         <item quantity="other">Importati %d tunnel</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d applicazione esclusa</item>
-        <item quantity="other">%d applicazioni escluse</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d applicazione inclusa</item>
-        <item quantity="other">%d applicazioni incluse</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d escluse</item>
-        <item quantity="other">%d escluse</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d inclusa</item>
-        <item quantity="other">%d incluse</item>
-    </plurals>
-    <string name="all_applications">Tutte le applicazioni</string>
-    <string name="exclude_from_tunnel">Escludi</string>
-    <string name="include_in_tunnel">Includi solo</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Includi %d applicazione</item>
-        <item quantity="other">Includi %d applicazioni</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Escludi %d applicazione</item>
-        <item quantity="other">Escludi %d applicazioni</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">ogni secondo</item>
         <item quantity="other">ogni %d secondi</item>
@@ -55,10 +28,8 @@
         <item quantity="one">secondo</item>
         <item quantity="other">secondi</item>
     </plurals>
-    <string name="use_all_applications">Utilizza tutte le applicazioni</string>
     <string name="add_peer">Aggiungi peer</string>
     <string name="addresses">Indirizzi</string>
-    <string name="applications">Applicazioni</string>
     <string name="allow_remote_control_intents_summary_off">Le app esterne non possono attivare tunnel (consigliato)</string>
     <string name="allow_remote_control_intents_summary_on">Le app esterne possono attivare tunnel (avanzato)</string>
     <string name="allow_remote_control_intents_title">Consenti intent remoti</string>
@@ -123,7 +94,6 @@
     <string name="edit">Modifica</string>
     <string name="endpoint">Endpoint</string>
     <string name="error_down">Errore di disattivazione del tunnel: %s</string>
-    <string name="error_fetching_apps">Errore di recupero dell\'elenco applicazioni: %s</string>
     <string name="error_root">Accedi come root e riprova</string>
     <string name="error_prepare">Errore di preparazione del tunnel: %s</string>
     <string name="error_up">Errore di attivazione del tunnel: %s</string>
@@ -209,7 +179,6 @@
     <string name="shell_marker_count_error">La shell si aspettava 4 marker, ne ha ricevuti %d</string>
     <string name="shell_start_error">Avvio della shell non riuscito: %d</string>
     <string name="success_application_will_restart">Successo. L\'applicazione si riavvierà…</string>
-    <string name="toggle_all">Inverti tutto</string>
     <string name="toggle_error">Errore di commutazione tunnel AmneziaWG: %s</string>
     <string name="tools_installer_already">awg e awg-quick sono già installati</string>
     <string name="tools_installer_failure">Impossibile installare strumenti di riga di comando (non root?)</string>

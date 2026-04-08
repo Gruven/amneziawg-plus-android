@@ -15,37 +15,14 @@
     <plurals name="import_total_success">
         <item quantity="other">导入了 %d 个隧道</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="other">对 %d 个应用不生效</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="other">对 %d 个应用生效</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="other">对 %d 个应用不生效</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="other">对 %d 个应用生效</item>
-    </plurals>
-    <string name="all_applications">应用过滤</string>
-    <string name="exclude_from_tunnel">不生效</string>
-    <string name="include_in_tunnel">生效</string>
-    <plurals name="include_n_applications">
-        <item quantity="other">选定 %d 个应用</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="other">选定 %d 个应用</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="other">每隔 %d 秒</item>
     </plurals>
     <plurals name="persistent_keepalive_seconds_suffix">
         <item quantity="other">秒</item>
     </plurals>
-    <string name="use_all_applications">不设定过滤</string>
     <string name="add_peer">添加节点</string>
     <string name="addresses">局域网 IP 地址</string>
-    <string name="applications">应用过滤</string>
     <string name="allow_remote_control_intents_summary_off">不允许外部应用控制隧道（推荐）</string>
     <string name="allow_remote_control_intents_summary_on">允许外部应用控制隧道（面向高级用户）</string>
     <string name="allow_remote_control_intents_title">允许远程意图</string>
@@ -110,7 +87,6 @@
     <string name="edit">编辑</string>
     <string name="endpoint">对端</string>
     <string name="error_down">断开连接时出错：%s</string>
-    <string name="error_fetching_apps">获取应用列表时出错：%s</string>
     <string name="error_root">请获取 root 权限并重试</string>
     <string name="error_prepare">准备连接时出错：%s</string>
     <string name="error_up">建立连接时出错：%s</string>
@@ -196,7 +172,6 @@
     <string name="shell_marker_count_error">Shell 应获取 4 个标记，获取到 %d 个</string>
     <string name="shell_start_error">Shell 启动失败：%d</string>
     <string name="success_application_will_restart">成功，应用即将重启…</string>
-    <string name="toggle_all">全选</string>
     <string name="toggle_error">切换隧道状态时出错：%s</string>
     <string name="tools_installer_already">awg 与 awg-quick 已安装</string>
     <string name="tools_installer_failure">无法安装命令行工具（尚未获取 root 权限？）</string>

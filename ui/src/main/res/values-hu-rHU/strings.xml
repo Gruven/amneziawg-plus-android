@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="all_applications">Minden alkalmazás</string>
-    <string name="exclude_from_tunnel">Kizárás</string>
     <string name="addresses">Címek</string>
-    <string name="applications">Alkalmazások</string>
     <string name="allowed_ips">Engedélyezett IP-k</string>
     <string name="bad_config_reason_invalid_key">Érvénytelen kulcs</string>
     <string name="bad_config_reason_invalid_value">Helytelen érték</string>
@@ -28,7 +25,6 @@
     <string name="save">Mentés</string>
     <string name="select_all">Összes kijelölése</string>
     <string name="settings">Beállítások</string>
-    <string name="toggle_all">Összes átkapcsolása</string>
     <string name="tunnel_name">Csatorna neve</string>
     <string name="type_name_kernel_module">Kernel modul</string>
     <string name="type_name_root_go_userspace">Root Go userspace</string>

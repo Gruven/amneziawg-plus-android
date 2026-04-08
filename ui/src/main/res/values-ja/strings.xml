@@ -15,37 +15,14 @@
     <plurals name="import_total_success">
         <item quantity="other">%d 個のトンネル設定をインポート済</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="other">除外アプリ %d 個</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="other">トンネリング対象アプリ %d 個</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="other">対象外アプリ %d 個</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="other">トンネル対象アプリ %d 個</item>
-    </plurals>
-    <string name="all_applications">すべてのアプリがトンネル対象</string>
-    <string name="exclude_from_tunnel">トンネルしない</string>
-    <string name="include_in_tunnel">トンネルする</string>
-    <plurals name="include_n_applications">
-        <item quantity="other">%d アプリが対象</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="other">%d アプリを除外</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="other">%d 秒ごと</item>
     </plurals>
     <plurals name="persistent_keepalive_seconds_suffix">
         <item quantity="other">秒</item>
     </plurals>
-    <string name="use_all_applications">全アプリをトンネル対象にする</string>
     <string name="add_peer">ピアを追加する</string>
     <string name="addresses">アドレス</string>
-    <string name="applications">アプリ</string>
     <string name="allow_remote_control_intents_summary_off">外部アプリはトンネルを制御できない(推奨)</string>
     <string name="allow_remote_control_intents_summary_on">外部アプリにトンネルの制御を許可(上級者向け)</string>
     <string name="allow_remote_control_intents_title">リモートインテントを許可</string>
@@ -110,7 +87,6 @@
     <string name="edit">編集</string>
     <string name="endpoint">エンドポイント</string>
     <string name="error_down">トンネル停止時エラー: %s</string>
-    <string name="error_fetching_apps">アプリ一覧取得エラー: %s</string>
     <string name="error_root">root 権限を取得して再試行してください</string>
     <string name="error_prepare">トンネル準備中エラー: %s</string>
     <string name="error_up">トンネル起動時エラー: %s</string>
@@ -196,7 +172,6 @@
     <string name="shell_marker_count_error">シェルは 4 マーカーを期待していますが、 %d マーカーを受け取りました</string>
     <string name="shell_start_error">シェルの起動に失敗しました: %d</string>
     <string name="success_application_will_restart">成功。アプリケーションは再起動します…</string>
-    <string name="toggle_all">すべての状態を切り替え</string>
     <string name="toggle_error">AmneziaWG トンネルの状態切り替え時にエラー: %s</string>
     <string name="tools_installer_already">awg および awg-quick はインストール済みです</string>
     <string name="tools_installer_failure">コマンドラインツールをインストールできません(root権限がない？)</string>

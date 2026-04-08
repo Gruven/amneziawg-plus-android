@@ -8,8 +8,6 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import androidx.databinding.ObservableArrayList
-import androidx.databinding.ObservableList
 import org.amnezia.awg.BR
 import org.amnezia.awg.config.Attribute
 import org.amnezia.awg.config.BadConfigException
@@ -19,12 +17,6 @@ import org.amnezia.awg.crypto.KeyFormatException
 import org.amnezia.awg.crypto.KeyPair
 
 class InterfaceProxy : BaseObservable, Parcelable {
-    @get:Bindable
-    val excludedApplications: ObservableList<String> = ObservableArrayList()
-
-    @get:Bindable
-    val includedApplications: ObservableList<String> = ObservableArrayList()
-
     @get:Bindable
     var addresses: String = ""
         set(value) {
@@ -184,8 +176,6 @@ class InterfaceProxy : BaseObservable, Parcelable {
     private constructor(parcel: Parcel) {
         addresses = parcel.readString() ?: ""
         dnsServers = parcel.readString() ?: ""
-        parcel.readStringList(excludedApplications)
-        parcel.readStringList(includedApplications)
         listenPort = parcel.readString() ?: ""
         mtu = parcel.readString() ?: ""
         junkPacketCount = parcel.readString() ?: ""
@@ -211,8 +201,6 @@ class InterfaceProxy : BaseObservable, Parcelable {
         addresses = Attribute.join(other.addresses)
         val dnsServerStrings = other.dnsServers.map { it.hostAddress }.plus(other.dnsSearchDomains)
         dnsServers = Attribute.join(dnsServerStrings)
-        excludedApplications.addAll(other.excludedApplications)
-        includedApplications.addAll(other.includedApplications)
         listenPort = other.listenPort.map { it.toString() }.orElse("")
         mtu = other.mtu.map { it.toString() }.orElse("")
         junkPacketCount = other.junkPacketCount.map { it.toString() }.orElse("")
@@ -251,8 +239,6 @@ class InterfaceProxy : BaseObservable, Parcelable {
         val builder = Interface.Builder()
         if (addresses.isNotEmpty()) builder.parseAddresses(addresses)
         if (dnsServers.isNotEmpty()) builder.parseDnsServers(dnsServers)
-        if (excludedApplications.isNotEmpty()) builder.excludeApplications(excludedApplications)
-        if (includedApplications.isNotEmpty()) builder.includeApplications(includedApplications)
         if (listenPort.isNotEmpty()) builder.parseListenPort(listenPort)
         if (mtu.isNotEmpty()) builder.parseMtu(mtu)
         if (junkPacketCount.isNotEmpty()) builder.parseJunkPacketCount(junkPacketCount)
@@ -278,8 +264,6 @@ class InterfaceProxy : BaseObservable, Parcelable {
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeString(addresses)
         dest.writeString(dnsServers)
-        dest.writeStringList(excludedApplications)
-        dest.writeStringList(includedApplications)
         dest.writeString(listenPort)
         dest.writeString(mtu)
         dest.writeString(junkPacketCount)

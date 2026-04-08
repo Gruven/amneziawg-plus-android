@@ -20,33 +20,6 @@
         <item quantity="one">Imported %d tunnel</item>
         <item quantity="other">Imported %d tunnels</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d Excluded Application</item>
-        <item quantity="other">%d Excluded Applications</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d Included Application</item>
-        <item quantity="other">%d Included Applications</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d excluded</item>
-        <item quantity="other">%d excluded</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d included</item>
-        <item quantity="other">%d included</item>
-    </plurals>
-    <string name="all_applications">All Applications</string>
-    <string name="exclude_from_tunnel">Exclude</string>
-    <string name="include_in_tunnel">Include only</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Include %d app</item>
-        <item quantity="other">Include %d apps</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Exclude %d app</item>
-        <item quantity="other">Exclude %d apps</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">every second</item>
         <item quantity="other">every %d seconds</item>
@@ -55,10 +28,8 @@
         <item quantity="one">second</item>
         <item quantity="other">seconds</item>
     </plurals>
-    <string name="use_all_applications">Use all apps</string>
     <string name="add_peer">Add peer</string>
     <string name="addresses">Addresses</string>
-    <string name="applications">Applications</string>
     <string name="allow_remote_control_intents_summary_off">External apps may not toggle tunnels via intents (recommended)</string>
     <string name="allow_remote_control_intents_summary_on">External apps may toggle tunnels via intents (advanced)</string>
     <string name="allow_remote_control_intents_title">Allow remote intents</string>
@@ -121,7 +92,6 @@
     <string name="edit">Edit</string>
     <string name="endpoint">Endpoint</string>
     <string name="error_down">Error bringing down tunnel: %s</string>
-    <string name="error_fetching_apps">Error fetching apps list: %s</string>
     <string name="error_root">Please obtain root access and try again</string>
     <string name="error_prepare">Error preparing tunnel: %s</string>
     <string name="error_up">Error bringing up tunnel: %s</string>
@@ -224,7 +194,6 @@
     <string name="shell_marker_count_error">Shell expected 4 markers, received %d</string>
     <string name="shell_start_error">Shell failed to start: %d</string>
     <string name="success_application_will_restart">Success. The application will now restart…</string>
-    <string name="toggle_all">Toggle All</string>
     <string name="toggle_error">Error toggling AmneziaWG tunnel: %s</string>
     <string name="tools_installer_already">awg and awg-quick are already installed</string>
     <string name="tools_installer_failure">Unable to install command-line tools (no root?)</string>

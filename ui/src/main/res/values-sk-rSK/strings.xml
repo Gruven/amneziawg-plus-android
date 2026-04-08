@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="all_applications">Všetky aplikácie</string>
-    <string name="exclude_from_tunnel">Vylúč</string>
-    <string name="include_in_tunnel">Zahrň len</string>
-    <string name="use_all_applications">Použi všetky aplikácie</string>
     <string name="add_peer">Pridať peera</string>
     <string name="addresses">Adresy</string>
-    <string name="applications">Aplikácie</string>
     <string name="allow_remote_control_intents_summary_off">Externé aplikácie nemôžu spustiť tunely (odporúčané)</string>
     <string name="allow_remote_control_intents_summary_on">Externé aplikácie môžu spustiť tunely (pokročilé)</string>
     <string name="allow_remote_control_intents_title">Povoliť vzdialené intenty</string>
@@ -68,7 +63,6 @@
     <string name="edit">Upraviť</string>
     <string name="endpoint">Koncový bod</string>
     <string name="error_down">Chyba pri vypínaní tunela: %s</string>
-    <string name="error_fetching_apps">Chyba pri načítaní zoznamu aplikácií: %s</string>
     <string name="error_root">Získajte prístup root a skúste znova</string>
     <string name="error_up">Chyba pri zapínaní tunela: %s</string>
     <string name="exclude_private_ips">Vynechať súkromné IP</string>
@@ -132,7 +126,6 @@
     <string name="save">Uložiť</string>
     <string name="select_all">Označiť všetko</string>
     <string name="settings">Nastavenia</string>
-    <string name="toggle_all">Prepnúť všetko</string>
     <string name="tools_installer_already">awg a awg-quick už sú nainštalované</string>
     <string name="tools_installer_initial">Nainštalovať voliteľné nástroje pre skriptovanie</string>
     <string name="tools_installer_initial_magisk">Nainštalovať voliteľné nástroje pre skriptovanie ako Magisk modul</string>

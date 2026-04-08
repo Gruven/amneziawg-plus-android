@@ -30,45 +30,6 @@
         <item quantity="many">Імпортовано %d тунелів</item>
         <item quantity="other">Імпортовано %d тунелів</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d Виключений додаток</item>
-        <item quantity="few">%d Виключених додатки</item>
-        <item quantity="many">%d Виключені додатки</item>
-        <item quantity="other">%d Виключених додатків</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d Включений додаток</item>
-        <item quantity="few">%d Включені додатки</item>
-        <item quantity="many">%d Включених додатків</item>
-        <item quantity="other">%d Включених додатків</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d виключений</item>
-        <item quantity="few">%d виключені</item>
-        <item quantity="many">%d виключені</item>
-        <item quantity="other">%d виключені</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d включено</item>
-        <item quantity="few">%d включено</item>
-        <item quantity="many">%d включено</item>
-        <item quantity="other">%d включено</item>
-    </plurals>
-    <string name="all_applications">Всі додатки</string>
-    <string name="exclude_from_tunnel">Виключити</string>
-    <string name="include_in_tunnel">Включити тільки</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Включити %d додаток</item>
-        <item quantity="few">Включити %d додатки</item>
-        <item quantity="many">Включити %d додатків</item>
-        <item quantity="other">Включити %d додатків</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Виключити %d додаток</item>
-        <item quantity="few">Виключити %d додатки</item>
-        <item quantity="many">Виключити %d додатків</item>
-        <item quantity="other">Виключити %d додатків</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">кожну секунду</item>
         <item quantity="few">кожні %d секунди</item>
@@ -81,10 +42,8 @@
         <item quantity="many">секунд</item>
         <item quantity="other">секунд</item>
     </plurals>
-    <string name="use_all_applications">Використовувати всі додатки</string>
     <string name="add_peer">Додати пір</string>
     <string name="addresses">Адреси</string>
-    <string name="applications">Додатки</string>
     <string name="allow_remote_control_intents_summary_off">Зовнішні додатки не можуть перемикати тунелі (рекомендовано)</string>
     <string name="allow_remote_control_intents_summary_on">Зовнішні додатки можуть перемикати тунелі (для досвідчених)</string>
     <string name="allow_remote_control_intents_title">Дозволити віддалені інтенти</string>
@@ -149,7 +108,6 @@
     <string name="edit">Редагувати</string>
     <string name="endpoint">Endpoint</string>
     <string name="error_down">Помилка вимкнення тунелю: %s</string>
-    <string name="error_fetching_apps">Помилка при отриманні списку додатків: %s</string>
     <string name="error_root">Будь ласка, отримайте root-доступ і спробуйте ще раз</string>
     <string name="error_prepare">Помилка підготовки тунелю: %s</string>
     <string name="error_up">Помилка при увімкненні тунелю: %s</string>
@@ -231,7 +189,6 @@
     <string name="shell_marker_count_error">Очікувалось 4 маркери, отримано %d</string>
     <string name="shell_start_error">Не вдалося запустити в оболонці: %d</string>
     <string name="success_application_will_restart">Успішно виконано. Додаток буде перезапущено…</string>
-    <string name="toggle_all">Перемкнути всі</string>
     <string name="toggle_error">Помилка перемикання тунелю: %s</string>
     <string name="tools_installer_already">awg та awg-quick вже встановлено</string>
     <string name="tools_installer_failure">Не вдалося встановити інструменти командного рядка (немає root?)</string>

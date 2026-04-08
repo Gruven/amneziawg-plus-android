@@ -40,57 +40,6 @@
         <item quantity="many">تم استيراد %d أنفاق</item>
         <item quantity="other">تم استيراد %d أنفاق</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="zero">%d تطبيقات مستبعدة</item>
-        <item quantity="one">%d تطبيق مستبعد</item>
-        <item quantity="two">تطبيقين مستبعدين</item>
-        <item quantity="few">%d تطبيقات مستبعدة</item>
-        <item quantity="many">%d تطبيقات مستبعدة</item>
-        <item quantity="other">%d تطبيقات مستبعدة</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="zero">%d تطبيق مضمن</item>
-        <item quantity="one">%d تطبيق مضمن</item>
-        <item quantity="two">تطبيقين مضمننين</item>
-        <item quantity="few">%d تطبيقات مضمنة</item>
-        <item quantity="many">%d تطبيقات مضمنة</item>
-        <item quantity="other">%d تطبيقات مضمنة</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="zero">تم استبعاد %d</item>
-        <item quantity="one">تم استبعاد %d</item>
-        <item quantity="two">تم استبعاد %d</item>
-        <item quantity="few">تم استبعاد %d</item>
-        <item quantity="many">تم استبعاد %d</item>
-        <item quantity="other">تم استبعاد %d</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="zero">تم تضمين %d</item>
-        <item quantity="one">تم تضمين %d</item>
-        <item quantity="two">تم تضمين %d</item>
-        <item quantity="few">تم تضمين %d</item>
-        <item quantity="many">تم تضمين %d</item>
-        <item quantity="other">تم تضمين %d</item>
-    </plurals>
-    <string name="all_applications">جميع التطبيقات</string>
-    <string name="exclude_from_tunnel">استبعاد</string>
-    <string name="include_in_tunnel">تضمين فقط</string>
-    <plurals name="include_n_applications">
-        <item quantity="zero">تضمين %d من التطبيقات</item>
-        <item quantity="one">تضمين تطبيق %d</item>
-        <item quantity="two">تضمين %d من التطبيقات</item>
-        <item quantity="few">تضمين %d من التطبيقات</item>
-        <item quantity="many">تضمين %d من التطبيقات</item>
-        <item quantity="other">تضمين %d من التطبيقات</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="zero">استبعاد %d تطبيقات</item>
-        <item quantity="one">استبعاد %d تطبيقات</item>
-        <item quantity="two">استبعاد طبيقين</item>
-        <item quantity="few">استبعاد %d تطبيقات</item>
-        <item quantity="many">استبعاد %d تطبيقات</item>
-        <item quantity="other">استبعاد %d تطبيقات</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="zero">كل %d ثانية</item>
         <item quantity="one">كل ثانية</item>
@@ -107,10 +56,8 @@
         <item quantity="many">ثواني</item>
         <item quantity="other">ثوان</item>
     </plurals>
-    <string name="use_all_applications">استخدام جميع التطبيقات</string>
     <string name="add_peer">إضافة ند</string>
     <string name="addresses">العناوين</string>
-    <string name="applications">التطبيقات</string>
     <string name="allow_remote_control_intents_summary_off">لا يمكن للتطبيقات الخارجية تبدل الأنفاق (مستحسن)</string>
     <string name="allow_remote_control_intents_summary_on">يمكن للتطبيقات الخارجية تبدل الأنفاق (مستحسن)</string>
     <string name="allow_remote_control_intents_title">السماح بالأوامر عن بعد</string>
@@ -175,7 +122,6 @@
     <string name="edit">تعديل</string>
     <string name="endpoint">نقطة نهاية</string>
     <string name="error_down">خطأ في فصل النفق:%s</string>
-    <string name="error_fetching_apps">خطأ في جلب قائمة التطبيقات: %s</string>
     <string name="error_root">الرجاء الحصول على صلاحيات الروت وحاول مرة أخرى</string>
     <string name="error_prepare">خطأ في تحضير النفق: %s</string>
     <string name="error_up">خطأ خلال إنشاء النفق: %s</string>
@@ -261,7 +207,6 @@
     <string name="shell_marker_count_error">القشرة متوقعة 4 علامات، استلمت %d</string>
     <string name="shell_start_error">فشل تشغيل القشرة: %d</string>
     <string name="success_application_will_restart">تم بنجاح. ستتم الآن إعادة تشغيل التطبيق…</string>
-    <string name="toggle_all">تبديل الكل</string>
     <string name="toggle_error">خطأ في تبديل نفق وايرجارد: %s</string>
     <string name="tools_installer_already">تم بالفعل تثبيت awg و awg-quick</string>
     <string name="tools_installer_failure">غير قادر على تثبيت أدوات سطر الأوامر (لا يوجد root؟)</string>

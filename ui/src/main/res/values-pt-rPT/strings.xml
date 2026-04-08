@@ -20,33 +20,6 @@
         <item quantity="one">%d túnel importado</item>
         <item quantity="other">%d túneis importados</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d Aplicação Excluída</item>
-        <item quantity="other">%d Aplicações Excluídas</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d Aplicação Incluída</item>
-        <item quantity="other">%d Aplicações incluídas</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d Excluída</item>
-        <item quantity="other">%d Excluídas</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d Incluída</item>
-        <item quantity="other">%d Incluídas</item>
-    </plurals>
-    <string name="all_applications">Todas as Aplicações</string>
-    <string name="exclude_from_tunnel">Excluir</string>
-    <string name="include_in_tunnel">Apenas aplicações incluídas</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Incluir %d Aplicação</item>
-        <item quantity="other">Incluir %d Aplicações</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Excluir %d Aplicação</item>
-        <item quantity="other">Exluir %d Aplicações</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">a cada %d segundo</item>
         <item quantity="other">a cada %d segundos</item>
@@ -55,10 +28,8 @@
         <item quantity="one">segundo</item>
         <item quantity="other">segundos</item>
     </plurals>
-    <string name="use_all_applications">Usar todas as aplicações</string>
     <string name="add_peer">Adicionar nó</string>
     <string name="addresses">Endereços</string>
-    <string name="applications">Aplicações</string>
     <string name="allow_remote_control_intents_summary_off">Aplicações externas não podem controlar túneis (recomendado)</string>
     <string name="allow_remote_control_intents_summary_on">Aplicações externas podem controlar túneis (avançado)</string>
     <string name="allow_remote_control_intents_title">Permitir intents remotos</string>
@@ -120,7 +91,6 @@
     <string name="edit">Editar</string>
     <string name="endpoint">Endpoint</string>
     <string name="error_down">Erro ao fechar túnel: %s</string>
-    <string name="error_fetching_apps">Erro ao obter lista de aplicações: %s</string>
     <string name="error_root">Por favor, obtenha acesso root e tente novamente</string>
     <string name="error_up">Erro ao abrir túnel: %s</string>
     <string name="exclude_private_ips">Excluir IPs privados</string>
@@ -199,7 +169,6 @@
     <string name="shell_marker_count_error">A shell esperava 4 marcadores, recebeu %d</string>
     <string name="shell_start_error">A shell falhou ao iniciar: %d</string>
     <string name="success_application_will_restart">Sucesso. A aplicação irá reiniciar…</string>
-    <string name="toggle_all">Ativar/Desativar todos</string>
     <string name="toggle_error">Erro ao alterar o túnel AmneziaWG: %s</string>
     <string name="tools_installer_already">awg e awg-quick já estão instalados</string>
     <string name="tools_installer_failure">Não foi possível instalar as ferramentas de linha de comando (sem root?)</string>

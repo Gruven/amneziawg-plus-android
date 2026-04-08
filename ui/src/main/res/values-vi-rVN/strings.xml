@@ -15,37 +15,14 @@
     <plurals name="import_total_success">
         <item quantity="other">Đã nhập %d tunnel(s)</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="other">%d Ứng dụng được loại trừ</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="other">%d Ứng dụng được bao gồm</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="other">Đã loại trừ %d</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="other">Đã thêm vào %d</item>
-    </plurals>
-    <string name="all_applications">Tất cả các ứng dụng</string>
-    <string name="exclude_from_tunnel">Ngoại trừ</string>
-    <string name="include_in_tunnel">Chỉ bao gồm</string>
-    <plurals name="include_n_applications">
-        <item quantity="other">Thêm vào %d ứng dụng</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="other">Loại trừ %d ứng dụng</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="other">Mỗi %d giây</item>
     </plurals>
     <plurals name="persistent_keepalive_seconds_suffix">
         <item quantity="other">Giây</item>
     </plurals>
-    <string name="use_all_applications">Xài dùng tất cả app</string>
     <string name="add_peer">Thêm cộng tác viên</string>
     <string name="addresses">Địa chỉ</string>
-    <string name="applications">Ứng dụng</string>
     <string name="allow_remote_control_intents_summary_off">Các ứng dụng bên ngoài không thể bật/tắt tunnels (khuyến nghị)</string>
     <string name="allow_remote_control_intents_summary_on">Các ứng dụng bên ngoài có thể bật/tắt tunnels (nâng cao)</string>
     <string name="allow_remote_control_intents_title">Cho phép intent từ xa</string>
@@ -110,7 +87,6 @@
     <string name="edit">Chỉnh sửa</string>
     <string name="endpoint">Đầu cuối</string>
     <string name="error_down">Có lỗi khi tắt tunnel: %s</string>
-    <string name="error_fetching_apps">Lỗi khi lấy danh sách ứng dụng: %s</string>
     <string name="error_root">Vui lòng truy cập bằng quyền root và thử lại</string>
     <string name="error_prepare">Lỗi khi chuẩn bị tunnel: %s</string>
     <string name="error_up">Có lỗi khi bật tunnel: %s</string>

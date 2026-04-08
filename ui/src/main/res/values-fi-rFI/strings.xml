@@ -12,10 +12,8 @@
         <item quantity="one">sekunti</item>
         <item quantity="other">sekuntia</item>
     </plurals>
-    <string name="use_all_applications">Käytä kaikkia sovelluksia</string>
     <string name="add_peer">Lisää toinen osapuoli</string>
     <string name="addresses">Osoitteet</string>
-    <string name="applications">Sovellukset</string>
     <string name="allowed_ips">Sallitut IP-osoitteet</string>
     <string name="bad_config_context_top_level">%s</string>
     <string name="bad_config_explanation_pka">: Oltava positiivinen ja enintään 65535</string>

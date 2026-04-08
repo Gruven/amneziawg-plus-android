@@ -20,10 +20,6 @@
         <item quantity="one">आयातित %d टनल</item>
         <item quantity="other">आयातित %d टनलस</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d बहिष्कृत अनुप्रयोग</item>
-        <item quantity="other">%d बहिष्कृत अनुप्रयोग</item>
-    </plurals>
     <string name="add_peer">पीयर जोड़ें</string>
     <string name="addresses">एड्रेससैस</string>
     <string name="allowed_ips">अनुमत आईपी</string>
@@ -62,12 +58,10 @@
     <string name="dark_theme_summary_on">अभी डार्क (रात) थीम का उपयोग कर रहे हैं</string>
     <string name="dark_theme_title">डार्क थीम का इस्तेमाल करें</string>
     <string name="delete">हटाएं</string>
-    <string name="toggle_all">सबको स्विच करे</string>
     <string name="dns_servers">डीएनएस सर्वर</string>
     <string name="edit">संपादित करें</string>
     <string name="endpoint">अंतिम</string>
     <string name="error_down">टनल को लाने में त्रुटि: %s</string>
-    <string name="error_fetching_apps">ऐप्स सूची लाने में त्रुटि: %s</string>
     <string name="error_root">कृपया रूट एक्सेस प्राप्त करें और पुनः प्रयास करें</string>
     <string name="error_up">टनल को लाने में त्रुटि: %s</string>
     <string name="exclude_private_ips">निजी आईपी को छोड़ दें</string>

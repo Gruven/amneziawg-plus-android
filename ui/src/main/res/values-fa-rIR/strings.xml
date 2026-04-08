@@ -20,33 +20,6 @@
         <item quantity="one">%d تونل اضافه شد</item>
         <item quantity="other">%d از تونل اضافه شد</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d برنامه استثنا</item>
-        <item quantity="other">%d برنامه‌های استثنا</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d برنامه مشمول</item>
-        <item quantity="other">%d برنامه‌های مشمول</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d استثنا</item>
-        <item quantity="other">%d استثناها</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">شامل %d</item>
-        <item quantity="other">شامل %d</item>
-    </plurals>
-    <string name="all_applications">همه‌ برنامه‌ها</string>
-    <string name="exclude_from_tunnel">جدا کردن</string>
-    <string name="include_in_tunnel">تنها شامل</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">شامل %d برنامه</item>
-        <item quantity="other">شامل %d برنامه</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">جداکردن %d برنامه</item>
-        <item quantity="other">جداکردن %d برنامه</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">هر ثانیه</item>
         <item quantity="other">هر %d ثانیه</item>
@@ -55,10 +28,8 @@
         <item quantity="one">ثانیه</item>
         <item quantity="other">ثانیه</item>
     </plurals>
-    <string name="use_all_applications">از همه برنامه‌ها استفاده کن</string>
     <string name="add_peer">افزودن همتا</string>
     <string name="addresses">نشانی‌ها</string>
-    <string name="applications">برنامه‌ها</string>
     <string name="allow_remote_control_intents_summary_off">برنامه‌های بیرونی تونل ها را عوض نکنند
 (توصیه می‌شود)</string>
     <string name="allow_remote_control_intents_summary_on">برنامه‌های بیرونی تونل‌ها را عوض کنند (پیشرفته)</string>
@@ -124,7 +95,6 @@
     <string name="edit">ویرایش</string>
     <string name="endpoint">نقطه پایان</string>
     <string name="error_down">خطا هنگام بستن تونل: %s</string>
-    <string name="error_fetching_apps">خطا هنگام واکشی فهرست برنامه‌ها: %s</string>
     <string name="error_root">لطفا دسترسی روت را فراهم‌کرده و دوباره تلاش کنید</string>
     <string name="error_up">خطا هنگام راه‌اندازی تونل: %s</string>
     <string name="exclude_private_ips">مستثنی کردن IPهای خصوصی</string>
@@ -203,7 +173,6 @@
     <string name="shell_marker_count_error">شل انتظار داشت 4 نشانگر دریافت شود %d</string>
     <string name="shell_start_error">آغاز پوسته شکست خورد: %d</string>
     <string name="success_application_will_restart">موفقیت. برنامه اکنون دوباره راه‌اندازی خواهد شد…</string>
-    <string name="toggle_all">معکوس کردن همه</string>
     <string name="toggle_error">خطا در ضامن تونل AmneziaWG: %s</string>
     <string name="tools_installer_already">awg و awg-quick قبلاً نصب شده اند</string>
     <string name="tools_installer_failure">ابزارهای خط-فرمان نصب نمی‌شود (روت نیستید؟)</string>

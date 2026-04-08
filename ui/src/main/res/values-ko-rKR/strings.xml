@@ -15,37 +15,14 @@
     <plurals name="import_total_success">
         <item quantity="other">%d개의 터널을 가져왔습니다</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="other">%d개의 앱이 제외됨</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="other">%d개의 앱이 포함됨</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="other">%d개 제외됨</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="other">%d개 포함됨</item>
-    </plurals>
-    <string name="all_applications">모든 앱</string>
-    <string name="exclude_from_tunnel">제외</string>
-    <string name="include_in_tunnel">이것만 포함</string>
-    <plurals name="include_n_applications">
-        <item quantity="other">%d개의 앱을 포함함</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="other">%d개의 앱을 제외함</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="other">%d초 마다</item>
     </plurals>
     <plurals name="persistent_keepalive_seconds_suffix">
         <item quantity="other">초</item>
     </plurals>
-    <string name="use_all_applications">모든 앱을 사용</string>
     <string name="add_peer">피어 추가</string>
     <string name="addresses">주소</string>
-    <string name="applications">앱</string>
     <string name="allow_remote_control_intents_summary_off">다른 앱이 터널을 조작할 수 없음 (권장)</string>
     <string name="allow_remote_control_intents_summary_on">다른 앱이 터널을 조작할 수 있음 (상급자용)</string>
     <string name="allow_remote_control_intents_title">원격 인텐트 허용</string>
@@ -110,7 +87,6 @@
     <string name="edit"> 수정</string>
     <string name="endpoint">엔드포인트</string>
     <string name="error_down">터널 중단 시 오류 발생: %s</string>
-    <string name="error_fetching_apps">앱 목록을 받는 도중 오류 발생: %s</string>
     <string name="error_root">관리자 권한이 필요함</string>
     <string name="error_up">터널을 시작 시 오류 발생: %s</string>
     <string name="exclude_private_ips">사설 IP 제외</string>
@@ -189,7 +165,6 @@
     <string name="shell_marker_count_error">쉘은 4 개의 마커를 받아야 하지만 %d 개만 받음</string>
     <string name="shell_start_error">쉘이 실행 실패함: %d</string>
     <string name="success_application_will_restart">성공. 앱이 곧 재시작됨…</string>
-    <string name="toggle_all">모두 반전</string>
     <string name="toggle_error">AmneziaWG 터널 토글링 오류: %s</string>
     <string name="tools_installer_already">awg와 awg-quick 모두 이미 설치되었음</string>
     <string name="tools_installer_failure">커맨드라인 도구 설치 불가 (루트 권한 필요)</string>

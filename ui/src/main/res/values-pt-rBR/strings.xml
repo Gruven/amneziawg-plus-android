@@ -20,21 +20,12 @@
         <item quantity="one">Importado %d túnel</item>
         <item quantity="other">Importados %d túneis</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">Aplicação %d Excluída</item>
-        <item quantity="other">Aplicações %d Excluídas</item>
-    </plurals>
-    <string name="all_applications">Todos as aplicativos</string>
-    <string name="exclude_from_tunnel">Retirar</string>
-    <string name="include_in_tunnel">Incluir somente</string>
     <plurals name="persistent_keepalive_seconds_suffix">
         <item quantity="one">segundo</item>
         <item quantity="other">segundos</item>
     </plurals>
-    <string name="use_all_applications">Usar todas aplicações</string>
     <string name="add_peer">Adicionar Par</string>
     <string name="addresses">Endereço</string>
-    <string name="applications">Aplicativo</string>
     <string name="allow_remote_control_intents_summary_off">Aplicativos externos podem não alternar túneis (recomendado)</string>
     <string name="allow_remote_control_intents_summary_on">Aplicativos externos podem alternar túneis (avançado)</string>
     <string name="allow_remote_control_intents_title">Permitir intents remotos</string>
@@ -99,7 +90,6 @@
     <string name="edit">Editar</string>
     <string name="endpoint">Endpoint</string>
     <string name="error_down">Erro ao derrubar o túnel: %s</string>
-    <string name="error_fetching_apps">Erro ao obter lista de apps: %s</string>
     <string name="error_root">Por favor, obtenha acesso root e tente novamente</string>
     <string name="error_prepare">Erro ao preparar o túnel: %s</string>
     <string name="error_up">Erro ao criar túnel: %s</string>

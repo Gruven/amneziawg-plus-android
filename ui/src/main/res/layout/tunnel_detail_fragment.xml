@@ -223,7 +223,7 @@
                         android:contentDescription="@string/listen_port"
                         android:nextFocusRight="@id/mtu_text"
                         android:nextFocusUp="@id/dns_search_domains_text"
-                        android:nextFocusDown="@id/applications_text"
+                        android:nextFocusDown="@id/peers_layout"
                         android:nextFocusForward="@id/mtu_text"
                         android:onClick="@{ClipboardUtils::copyTextView}"
                         android:text="@{config.interface.listenPort}"
@@ -256,7 +256,7 @@
                         android:contentDescription="@string/mtu"
                         android:nextFocusLeft="@id/listen_port_text"
                         android:nextFocusUp="@id/dns_servers_text"
-                        android:nextFocusForward="@id/applications_text"
+                        android:nextFocusForward="@id/peers_layout"
                         android:onClick="@{ClipboardUtils::copyTextView}"
                         android:text="@{config.interface.mtu}"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
@@ -658,8 +658,8 @@
                         android:layout_marginTop="8dp"
                         android:contentDescription="@string/special_junk_i5"
                         android:nextFocusUp="@id/special_junk_i4_text"
-                        android:nextFocusDown="@id/applications_text"
-                        android:nextFocusForward="@id/applications_text"
+                        android:nextFocusDown="@id/peers_layout"
+                        android:nextFocusForward="@id/peers_layout"
                         android:onClick="@{ClipboardUtils::copyTextView}"
                         android:text="@{config.interface.specialJunkI5}"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
@@ -675,31 +675,6 @@
                         app:barrierDirection="bottom"
                         app:constraint_referenced_ids="transport_packet_magic_header_text,special_junk_i1_text,special_junk_i2_text,special_junk_i3_text,special_junk_i4_text,special_junk_i5_text" />
 
-                    <TextView
-                        android:id="@+id/applications_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:labelFor="@+id/applications_text"
-                        android:text="@string/applications"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/amnezia_barrier" />
-
-                    <TextView
-                        android:id="@+id/applications_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/applications"
-                        android:nextFocusUp="@id/special_junk_i5_text"
-                        android:nextFocusDown="@id/peers_layout"
-                        android:nextFocusForward="@id/peers_layout"
-                        android:onClick="@{ClipboardUtils::copyTextView}"
-                        android:text="@{config.interface.includedApplications.isEmpty() ? @plurals/n_excluded_applications(config.interface.excludedApplications.size(), config.interface.excludedApplications.size()) : @plurals/n_included_applications(config.interface.includedApplications.size(), config.interface.includedApplications.size())}"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:visibility="@{config.interface.includedApplications.isEmpty() &amp;&amp; config.interface.excludedApplications.isEmpty() ? android.view.View.GONE : android.view.View.VISIBLE}"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/applications_label"
-                        tools:text="8 excluded" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 

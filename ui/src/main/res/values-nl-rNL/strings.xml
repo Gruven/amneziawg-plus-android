@@ -20,33 +20,6 @@
         <item quantity="one">%d tunnel geïmporteerd</item>
         <item quantity="other">%d tunnels geïmporteerd</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d uitgesloten applicatie(s)</item>
-        <item quantity="other">%d uitgesloten applicaties</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d inbegrepen applicatie</item>
-        <item quantity="other">%d inbegrepen applicaties</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d uitgesloten</item>
-        <item quantity="other">%d uitgesloten</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d inbegrepen</item>
-        <item quantity="other">%d inbegrepen</item>
-    </plurals>
-    <string name="all_applications">Alle applicaties</string>
-    <string name="exclude_from_tunnel">Uitsluiten</string>
-    <string name="include_in_tunnel">Alleen opnemen</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Neem %d app op</item>
-        <item quantity="other">Voeg %d apps toe</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">%d app uitsluiten</item>
-        <item quantity="other">%d apps uitsluiten</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">iedere seconde</item>
         <item quantity="other">iedere %d seconden</item>
@@ -55,10 +28,8 @@
         <item quantity="one">seconde</item>
         <item quantity="other">seconden</item>
     </plurals>
-    <string name="use_all_applications">Gebruik alle applicaties</string>
     <string name="add_peer">Peer toevoegen</string>
     <string name="addresses">Adressen</string>
-    <string name="applications">Applicaties</string>
     <string name="allow_remote_control_intents_summary_off">Externe apps kunnen mogelijk geen tunnels in-/uitschakelen (aanbevolen)</string>
     <string name="allow_remote_control_intents_summary_on">Externe apps kunnen tunnels in-/uitschakelen (geavanceerd)</string>
     <string name="allow_remote_control_intents_title">Externe intents toestaan</string>
@@ -123,7 +94,6 @@
     <string name="edit">Bewerken</string>
     <string name="endpoint">Eindpunt</string>
     <string name="error_down">Fout bij stoppen tunnel: %s</string>
-    <string name="error_fetching_apps">Fout bij ophalen van apps-lijst: %s</string>
     <string name="error_root">Verkrijg root toegang en probeer het opnieuw</string>
     <string name="error_prepare">Fout bij voorbereiden tunnel: %s</string>
     <string name="error_up">Fout bij het starten van tunnel: %s</string>
@@ -209,7 +179,6 @@
     <string name="shell_marker_count_error">Shell verwachtte 4 markeringen, ontving er %d</string>
     <string name="shell_start_error">Shell kon niet starten: %d</string>
     <string name="success_application_will_restart">Succes. De toepassing zal nu herstarten…</string>
-    <string name="toggle_all">Alles wisselen</string>
     <string name="toggle_error">Fout bij omschakelen AmneziaWG tunnel: %s</string>
     <string name="tools_installer_already">awg and awg-quick zijn al geïnstalleerd</string>
     <string name="tools_installer_failure">Kan de command-line tools niet installeren (geen root?)</string>

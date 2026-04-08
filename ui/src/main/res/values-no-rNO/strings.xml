@@ -20,33 +20,6 @@
         <item quantity="one">Importerte %d tunnel</item>
         <item quantity="other">Importerte %d tunneler</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d ekskludert app</item>
-        <item quantity="other">%d ekskluderte apper</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d inkludert app</item>
-        <item quantity="other">%d inkluderte apper</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d ekskludert</item>
-        <item quantity="other">%d ekskluderte</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d inkludert</item>
-        <item quantity="other">%d inkluderte</item>
-    </plurals>
-    <string name="all_applications">Alle applikasjoner</string>
-    <string name="exclude_from_tunnel">Ekskluder</string>
-    <string name="include_in_tunnel">Inkluder kun</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Inkluder %d app</item>
-        <item quantity="other">Inkluder %d apper</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Ekskluder %d app</item>
-        <item quantity="other">Ekskluder %d apper</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">hvert %d sekund</item>
         <item quantity="other">hvert %d sekund</item>
@@ -55,10 +28,8 @@
         <item quantity="one">sekund</item>
         <item quantity="other">sekunder</item>
     </plurals>
-    <string name="use_all_applications">Bruk alle apper</string>
     <string name="add_peer">Legg til peer</string>
     <string name="addresses">Adresser</string>
-    <string name="applications">Applikasjoner</string>
     <string name="allow_remote_control_intents_summary_off">Fjernstyrte apper kan ikke toggle tunneler (anbefalt)</string>
     <string name="allow_remote_control_intents_summary_on">Fjernstyrte apper toggle tunneler (avansert)</string>
     <string name="allow_remote_control_intents_title">Tillat fjern-intents</string>
@@ -123,7 +94,6 @@
     <string name="edit">Rediger</string>
     <string name="endpoint">Endepunkt</string>
     <string name="error_down">Feil når tunnel skulle tas ned: %s</string>
-    <string name="error_fetching_apps">Feil ved henting av applikasjonsliste: %s</string>
     <string name="error_root">Vennligst få root-tilgang og prøv igjen</string>
     <string name="error_prepare">Feil ved klargjøring av tunnel: %s</string>
     <string name="error_up">Feil når tunnel skulle tas opp: %s</string>
@@ -203,7 +173,6 @@
     <string name="shell_marker_count_error">Skallet forventet 4 markører, mottok %d</string>
     <string name="shell_start_error">Skallet klarte ikke å starte: %d</string>
     <string name="success_application_will_restart">Suksess. Programmet vil nå starte på nytt…</string>
-    <string name="toggle_all">Toggle alle</string>
     <string name="toggle_error">Feil under toggling av AmneziaWG tunnel: %s</string>
     <string name="tools_installer_already">awg og awg-quick er allerede installert</string>
     <string name="tools_installer_failure">Kunne ikke installere kommandolinjeverktøy (ingen root-tilgang?)</string>

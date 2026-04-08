@@ -15,37 +15,14 @@
     <plurals name="import_total_success">
         <item quantity="other">Mengimpor %d terowongan</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="other">%d Aplikasi Dikecualikan</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="other">%d Aplikasi Disertakan</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="other">%d dikecualikan</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="other">%d termasuk</item>
-    </plurals>
-    <string name="all_applications">Semua aplikasi</string>
-    <string name="exclude_from_tunnel">Kecualikan</string>
-    <string name="include_in_tunnel">Berlaku hanya untuk</string>
-    <plurals name="include_n_applications">
-        <item quantity="other">Aplikasi %d yang disertakan</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="other">Aplikasi %d yang disertakan</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="other">setiap 10 detik</item>
     </plurals>
     <plurals name="persistent_keepalive_seconds_suffix">
         <item quantity="other">detik</item>
     </plurals>
-    <string name="use_all_applications">Gunakan semua aplikasi</string>
     <string name="add_peer">Tambahkan rekan</string>
     <string name="addresses">Alamat</string>
-    <string name="applications">Aplikasi</string>
     <string name="allow_remote_control_intents_summary_off">Aplikasi eksternal tidak dapat mengalihkan tunnel (disarankan)</string>
     <string name="allow_remote_control_intents_summary_on">Apl eksternal dapat mengalihkan tunnel (lanjutan)</string>
     <string name="allow_remote_control_intents_title">Izinkan intent jarak jauh</string>
@@ -110,7 +87,6 @@
     <string name="edit">Edit</string>
     <string name="endpoint">Endpoint</string>
     <string name="error_down">Kesalahan pada tunel: %s</string>
-    <string name="error_fetching_apps">Kesalahan mengambil daftar aplikasi: %s</string>
     <string name="error_root">Izinkan akses root dan coba lagi</string>
     <string name="error_up">Kesalahan pada tunel: %s</string>
     <string name="exclude_private_ips">Kecualikan IP pribadi</string>
@@ -189,7 +165,6 @@
     <string name="shell_marker_count_error">Shell diharapkan 4 nilai, diterima %d</string>
     <string name="shell_start_error">Gagal memulai shell: %d</string>
     <string name="success_application_will_restart">Berhasil. Sekarang aplikasi akan memulai ulang…</string>
-    <string name="toggle_all">Matikan semua</string>
     <string name="toggle_error">Tunel AmneziaWG %s gagal dialihkan</string>
     <string name="tools_installer_already">awg and awg-quick sudah terpasang</string>
     <string name="tools_installer_failure">Tidak dapat memasang alat command-line (tidak root?)</string>

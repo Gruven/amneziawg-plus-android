@@ -38,10 +38,6 @@ public class ConfigTest {
             fail("'working.conf' should never fail to parse");
         }
         assertNotNull("config cannot be null after parsing", config);
-        assertTrue(
-                "No applications should be excluded by default",
-                config.getInterface().getExcludedApplications().isEmpty()
-        );
         assertEquals("Test config has exactly one peer", 1, config.getPeers().size());
         assertEquals("Test config's allowed IPs are 0.0.0.0/0 and ::0/0", config.getPeers().get(0).getAllowedIps(), expectedAllowedIps);
         assertEquals("Test config has one DNS server", 1, config.getInterface().getDnsServers().size());

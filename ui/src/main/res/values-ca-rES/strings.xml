@@ -20,33 +20,6 @@
         <item quantity="one">%d túnel importat</item>
         <item quantity="other">%d túnels importats</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d Aplicació exclosa</item>
-        <item quantity="other">%d Aplicacins excloses</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d Aplicació inclosa</item>
-        <item quantity="other">%d Aplicacions incloses</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d exclòs</item>
-        <item quantity="other">%d exclosos</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d inclòs</item>
-        <item quantity="other">%d inclosos</item>
-    </plurals>
-    <string name="all_applications">Totes les aplicacions</string>
-    <string name="exclude_from_tunnel">Exclou</string>
-    <string name="include_in_tunnel">Inclou només</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Inclou %d aplicació</item>
-        <item quantity="other">Inclou %d aplicacions</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Exclou %d aplicació</item>
-        <item quantity="other">Exclou %d aplicacions</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">cada segon</item>
         <item quantity="other">cada %d segons</item>
@@ -55,10 +28,8 @@
         <item quantity="one">segon</item>
         <item quantity="other">segons</item>
     </plurals>
-    <string name="use_all_applications">Utilitza totes les aplicacions</string>
     <string name="add_peer">Afegir parell</string>
     <string name="addresses">Adreces</string>
-    <string name="applications">Aplicacions</string>
     <string name="allow_remote_control_intents_summary_off">Aplicacions externes no poden cambiar túnels (recomanat)</string>
     <string name="allow_remote_control_intents_summary_on">Aplicacions externes poden cambiar túnels (avançat)</string>
     <string name="allow_remote_control_intents_title">Permet intents remots</string>
@@ -120,7 +91,6 @@
     <string name="edit">Edita</string>
     <string name="endpoint">Extrem</string>
     <string name="error_down">Error desactivant el túnel: %s</string>
-    <string name="error_fetching_apps">Error obtenint llista d\'aplicacions: %s</string>
     <string name="error_root">Si us plau, obteniu accés root i torneu a intentar</string>
     <string name="error_up">Error activant túnel: %s</string>
     <string name="exclude_private_ips">Exclou IPs privades</string>
@@ -196,7 +166,6 @@
     <string name="shell_marker_count_error">La shell esperava 4 marcadors, n\'ha rebut %d</string>
     <string name="shell_start_error">No s\'ha pogut iniciar: %d</string>
     <string name="success_application_will_restart">Èxit. Ara l\'aplicació es reiniciarà…</string>
-    <string name="toggle_all">Canviar tot</string>
     <string name="toggle_error">Error al canviar el túnel AmneziaWG: %s</string>
     <string name="tools_installer_already">awg i awg-quick ja estan instalats</string>
     <string name="tools_installer_failure">No s\'ha pogut instalar les eines de linia de comandes (ets root?)</string>

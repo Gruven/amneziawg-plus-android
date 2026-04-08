@@ -20,33 +20,6 @@
         <item quantity="one">Importeret %d tunnel</item>
         <item quantity="other">Importeret %d tunneler</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d Ekskluderet Applikation</item>
-        <item quantity="other">%d Ekskluderet Applikationer</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d Inkluderet Applikation</item>
-        <item quantity="other">%d Inkluderet Applikationer</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d ekskluderet</item>
-        <item quantity="other">%d ekskluderet</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d inkluderet</item>
-        <item quantity="other">%d inkluderet</item>
-    </plurals>
-    <string name="all_applications">Alle Applikationer</string>
-    <string name="exclude_from_tunnel">Ekskludér</string>
-    <string name="include_in_tunnel">Inkludér kun</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Inkludér %d app</item>
-        <item quantity="other">Inkludér %d apps</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Ekskludér %d app</item>
-        <item quantity="other">Ekskludér %d apps</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">hvert sekund</item>
         <item quantity="other">hver %d. sekund</item>
@@ -55,10 +28,8 @@
         <item quantity="one">sekund</item>
         <item quantity="other">sekunder</item>
     </plurals>
-    <string name="use_all_applications">Brug alle apps</string>
     <string name="add_peer">Tilføj modpart</string>
     <string name="addresses">Adresser</string>
-    <string name="applications">Applikationer</string>
     <string name="allow_remote_control_intents_summary_off">Eksterne apps kan ikke slå tunneler til/fra (Anbefales)</string>
     <string name="allow_remote_control_intents_summary_on">Eksterne apps må slå tunneler til/fra (Avanceret)</string>
     <string name="allow_remote_control_intents_title">Tillad fjern-intents</string>
@@ -167,7 +138,6 @@
     <string name="save">Gem</string>
     <string name="select_all">Vælg alle</string>
     <string name="settings">Indstillinger</string>
-    <string name="toggle_all">Vælg/Fravælg Alle</string>
     <string name="tools_installer_already">awg og awg-quick er allerede installeret</string>
     <string name="tools_installer_working">Installerer awg og awg-quick</string>
     <string name="transfer">Overførsel</string>

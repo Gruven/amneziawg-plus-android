@@ -20,33 +20,6 @@
         <item quantity="one">%d tünel içe aktarıldı</item>
         <item quantity="other">%d tünel içe aktarıldı</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d Hariç Tutulan Uygulama</item>
-        <item quantity="other">%d Hariç Tutulan Uygulamalar</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d Dahil Edilen Uygulama</item>
-        <item quantity="other">%d Dahil Edilen Uygulamalar</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d hariç tutuldu</item>
-        <item quantity="other">%d hariç tutuldu</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d dahil edildi</item>
-        <item quantity="other">%d dahil edildi</item>
-    </plurals>
-    <string name="all_applications">Tüm Uygulamalar</string>
-    <string name="exclude_from_tunnel">Hariç</string>
-    <string name="include_in_tunnel">Yalnızca dahil</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">%d uygulamasını dahil et</item>
-        <item quantity="other">%d uygulamalarını dahil et</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">%d uygulamasını hariç tut</item>
-        <item quantity="other">%d uygulamalarını hariç tut</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">her saniye</item>
         <item quantity="other">%d saniyede bir</item>
@@ -55,10 +28,8 @@
         <item quantity="one">saniye</item>
         <item quantity="other">saniye</item>
     </plurals>
-    <string name="use_all_applications">Tüm uygulamaları kullan</string>
     <string name="add_peer">Eş ekle</string>
     <string name="addresses">Adresler</string>
-    <string name="applications">Uygulamalar</string>
     <string name="allow_remote_control_intents_summary_off">Harici uygulamalar tünelleri değiştiremez (önerilir)</string>
     <string name="allow_remote_control_intents_summary_on">Harici uygulamalar tünelleri değiştirebilir (gelişmiş)</string>
     <string name="allow_remote_control_intents_title">Uzak intent\'lere izin ver</string>
@@ -123,7 +94,6 @@
     <string name="edit">Düzenle</string>
     <string name="endpoint">Uç nokta</string>
     <string name="error_down">Tünel kapatılırken hata oluştu: %s</string>
-    <string name="error_fetching_apps">Uygulama listesi getirilirken hata oluştu: %s</string>
     <string name="error_root">Lütfen root erişimi elde edin ve tekrar deneyin</string>
     <string name="error_prepare">Tünel hazırlanırken hata oluştu: %s</string>
     <string name="error_up">Tünel açılırken hata oluştu: %s</string>
@@ -209,7 +179,6 @@
     <string name="shell_marker_count_error">Kabuk 4 işaret bekledi, %d aldı</string>
     <string name="shell_start_error">Kabuk başlatılamadı: %d</string>
     <string name="success_application_will_restart">Başarı. Uygulama şimdi yeniden başlayacak…</string>
-    <string name="toggle_all">Tümünü Değiştir</string>
     <string name="toggle_error">AmneziaWG tüneli değiştirilirken hata oluştu: %s</string>
     <string name="tools_installer_already">awg ve awg-quick zaten kurulu</string>
     <string name="tools_installer_failure">Komut satırı araçları yüklenemiyor (root yok mu?)</string>

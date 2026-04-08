@@ -20,33 +20,6 @@
         <item quantity="one">आयातित %d टनल</item>
         <item quantity="other">आयातित %d टनलस</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d बहिष्कृत अनुप्रयोग</item>
-        <item quantity="other">%d बहिष्कृत अनुप्रयोग</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d ऐप्स शामिल</item>
-        <item quantity="other">%d ऐप्स शामिल किये गए</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d अपवर्जित</item>
-        <item quantity="other">%d अपवर्जित</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d शामिल</item>
-        <item quantity="other">%d शामिल</item>
-    </plurals>
-    <string name="all_applications">सभी एप्लीकेशन</string>
-    <string name="exclude_from_tunnel">वर्जित</string>
-    <string name="include_in_tunnel">केवल शामिल करें</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">%d ऐप शामिल करें</item>
-        <item quantity="other">%d ऐप्स शामिल करें</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">%d ऐप को बाहर करें</item>
-        <item quantity="other">%d ऐप्स को बाहर करें</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">हर सेकंड</item>
         <item quantity="other">हर %d सेकंड्‌स</item>
@@ -55,10 +28,8 @@
         <item quantity="one">सेकंड</item>
         <item quantity="other">सेकंड्‌स</item>
     </plurals>
-    <string name="use_all_applications">सभी ऐप्स का उपयोग करें</string>
     <string name="add_peer">पीयर जोड़ें</string>
     <string name="addresses">एड्रेससैस</string>
-    <string name="applications">ऍप्लिकेशन्स</string>
     <string name="allow_remote_control_intents_summary_off">बाहरी ऐप्स टनल्स को चालू नहीं कर सकते (अनुशंसित)</string>
     <string name="allow_remote_control_intents_summary_on">बाहरी ऐप्स टनल्स को चालू कर सकते है (एडवांस्ड)</string>
     <string name="allow_remote_control_intents_title">रिमोट इंटेंट्स की अनुमति दें</string>
@@ -111,7 +82,6 @@
     <string name="edit">संपादित करें</string>
     <string name="endpoint">अंतिम</string>
     <string name="error_down">टनल को लाने में त्रुटि: %s</string>
-    <string name="error_fetching_apps">ऐप्स सूची लाने में त्रुटि: %s</string>
     <string name="error_root">कृपया रूट एक्सेस प्राप्त करें और पुनः प्रयास करें</string>
     <string name="error_up">टनल को लाने में त्रुटि: %s</string>
     <string name="exclude_private_ips">निजी आईपी को छोड़ दें</string>
@@ -190,7 +160,6 @@
     <string name="shell_marker_count_error">शेल ने 4 मार्करों की अपेक्षा की, %d प्राप्त किया</string>
     <string name="shell_start_error">शेल शुरू करने में विफल: %d</string>
     <string name="success_application_will_restart">सफलता। एप्लीकेशन अब पुनः आरंभ होगा…</string>
-    <string name="toggle_all">सबको स्विच करे</string>
     <string name="toggle_error">वायरगार्ड टनल टॉगल करने में त्रुटि: %s</string>
     <string name="tools_installer_already">awg और awg-quick पहले से इंस्टॉल हैं</string>
     <string name="tools_installer_failure">कमांड-लाइन टूल स्थापित करने में असमर्थ (कोई रूट नहीं)</string>

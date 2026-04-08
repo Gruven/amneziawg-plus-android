@@ -30,45 +30,6 @@
         <item quantity="many">Importováno %d tunelů</item>
         <item quantity="other">Importováno %d tunelů</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d vyloučená aplikace</item>
-        <item quantity="few">%d vyloučené aplikace</item>
-        <item quantity="many">%d vyloučených aplikací</item>
-        <item quantity="other">%d vyloučených aplikací</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d zahrnutá aplikace</item>
-        <item quantity="few">%d zahrnuté aplikace</item>
-        <item quantity="many">%d zahrnutých aplikací</item>
-        <item quantity="other">%d zahrnutých aplikací</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d vyloučena</item>
-        <item quantity="few">%d vyloučeny</item>
-        <item quantity="many">%d vyloučeno</item>
-        <item quantity="other">%d vyloučeno</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d zahrnuta</item>
-        <item quantity="few">%d zahrnuty</item>
-        <item quantity="many">%d zahrnuto</item>
-        <item quantity="other">%d zahrnuto</item>
-    </plurals>
-    <string name="all_applications">Všechny aplikace</string>
-    <string name="exclude_from_tunnel">Vyloučit</string>
-    <string name="include_in_tunnel">Zahrnout pouze</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Zahrnout %d aplikaci</item>
-        <item quantity="few">Zahrnout %d aplikace</item>
-        <item quantity="many">Zahrnout %d aplikací</item>
-        <item quantity="other">Zahrnout %d aplikací</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Vyloučit %d aplikaci</item>
-        <item quantity="few">Vyloučit %d aplikace</item>
-        <item quantity="many">Vyloučit %d aplikací</item>
-        <item quantity="other">Vyloučit %d aplikací</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">každou sekundu</item>
         <item quantity="few">každé %d sekundy</item>
@@ -81,10 +42,8 @@
         <item quantity="many">sekund</item>
         <item quantity="other">sekund</item>
     </plurals>
-    <string name="use_all_applications">Použít všechny aplikace</string>
     <string name="add_peer">Přidat peera</string>
     <string name="addresses">Adresy</string>
-    <string name="applications">Aplikace</string>
     <string name="allow_remote_control_intents_summary_off">Externí aplikace nemohou přepínat tunely (doporučeno)</string>
     <string name="allow_remote_control_intents_summary_on">Externí aplikace mohou přepínat tunely (pokročilé)</string>
     <string name="allow_remote_control_intents_title">Povolit vzdálené intenty</string>

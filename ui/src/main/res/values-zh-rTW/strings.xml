@@ -15,37 +15,14 @@
     <plurals name="import_total_success">
         <item quantity="other">已匯入 %d 個通道</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="other">已排除 %d 個應用程式</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="other">套用到 %d 個應用程式</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="other">已排除 %d</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="other">已套用 %d</item>
-    </plurals>
-    <string name="all_applications">套用到所有應用程式</string>
-    <string name="exclude_from_tunnel">排除</string>
-    <string name="include_in_tunnel">只套用到</string>
-    <plurals name="include_n_applications">
-        <item quantity="other">已套用 %d 個應用程式</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="other">已排除 %d 個應用程式</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="other">每隔 %d 秒</item>
     </plurals>
     <plurals name="persistent_keepalive_seconds_suffix">
         <item quantity="other">秒</item>
     </plurals>
-    <string name="use_all_applications">套用到所有應用程式</string>
     <string name="add_peer">新增端點</string>
     <string name="addresses">位址</string>
-    <string name="applications">應用程式</string>
     <string name="allow_remote_control_intents_summary_off">外部程式無法控制通道 (推薦)</string>
     <string name="allow_remote_control_intents_summary_on">外部程式可以控制通道 (進階)</string>
     <string name="allow_remote_control_intents_title">允許遠端意圖</string>
@@ -110,7 +87,6 @@
     <string name="edit">編輯</string>
     <string name="endpoint">終端點</string>
     <string name="error_down">徹下通道錯誤: %s</string>
-    <string name="error_fetching_apps">汲取應用程式清單錯誤: %s</string>
     <string name="error_root">請取得 root 存取權後再試一次</string>
     <string name="error_up">啟動通道錯誤: %s</string>
     <string name="exclude_private_ips">排除私有 IPs</string>
@@ -189,7 +165,6 @@
     <string name="shell_marker_count_error">殼牌預計有 4 個標記，但收到了 %d</string>
     <string name="shell_start_error">Shell 啟動失敗: %d</string>
     <string name="success_application_will_restart">成功。 應用程式即將重新啟動…</string>
-    <string name="toggle_all">切換全部</string>
     <string name="toggle_error">切換 AmneziaWG 通道時發生錯誤：%s</string>
     <string name="tools_installer_already">awg 及 awg-quick 已安裝</string>
     <string name="tools_installer_failure">無法安裝命令行工具 (沒有 root 存取權？)</string>

@@ -25,7 +25,6 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import org.amnezia.awg.Application
 import org.amnezia.awg.R
-import org.amnezia.awg.backend.RootGoBackend
 import org.amnezia.awg.backend.Tunnel
 import org.amnezia.awg.databinding.TunnelEditorFragmentBinding
 import org.amnezia.awg.model.ObservableTunnel
@@ -80,12 +79,6 @@ class TunnelEditorFragment : BaseFragment(), MenuProvider {
         binding?.apply {
             executePendingBindings()
             privateKeyTextLayout.setEndIconOnClickListener { config?.`interface`?.generateKeyPair() }
-        }
-        // Hide app selection button in root mode (per-app routing unavailable)
-        lifecycleScope.launch {
-            if (Application.getBackend() is RootGoBackend) {
-                binding?.setExcludedApplications?.visibility = View.GONE
-            }
         }
         return binding?.root
     }
@@ -169,39 +162,6 @@ class TunnelEditorFragment : BaseFragment(), MenuProvider {
             return true
         }
         return false
-    }
-
-    @Suppress("UNUSED_PARAMETER")
-    fun onRequestSetExcludedIncludedApplications(view: View?) {
-        if (binding != null) {
-            var isExcluded = true
-            var selectedApps = ArrayList(binding!!.config!!.`interface`.excludedApplications)
-            if (selectedApps.isEmpty()) {
-                selectedApps = ArrayList(binding!!.config!!.`interface`.includedApplications)
-                if (selectedApps.isNotEmpty())
-                    isExcluded = false
-            }
-            val fragment = AppListDialogFragment.newInstance(selectedApps, isExcluded)
-            childFragmentManager.setFragmentResultListener(AppListDialogFragment.REQUEST_SELECTION, viewLifecycleOwner) { _, bundle ->
-                requireNotNull(binding) { "Tried to set excluded/included apps while no view was loaded" }
-                val newSelections = requireNotNull(bundle.getStringArray(AppListDialogFragment.KEY_SELECTED_APPS))
-                val excluded = requireNotNull(bundle.getBoolean(AppListDialogFragment.KEY_IS_EXCLUDED))
-                if (excluded) {
-                    binding!!.config!!.`interface`.includedApplications.clear()
-                    binding!!.config!!.`interface`.excludedApplications.apply {
-                        clear()
-                        addAll(newSelections)
-                    }
-                } else {
-                    binding!!.config!!.`interface`.excludedApplications.clear()
-                    binding!!.config!!.`interface`.includedApplications.apply {
-                        clear()
-                        addAll(newSelections)
-                    }
-                }
-            }
-            fragment.show(childFragmentManager, null)
-        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

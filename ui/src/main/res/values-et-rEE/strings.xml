@@ -20,33 +20,6 @@
         <item quantity="one">Imporditud %d tunnel</item>
         <item quantity="other">Imporditud %d tunnelit</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d välistatud rakendus</item>
-        <item quantity="other">%d välistatud rakendust</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d kaasatud rakendus</item>
-        <item quantity="other">%d kaasatud rakendust</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d välistatud</item>
-        <item quantity="other">%d välistatud</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d kaasatud</item>
-        <item quantity="other">%d kaasatud</item>
-    </plurals>
-    <string name="all_applications">Kõik rakendused</string>
-    <string name="exclude_from_tunnel">Välista</string>
-    <string name="include_in_tunnel">Kaasa ainult</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Kaasa %d rakendus</item>
-        <item quantity="other">Kaasa %d rakendust</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Välista %d rakendus</item>
-        <item quantity="other">Välista %d rakendust</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">iga sekund</item>
         <item quantity="other">iga %d sekundi järel</item>
@@ -55,10 +28,8 @@
         <item quantity="one">sekund</item>
         <item quantity="other">sekundit</item>
     </plurals>
-    <string name="use_all_applications">Kasuta kõiki rakendusi</string>
     <string name="add_peer">Lisa partner</string>
     <string name="addresses">Aadressid</string>
-    <string name="applications">Rakendused</string>
     <string name="allow_remote_control_intents_summary_off">Välised rakendused ei saa tunneleid lülitada (soovituslik)</string>
     <string name="allow_remote_control_intents_summary_on">Välised rakendused saavad tunneleid lülitada (edasijõudnud)</string>
     <string name="allow_remote_control_intents_title">Luba kaugkäsklused</string>
@@ -123,7 +94,6 @@
     <string name="edit">Muuda</string>
     <string name="endpoint">Lõpp-punkt</string>
     <string name="error_down">Viga tunneli väljalülitamisel: %s</string>
-    <string name="error_fetching_apps">Viga rakenduste nimekirja pärimisel: %s</string>
     <string name="error_root">Hangi juurkasutaja õigused ja proovi uuesti</string>
     <string name="error_prepare">Viga tunneli ettevalmistamisel: %s</string>
     <string name="error_up">Viga tunneli sisselülitamisel: %s</string>
@@ -206,7 +176,6 @@
     <string name="shell_marker_count_error">Kest ootas 4 markerit, saadi %d</string>
     <string name="shell_start_error">Kesta käivitumine ebaõnnestus: %d</string>
     <string name="success_application_will_restart">Tegevus õnnestus. Rakendus taaskäivitub…</string>
-    <string name="toggle_all">Vaheta kõik</string>
     <string name="toggle_error">AmneziaWG tunneli lülitamine ebaõnnestus: %s</string>
     <string name="tools_installer_already">awg ja awg-quick on juba paigaldatud</string>
     <string name="tools_installer_failure">Käsurea tööriistade paigaldamine ebaõnnestus (juurkasutaja õigused puuduvad?)</string>

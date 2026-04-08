@@ -30,45 +30,6 @@
         <item quantity="many">Zaimportowano %d tuneli</item>
         <item quantity="other">Zaimportowano %d tuneli</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d wykluczona aplikacja</item>
-        <item quantity="few">%d wykluczone aplikacje</item>
-        <item quantity="many">%d wykluczonych aplikacji</item>
-        <item quantity="other">%d wykluczonych aplikacji</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d dołączona aplikacja</item>
-        <item quantity="few">%d dołączone aplikacje</item>
-        <item quantity="many">%d dołączonych aplikacji</item>
-        <item quantity="other">%d dołączonych aplikacji</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d wykluczona</item>
-        <item quantity="few">%d wykluczone</item>
-        <item quantity="many">%d wykluczonych</item>
-        <item quantity="other">%d wykluczonych</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d dołączona</item>
-        <item quantity="few">%d dołączone</item>
-        <item quantity="many">%d dołączonych</item>
-        <item quantity="other">%d dołączonych</item>
-    </plurals>
-    <string name="all_applications">Wszystkie aplikacje</string>
-    <string name="exclude_from_tunnel">Wyklucz</string>
-    <string name="include_in_tunnel">Dołącz tylko</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Dołącz %d aplikację</item>
-        <item quantity="few">Dołącz %d aplikacje</item>
-        <item quantity="many">Dołącz %d aplikacji</item>
-        <item quantity="other">Dołącz %d aplikacji</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Wyklucz %d aplikację</item>
-        <item quantity="few">Wyklucz %d aplikacje</item>
-        <item quantity="many">Wyklucz %d aplikacji</item>
-        <item quantity="other">Wyklucz %d aplikacji</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">co sekundę</item>
         <item quantity="few">co %d sekundy</item>
@@ -81,10 +42,8 @@
         <item quantity="many">sekund</item>
         <item quantity="other">sekundy</item>
     </plurals>
-    <string name="use_all_applications">Użyj wszystkich</string>
     <string name="add_peer">Dodaj klienta</string>
     <string name="addresses">Adresy</string>
-    <string name="applications">Aplikacje</string>
     <string name="allow_remote_control_intents_summary_off">Zewnętrzne aplikacje nie mogą przełączać tuneli (zalecane)</string>
     <string name="allow_remote_control_intents_summary_on">Zewnętrzne aplikacje mogą przełączać tunele (zaawansowane)</string>
     <string name="allow_remote_control_intents_title">Zezwól na zdalne intenty</string>
@@ -149,7 +108,6 @@
     <string name="edit">Edytuj</string>
     <string name="endpoint">Punkt końcowy</string>
     <string name="error_down">Błąd podczas zamykania tunelu: %s</string>
-    <string name="error_fetching_apps">Błąd podczas pobierania listy aplikacji: %s</string>
     <string name="error_root">Proszę uzyskać dostęp do root-a i spróbować ponownie</string>
     <string name="error_up">Błąd podczas otwierania tunelu: %s</string>
     <string name="exclude_private_ips">Wyklucz prywatne adresy IP</string>
@@ -228,7 +186,6 @@
     <string name="shell_marker_count_error">Powłoka spodziewała się 4 znaczników, otrzymano %d</string>
     <string name="shell_start_error">Nie udało się uruchomić powłoki: %d</string>
     <string name="success_application_will_restart">Ukończono pomyślnie. Aplikacja zostanie uruchomiona ponownie…</string>
-    <string name="toggle_all">Przełącz wszystkie</string>
     <string name="toggle_error">Błąd podczas przełączania tunelu AmneziaWG: %s</string>
     <string name="tools_installer_already">Narzędzia awg i awg-quick są już zainstalowane</string>
     <string name="tools_installer_failure">Nie można zainstalować narzędzi wiersza poleceń (brak root-a?)</string>

@@ -30,45 +30,6 @@
         <item quantity="many">Импортировано %d туннелей</item>
         <item quantity="other">Импортировано %d туннелей</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d исключенное приложение</item>
-        <item quantity="few">%d исключенных приложения</item>
-        <item quantity="many">%d исключенных приложений</item>
-        <item quantity="other">%d исключенных приложений</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d включенное приложение</item>
-        <item quantity="few">%d включенных приложения</item>
-        <item quantity="many">%d включенных приложений</item>
-        <item quantity="other">%d включенных приложений</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d исключено</item>
-        <item quantity="few">%d исключено</item>
-        <item quantity="many">%d исключено</item>
-        <item quantity="other">%d исключено</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d включено</item>
-        <item quantity="few">%d включено</item>
-        <item quantity="many">%d включено</item>
-        <item quantity="other">%d включено</item>
-    </plurals>
-    <string name="all_applications">Все приложения</string>
-    <string name="exclude_from_tunnel">Исключить для</string>
-    <string name="include_in_tunnel">Включить для</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">Включить %d приложение</item>
-        <item quantity="few">Включить %d приложения</item>
-        <item quantity="many">Включить %d приложений</item>
-        <item quantity="other">Включить %d приложений</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">Исключить %d приложение</item>
-        <item quantity="few">Исключить %d приложения</item>
-        <item quantity="many">Исключить %d приложений</item>
-        <item quantity="other">Исключить %d приложений</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">каждую секунду</item>
         <item quantity="few">каждые %d секунды</item>
@@ -81,10 +42,8 @@
         <item quantity="many">секунд</item>
         <item quantity="other">секунд</item>
     </plurals>
-    <string name="use_all_applications">Использовать все приложения</string>
     <string name="add_peer">Добавить пир</string>
     <string name="addresses">Адреса</string>
-    <string name="applications">Приложения</string>
     <string name="allow_remote_control_intents_summary_off">Внешние приложения не могут переключать туннели (рекомендуется)</string>
     <string name="allow_remote_control_intents_summary_on">Внешние приложения могут переключать туннели (продвинутые)</string>
     <string name="allow_remote_control_intents_title">Разрешить удалённые интенты</string>
@@ -149,7 +108,6 @@
     <string name="edit">Изменить</string>
     <string name="endpoint">Конечная точка</string>
     <string name="error_down">Ошибка при отключении туннеля: %s</string>
-    <string name="error_fetching_apps">Ошибка при получении списка приложений: %s</string>
     <string name="error_root">Пожалуйста, получите root-доступ и попробуйте снова</string>
     <string name="error_prepare">Ошибка при подготовке туннеля: %s</string>
     <string name="error_up">Ошибка при запуске туннеля: %s</string>
@@ -241,7 +199,6 @@
     <string name="shell_marker_count_error">Shell ожидает 4 маркера, получено %d</string>
     <string name="shell_start_error">Не удалось запустить Shell: %d</string>
     <string name="success_application_will_restart">Успешно. Приложение будет перезапущено…</string>
-    <string name="toggle_all">Инвертировать все</string>
     <string name="toggle_error">Ошибка переключения туннеля AmneziaWG: %s</string>
     <string name="tools_installer_already">awg и awg-quick уже установлены</string>
     <string name="tools_installer_failure">Не удалось установить инструменты командной строки (нет root?)</string>

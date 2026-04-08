@@ -1,32 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">බැහැර කළ යෙදුම් %d යි</item>
-        <item quantity="other">බැහැර කළ යෙදුම් %d යි</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">ඇතුළත් කළ යෙදුම් %d යි</item>
-        <item quantity="other">ඇතුළත් කළ යෙදුම් %d යි</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%dක් බැහැරයි</item>
-        <item quantity="other">%dක් බැහැරයි</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%dක් ඇතුළත්</item>
-        <item quantity="other">%dක් ඇතුළත්</item>
-    </plurals>
-    <string name="all_applications">සියළුම යෙදුම්</string>
-    <string name="exclude_from_tunnel">බැහැර</string>
-    <string name="include_in_tunnel">ඇතුළත් දෑ පමණි</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">යෙදුම් %dක් ඇතුළත්</item>
-        <item quantity="other">යෙදුම් %dක් ඇතුළත්</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">යෙදුම් %dක් බැහැර</item>
-        <item quantity="other">යෙදුම් %dක් බැහැර</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">සෑම තත්පරයකට</item>
         <item quantity="other">සෑම තත්පර %d කට</item>
@@ -35,9 +8,7 @@
         <item quantity="one">තත්පරය</item>
         <item quantity="other">තත්පර</item>
     </plurals>
-    <string name="use_all_applications">සියලුම යෙදුම් භාවිතාකරන්න</string>
     <string name="addresses">ලිපින</string>
-    <string name="applications">යෙදුම්</string>
     <string name="allow_remote_control_intents_title">දුරස්ථ intents වලට ඉඩදෙන්න</string>
     <string name="remote_control_token_title">දුරස්ථ පාලන ටෝකනය</string>
     <string name="remote_control_token_copied">ටෝකනය පසුරුපුවරුවට පිටපත් කරන ලදී</string>
@@ -94,7 +65,6 @@
     <string name="dns_servers">ව.නා.ප. සේවාදායක</string>
     <string name="dns_search_domains">වසම් සොයන්න</string>
     <string name="edit">සංස්කරණය</string>
-    <string name="error_fetching_apps">යෙදුම් ලැයිස්තුව ලබා ගැනීමේ දෝෂයකි: %s</string>
     <string name="error_root">කරුණාකර මූල ප්‍රවේශය ලබාගෙන නැවත උත්සාහ කරන්න</string>
     <string name="exclude_private_ips">පෞද්. යතුරු බැහැර කරන්න</string>
     <string name="generate_new_private_key">නව පෞද්. යතුර උත්පාදනය</string>
@@ -168,7 +138,6 @@
     <string name="shell_marker_count_error">Shell අපේක්ෂිත ලකුණු 4, %dලැබිණි</string>
     <string name="shell_start_error">Shell ආරම්භ කිරීමට අසමත් විය: %d</string>
     <string name="success_application_will_restart">සාර්ථකයි. යෙදුම දැන් නැවත ආරම්භ කෙරේ…</string>
-    <string name="toggle_all">සියල්ල ටොගල් කරන්න</string>
     <string name="toggle_error">AmneziaWG උමං ටොගල් කිරීමේ දෝෂය: %s</string>
     <string name="tools_installer_already">awg සහ awg-quick දැනටමත් ස්ථාපනය කර ඇත</string>
     <string name="tools_installer_failure">විධාන රේඛා මෙවලම් ස්ථාපනය කළ නොහැක (root නැත?)</string>

@@ -20,33 +20,6 @@
         <item quantity="one">%d ਟਨਲ ਇੰਪੋਰਟ ਕੀਤੀ</item>
         <item quantity="other">%d ਟਨਲਾਂ ਇੰਪੋਰਟ ਕੀਤੀਆਂ</item>
     </plurals>
-    <plurals name="set_excluded_applications">
-        <item quantity="one">%d ਅਲਹਿਦਾ ਕੀਤੀ ਐਪਲੀਕੇਸ਼ਨ</item>
-        <item quantity="other">%d ਅਲਹਿਦਾ ਕੀਤੀਆਂ ਐਪਲੀਕੇਸ਼ਨਾਂ</item>
-    </plurals>
-    <plurals name="set_included_applications">
-        <item quantity="one">%d ਐਪਲੀਕੇਸ਼ਨ ਸਮੇਤ</item>
-        <item quantity="other">%d ਐਪਲੀਕੇਸ਼ਨਾਂ ਸਮੇਤ</item>
-    </plurals>
-    <plurals name="n_excluded_applications">
-        <item quantity="one">%d ਅਲਹਿਦਾ ਰੱਖਿਆ</item>
-        <item quantity="other">%d ਅਲਹਿਦਾ ਰੱਖੇ</item>
-    </plurals>
-    <plurals name="n_included_applications">
-        <item quantity="one">%d ਸਮੇਤ</item>
-        <item quantity="other">%d ਸਮੇਤ</item>
-    </plurals>
-    <string name="all_applications">ਸਾਰੀਆਂ ਐਪਲੀਕੇਸ਼ਨਾਂ</string>
-    <string name="exclude_from_tunnel">ਅਲਹਿਦਾ</string>
-    <string name="include_in_tunnel">ਸਿਰਫ਼ ਸ਼ਾਮਲ</string>
-    <plurals name="include_n_applications">
-        <item quantity="one">%d ਐਪ ਸ਼ਾਮਲ ਕਰੋ</item>
-        <item quantity="other">%d ਐਪਾਂ ਸ਼ਾਮਲ ਕਰੋ</item>
-    </plurals>
-    <plurals name="exclude_n_applications">
-        <item quantity="one">%d ਐਪ ਅਲਹਿਦਾ ਰੱਖੋ</item>
-        <item quantity="other">%d ਐਪਾਂ ਅਲਹਿਦਾ ਰੱਖੋ</item>
-    </plurals>
     <plurals name="persistent_keepalive_seconds_unit">
         <item quantity="one">ਹਰ ਸਕਿੰਟ</item>
         <item quantity="other">ਹਰ %d ਸਕਿੰਟ</item>
@@ -55,10 +28,8 @@
         <item quantity="one">ਸਕਿੰਟ</item>
         <item quantity="other">ਸਕਿੰਟ</item>
     </plurals>
-    <string name="use_all_applications">ਸਾਰੀਆਂ ਐਪਾਂ ਵਰਤੋਂ</string>
     <string name="add_peer">ਪੀਅਰ ਜੋੜੋ</string>
     <string name="addresses">ਸਿਰਨਾਵੇ</string>
-    <string name="applications">ਐਪਲੀਕੇਸ਼ਨਾਂ</string>
     <string name="allow_remote_control_intents_summary_off">ਬਾਹਰੀ ਐਪਾਂ ਟਨਲਾਂ ਨੂੰ ਬਦਲ ਨਹੀਂ ਸਕਦੀਆਂ (ਸਿਫਾਰਸ਼ੀ)</string>
     <string name="allow_remote_control_intents_summary_on">ਬਾਹਰੀ ਐਪਾਂ ਟਨਲਾਂ ਨੂੰ ਬਦਲ ਸਕਦੀਆਂ ਹਨ (ਤਕਨੀਕੀ)</string>
     <string name="allow_remote_control_intents_title">ਰਿਮੋਟ ਇੰਟੈਂਟਸ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ</string>
@@ -120,7 +91,6 @@
     <string name="edit">ਸੋਧੋ</string>
     <string name="endpoint">ਐਂਡ-ਪੁਆਇੰਟ</string>
     <string name="error_down">ਟਨਲ ਬੰਦ ਕਰਨ ਦੌਰਾਨ ਗ਼ਲਤੀ: %s</string>
-    <string name="error_fetching_apps">ਐਪ ਸੂਚੀ ਲੈਣ ਦੌਰਾਨ ਗ਼ਲਤੀ: %s</string>
     <string name="error_root">ਰੂਟ ਪਹੁੰਚ ਲਵੋ ਅਤੇ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
     <string name="error_up">ਟਨਲ ਚਾਲੂ ਕਰਨ ਦੌਰਾਨ ਗ਼ਲਤੀ: %s</string>
     <string name="exclude_private_ips">ਪ੍ਰਾਈਵੇਟ IP ਅਲਹਿਦਾ ਰੱਖੋ</string>
@@ -199,7 +169,6 @@
     <string name="shell_marker_count_error">ਸ਼ੈਲ 4 ਮਾਰਕਰਾਂ ਦੀ ਉਮੀਦ ਕਰਦੀ ਸੀ, %d ਮਿਲੇ</string>
     <string name="shell_start_error">ਸ਼ੈਲ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਅਸਫ਼ਲ ਹੈ: %d</string>
     <string name="success_application_will_restart">ਕਾਮਯਾਬ। ਐਪਲੀਕੇਸ਼ਨ ਹੁਣ ਮੁੜ-ਚਾਲੂ ਹੋਵੇਗੀ…</string>
-    <string name="toggle_all">ਸਭ ਪਲਟੋ</string>
     <string name="toggle_error">ਵਾਇਰਗਾਰਡ ਟਨਲ ਬਦਲਣ ਦੌਰਾਨ ਗ਼ਲਤੀ: %s</string>
     <string name="tools_installer_already">awg ਅਤੇ awg-quick ਪਹਿਲਾਂ ਹੀ ਇੰਸਟਾਲ ਹਨ</string>
     <string name="tools_installer_failure">ਕਮਾਂਡ-ਲਾਈਨ ਟੂਲ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਅਸਮਰੱਥ (ਰੂਟ ਨਹੀਂ ਹੋ?)</string>
