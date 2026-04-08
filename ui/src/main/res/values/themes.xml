@@ -27,5 +27,22 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
         <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
+
+        <!-- Map Material Design 3 text appearance attrs to MDC 2 equivalents -->
+        <item name="textAppearanceDisplayLarge">@style/TextAppearance.MaterialComponents.Headline1</item>
+        <item name="textAppearanceDisplayMedium">@style/TextAppearance.MaterialComponents.Headline2</item>
+        <item name="textAppearanceDisplaySmall">@style/TextAppearance.MaterialComponents.Headline3</item>
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.MaterialComponents.Headline4</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.MaterialComponents.Headline5</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.MaterialComponents.Headline6</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.MaterialComponents.Headline6</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.MaterialComponents.Subtitle1</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.MaterialComponents.Subtitle2</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.MaterialComponents.Body1</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.MaterialComponents.Body2</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.MaterialComponents.Caption</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.MaterialComponents.Button</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.MaterialComponents.Caption</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.MaterialComponents.Overline</item>
     </style>
 </resources>

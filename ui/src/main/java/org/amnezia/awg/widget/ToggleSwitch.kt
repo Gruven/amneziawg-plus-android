@@ -8,9 +8,15 @@ package org.amnezia.awg.widget
 import android.content.Context
 import android.os.Parcelable
 import android.util.AttributeSet
-import com.google.android.material.materialswitch.MaterialSwitch
+import androidx.appcompat.widget.SwitchCompat
 
-class ToggleSwitch @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : MaterialSwitch(context, attrs) {
+class ToggleSwitch @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : SwitchCompat(context, attrs) {
+    init {
+        // API 19: StaticLayout constructor crashes on null text in SwitchCompat.makeLayout()
+        if (textOn == null) textOn = ""
+        if (textOff == null) textOff = ""
+    }
+
     private var isRestoringState = false
     private var listener: OnBeforeCheckedChangeListener? = null
     override fun onRestoreInstanceState(state: Parcelable) {
