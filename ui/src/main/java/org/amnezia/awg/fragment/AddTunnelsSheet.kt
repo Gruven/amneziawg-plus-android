@@ -15,6 +15,9 @@ import android.view.ViewTreeObserver
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.setFragmentResult
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -53,13 +56,14 @@ class AddTunnelsSheet : BottomSheetDialogFragment() {
         view.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 view.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                val dialog = dialog as BottomSheetDialog? ?: return
+                val dialog = dialog as? BottomSheetDialog? ?: return
                 behavior = dialog.behavior
                 behavior?.apply {
                     state = BottomSheetBehavior.STATE_EXPANDED
                     peekHeight = 0
                     addBottomSheetCallback(bottomSheetCallback)
                 }
+                constrainSheetHeight(dialog, view)
                 dialog.findViewById<View>(R.id.create_empty)?.setOnClickListener {
                     dismiss()
                     onRequestCreateConfig()
@@ -83,6 +87,29 @@ class AddTunnelsSheet : BottomSheetDialogFragment() {
     override fun dismiss() {
         super.dismiss()
         behavior?.removeBottomSheetCallback(bottomSheetCallback)
+    }
+
+    private fun constrainSheetHeight(dialog: BottomSheetDialog, view: View) {
+        val bottomSheet = dialog.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet) ?: return
+        val parentHeight = (bottomSheet.parent as? View)?.height ?: return
+        val systemBarsInsets = ViewCompat.getRootWindowInsets(bottomSheet)
+            ?.getInsets(WindowInsetsCompat.Type.systemBars())
+        val availableHeight = (parentHeight - (systemBarsInsets?.top ?: 0) - (systemBarsInsets?.bottom ?: 0))
+            .coerceAtLeast(0)
+        if (availableHeight == 0) return
+        val width = bottomSheet.width.takeIf { it > 0 } ?: view.width
+        if (width <= 0) return
+        view.measure(
+            View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        )
+        view.updateLayoutParams<ViewGroup.LayoutParams> {
+            height = if (view.measuredHeight > availableHeight) {
+                availableHeight
+            } else {
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            }
+        }
     }
 
     private fun onRequestCreateConfig() {
