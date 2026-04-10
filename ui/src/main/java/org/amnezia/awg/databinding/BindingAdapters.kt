@@ -169,17 +169,6 @@ object BindingAdapters {
     }
 
     @JvmStatic
-    fun tryParseInt(s: String?): Int {
-        if (s == null)
-            return 0
-        return try {
-            Integer.parseInt(s)
-        } catch (_: Throwable) {
-            0
-        }
-    }
-
-    @JvmStatic
     @BindingAdapter("isUp")
     fun setIsUp(card: TvCardView, up: Boolean) {
         card.isUp = up
