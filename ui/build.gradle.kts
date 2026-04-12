@@ -26,6 +26,7 @@ extensions.configure<ApplicationExtension> {
         versionName = providers.gradleProperty("amneziawgVersionName").get()
         buildConfigField("int", "MIN_SDK_VERSION", minSdk.toString())
         multiDexEnabled = true
+        vectorDrawables.useSupportLibrary = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

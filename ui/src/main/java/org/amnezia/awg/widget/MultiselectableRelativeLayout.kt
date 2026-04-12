@@ -11,11 +11,10 @@ import android.widget.RelativeLayout
 import org.amnezia.awg.R
 
 class MultiselectableRelativeLayout @JvmOverloads constructor(
-    context: Context? = null,
+    context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0,
-    defStyleRes: Int = 0
-) : RelativeLayout(context, attrs, defStyleAttr, defStyleRes) {
+    defStyleAttr: Int = 0
+) : RelativeLayout(context, attrs, defStyleAttr) {
     private var multiselected = false
 
     override fun onCreateDrawableState(extraSpace: Int): IntArray {

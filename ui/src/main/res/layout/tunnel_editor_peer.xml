@@ -55,9 +55,9 @@
                 android:nextFocusForward="@id/public_key_text"
                 android:onClick="@{() -> item.unbind()}"
                 android:padding="8dp"
-                android:src="@drawable/ic_action_delete"
                 app:layout_constraintBaseline_toBaselineOf="@id/peer_title"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_action_delete"
                 app:layout_constraintTop_toTopOf="@id/peer_title" />
 
             <com.google.android.material.textfield.TextInputLayout
